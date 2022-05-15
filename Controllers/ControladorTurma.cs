@@ -4,13 +4,13 @@ using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Controllers
 {
-    class ControladorDisciplina
+    class ControladorTurma
     {
         private readonly TempDb _context = TempDb.Instanse;
 
-        public void AddDisciplina(FormularioDisciplina form)
+        public void AddTurma(FormularioTurma form)
         {
-            _context.Disciplinas.Add(new Disciplina(form.Id, form.Nome));
+            _context.Turmas.Add(new Turma(form.Id, form.Codigo, form.Nome, form.QuantidadeAlunos));
         }
     }
 }

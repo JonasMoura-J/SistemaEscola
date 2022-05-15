@@ -46,39 +46,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CadastrarDisciplina.cs">
+    <Compile Include="Boundries\CadastrarDisciplina.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CadastrarDisciplina.Designer.cs">
+    <Compile Include="Boundries\CadastrarDisciplina.Designer.cs">
       <DependentUpon>CadastrarDisciplina.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundries\CadastrarTurma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundries\CadastrarTurma.Designer.cs">
+      <DependentUpon>CadastrarTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundries\CadastrarAluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundries\CadastrarAluno.Designer.cs">
+      <DependentUpon>CadastrarAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundries\CadastrarProfessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundries\CadastrarProfessor.Designer.cs">
+      <DependentUpon>CadastrarProfessor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ControladorAluno.cs" />
     <Compile Include="Controllers\ControladorDisciplina.cs" />
+    <Compile Include="Controllers\ControladorProfessor.cs" />
+    <Compile Include="Controllers\ControladorTurma.cs" />
     <Compile Include="Db\TempDb.cs" />
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Entities\Disciplina.cs" />
     <Compile Include="Entities\Formularios\Formulario.cs" />
+    <Compile Include="Entities\Formularios\FormularioAluno.cs" />
     <Compile Include="Entities\Formularios\FormularioDisciplina.cs" />
+    <Compile Include="Entities\Formularios\FormularioProfessor.cs" />
+    <Compile Include="Entities\Formularios\FormularioTurma.cs" />
     <Compile Include="Entities\Professor.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Boundries\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Boundries\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home.cs">
+    <Compile Include="Boundries\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home.Designer.cs">
+    <Compile Include="Boundries\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CadastrarDisciplina.resx">
+    <EmbeddedResource Include="Boundries\CadastrarAluno.resx">
+      <DependentUpon>CadastrarAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundries\CadastrarDisciplina.resx">
       <DependentUpon>CadastrarDisciplina.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Home.resx">
+    <EmbeddedResource Include="Boundries\CadastrarProfessor.resx">
+      <DependentUpon>CadastrarProfessor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundries\CadastrarTurma.resx">
+      <DependentUpon>CadastrarTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundries\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

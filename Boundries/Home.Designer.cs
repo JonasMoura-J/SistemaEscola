@@ -53,6 +53,7 @@ namespace SistemaEscola
             this.turmaBtn.TabIndex = 1;
             this.turmaBtn.Text = "Cadastrar Turma";
             this.turmaBtn.UseVisualStyleBackColor = true;
+            this.turmaBtn.Click += new System.EventHandler(this.turmaBtn_Click);
             // 
             // professorBtn
             // 
@@ -62,6 +63,7 @@ namespace SistemaEscola
             this.professorBtn.TabIndex = 2;
             this.professorBtn.Text = "Cadastrar Professor";
             this.professorBtn.UseVisualStyleBackColor = true;
+            this.professorBtn.Click += new System.EventHandler(this.professorBtn_Click);
             // 
             // alunoBtn
             // 
@@ -71,6 +73,7 @@ namespace SistemaEscola
             this.alunoBtn.TabIndex = 3;
             this.alunoBtn.Text = "Cadastrar Aluno";
             this.alunoBtn.UseVisualStyleBackColor = true;
+            this.alunoBtn.Click += new System.EventHandler(this.alunoBtn_Click);
             // 
             // Home
             // 
