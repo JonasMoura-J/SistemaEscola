@@ -240,6 +240,7 @@ namespace SistemaEscola
             this.Controls.Add(this.idTxtBox);
             this.Controls.Add(this.idLb);
             this.Name = "CadastrarAluno";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CadastrarAluno";
             this.Load += new System.EventHandler(this.CadastrarAluno_Load);
             this.ResumeLayout(false);

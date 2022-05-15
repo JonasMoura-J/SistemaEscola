@@ -10,17 +10,12 @@ using System.Windows.Forms;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
 
-//Provisoriamente
-using SistemaEscola.Db;
-
 namespace SistemaEscola
 {
     public partial class CadastrarDisciplina : Form
     {
         ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
-
-        //Provisoriamente
-        TempDb context = TempDb.Instanse;
+        ControladorProfessor controladorProfessor = new ControladorProfessor();
 
         public CadastrarDisciplina()
         {
@@ -29,11 +24,13 @@ namespace SistemaEscola
 
         private void enviarBtn_Click(object sender, EventArgs e)
         {
-            controladorDisciplina.AddDisciplina(new FormularioDisciplina
+            var form = new FormularioDisciplina
             {
                 Id = int.Parse(idTxtBox.Text),
                 Nome = nomeTxtBox.Text
-            });
+            };
+
+            controladorDisciplina.Add(form);
 
             Close();            
         }
@@ -41,7 +38,9 @@ namespace SistemaEscola
         // Provisoriamente
         private void CadastrarDisciplina_Load(object sender, EventArgs e)
         {
-            context.Disciplinas.ForEach(d => comboBox1.Items.Add(d.Nome));
+            controladorDisciplina.FindAll().ForEach(d => comboBox1.Items.Add(d.Nome));
+            
+            controladorProfessor.FindAll().ForEach(p => comboBox2.Items.Add(p.Nome));
         }
     }
 }

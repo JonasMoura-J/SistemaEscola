@@ -1,4 +1,5 @@
-﻿using SistemaEscola.Db;
+﻿using System.Collections.Generic;
+using SistemaEscola.Db;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
 
@@ -8,9 +9,13 @@ namespace SistemaEscola.Controllers
     {
         private readonly TempDb _context = TempDb.Instanse;
 
-        public void AddTurma(FormularioTurma form)
+        public void Add(FormularioTurma form)
         {
             _context.Turmas.Add(new Turma(form.Id, form.Codigo, form.Nome, form.QuantidadeAlunos));
+        }
+        public List<Turma> FindAll()
+        {
+            return _context.Turmas;
         }
     }
 }

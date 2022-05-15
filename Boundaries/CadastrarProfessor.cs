@@ -10,26 +10,20 @@ using System.Windows.Forms;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
 
-//Provisoriamente
-using SistemaEscola.Db;
-
 namespace SistemaEscola
 {
-    public partial class CadastrarAluno : Form
+    public partial class CadastrarProfessor : Form
     {
-        ControladorAluno controladorAluno = new ControladorAluno();
+        ControladorProfessor controladorProfessor = new ControladorProfessor();
 
-        //Provisoriamente
-        TempDb context = TempDb.Instanse;
-
-        public CadastrarAluno()
+        public CadastrarProfessor()
         {
             InitializeComponent();
         }
 
         private void enviarBtn_Click(object sender, EventArgs e)
         {
-            controladorAluno.AddAluno(new FormularioAluno
+            var form = new FormularioProfessor
             {
                 Id = int.Parse(idTxtBox.Text),
                 Nome = nomeTxtBox.Text,
@@ -37,18 +31,18 @@ namespace SistemaEscola
                 Rg = rgTxtBox.Text,
                 TelefoneResidencial = teleResTxtBox.Text,
                 TelefoneCelular = teleCelTxtBox.Text,
-                Email = emailTxtBox.Text,
-                NomeResponsavel = nomeRespTxtBox.Text,
-                Matricula = matriculaTxtBox.Text
-            });
+                Email = emailTxtBox.Text
+            };
+
+            controladorProfessor.Add(form);
 
             Close();
         }
 
         // Provisoriamente
-        private void CadastrarAluno_Load(object sender, EventArgs e)
+        private void CadastrarProfessor_Load(object sender, EventArgs e)
         {
-            context.Alunos.ForEach(d => comboBox1.Items.Add(d.Nome));
+            controladorProfessor.FindAll().ForEach(p => comboBox1.Items.Add(p.Nome));
         }
     }
 }

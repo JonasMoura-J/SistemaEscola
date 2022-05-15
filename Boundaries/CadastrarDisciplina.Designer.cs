@@ -37,6 +37,7 @@ namespace SistemaEscola
             this.professoresLb = new System.Windows.Forms.Label();
             this.enviarBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // idLb
@@ -106,11 +107,21 @@ namespace SistemaEscola
             this.comboBox1.Size = new System.Drawing.Size(219, 21);
             this.comboBox1.TabIndex = 7;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(521, 121);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(219, 21);
+            this.comboBox2.TabIndex = 8;
+            // 
             // CadastrarDisciplina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.enviarBtn);
             this.Controls.Add(this.professoresTxtBox);
@@ -138,5 +149,6 @@ namespace SistemaEscola
         private System.Windows.Forms.Label professoresLb;
         private System.Windows.Forms.Button enviarBtn;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
