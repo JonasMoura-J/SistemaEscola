@@ -17,5 +17,31 @@ namespace SistemaEscola.Controllers
         {
             return _context.Turmas;
         }
+
+        public void Delete(int Id)
+        {
+            Turma turma = Find(Id);
+
+            if (turma != null) {
+                _context.Turmas.Remove(turma);
+            }
+
+        }
+
+        public void Update(FormularioTurma form)
+        {
+            Turma turma = Find(form.Id);
+
+            if (turma != null) {
+
+                _context.Turmas.Remove(turma);
+                _context.Turmas.Add(new Turma(form.Id, form.Codigo, form.Nome, form.QuantidadeAlunos));
+            }
+        }
+
+        public Turma Find(int Id)
+        {
+            return _context.Turmas.Find(x => x.Id == Id);
+        }
     }
 }

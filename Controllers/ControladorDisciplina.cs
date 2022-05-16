@@ -18,5 +18,32 @@ namespace SistemaEscola.Controllers
         {
             return _context.Disciplinas;
         }
+
+        public void Delete(int Id)
+        {
+            Disciplina disciplina = Find(Id);
+
+            if (disciplina != null) 
+            {
+                _context.Disciplinas.Remove(disciplina);
+            }
+            
+        }
+
+        public void Update(FormularioDisciplina form)
+        {
+            Disciplina disciplina = Find(form.Id);
+
+            if (disciplina != null) {
+
+                _context.Disciplinas.Remove(disciplina);
+                _context.Disciplinas.Add(new Disciplina(form.Id, form.Nome));
+            }
+        }
+
+        public Disciplina Find(int Id)
+        {
+            return _context.Disciplinas.Find(x => x.Id == Id);
+        }
     }
 }
