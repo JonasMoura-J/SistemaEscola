@@ -105,10 +105,10 @@
     <Compile Include="Boundaries\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuAluno.cs">
+    <Compile Include="Boundaries\MenuAluno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuAluno.Designer.cs">
+    <Compile Include="Boundaries\MenuAluno.Designer.cs">
       <DependentUpon>MenuAluno.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -134,7 +134,7 @@
     <EmbeddedResource Include="Boundaries\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuAluno.resx">
+    <EmbeddedResource Include="Boundaries\MenuAluno.resx">
       <DependentUpon>MenuAluno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

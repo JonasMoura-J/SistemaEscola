@@ -63,11 +63,11 @@ namespace SistemaEscola
             // nomeTxtBox
             // 
             this.nomeTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.nomeTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomeTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nomeTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.nomeTxtBox.Location = new System.Drawing.Point(205, 95);
             this.nomeTxtBox.Name = "nomeTxtBox";
-            this.nomeTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.nomeTxtBox.Size = new System.Drawing.Size(336, 24);
             this.nomeTxtBox.TabIndex = 39;
             this.nomeTxtBox.Text = "Nome";
             this.nomeTxtBox.Enter += new System.EventHandler(this.nomeTxtBox_Enter);
@@ -94,7 +94,7 @@ namespace SistemaEscola
             this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
             this.addBtn.FlatAppearance.BorderSize = 0;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.White;
             this.addBtn.Location = new System.Drawing.Point(461, 440);
             this.addBtn.Name = "addBtn";
@@ -123,11 +123,11 @@ namespace SistemaEscola
             // cpfTxtBox
             // 
             this.cpfTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cpfTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpfTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpfTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.cpfTxtBox.Location = new System.Drawing.Point(205, 183);
             this.cpfTxtBox.Name = "cpfTxtBox";
-            this.cpfTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.cpfTxtBox.Size = new System.Drawing.Size(336, 24);
             this.cpfTxtBox.TabIndex = 58;
             this.cpfTxtBox.Text = "CPF";
             this.cpfTxtBox.Enter += new System.EventHandler(this.cpfTxtBox_Enter);
@@ -144,11 +144,11 @@ namespace SistemaEscola
             // rgTxtBox
             // 
             this.rgTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rgTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rgTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rgTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.rgTxtBox.Location = new System.Drawing.Point(205, 270);
             this.rgTxtBox.Name = "rgTxtBox";
-            this.rgTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.rgTxtBox.Size = new System.Drawing.Size(336, 24);
             this.rgTxtBox.TabIndex = 58;
             this.rgTxtBox.Text = "RG";
             this.rgTxtBox.Enter += new System.EventHandler(this.rgTxtBox_Enter);
@@ -165,11 +165,11 @@ namespace SistemaEscola
             // emailTxtBox
             // 
             this.emailTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.emailTxtBox.Location = new System.Drawing.Point(205, 358);
             this.emailTxtBox.Name = "emailTxtBox";
-            this.emailTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.emailTxtBox.Size = new System.Drawing.Size(336, 24);
             this.emailTxtBox.TabIndex = 58;
             this.emailTxtBox.Text = "E-mail";
             this.emailTxtBox.Enter += new System.EventHandler(this.emailTxtBox_Enter);
@@ -186,11 +186,11 @@ namespace SistemaEscola
             // matriculaTxtBox
             // 
             this.matriculaTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.matriculaTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.matriculaTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.matriculaTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.matriculaTxtBox.Location = new System.Drawing.Point(613, 358);
             this.matriculaTxtBox.Name = "matriculaTxtBox";
-            this.matriculaTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.matriculaTxtBox.Size = new System.Drawing.Size(336, 24);
             this.matriculaTxtBox.TabIndex = 58;
             this.matriculaTxtBox.Text = "Matrícula";
             this.matriculaTxtBox.Enter += new System.EventHandler(this.matriculaTxtBox_Enter);
@@ -207,11 +207,11 @@ namespace SistemaEscola
             // telResTxtBox
             // 
             this.telResTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.telResTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telResTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.telResTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.telResTxtBox.Location = new System.Drawing.Point(613, 95);
             this.telResTxtBox.Name = "telResTxtBox";
-            this.telResTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.telResTxtBox.Size = new System.Drawing.Size(336, 24);
             this.telResTxtBox.TabIndex = 58;
             this.telResTxtBox.Text = "Telefone Residencial";
             this.telResTxtBox.Enter += new System.EventHandler(this.telResTxtBox_Enter);
@@ -228,11 +228,11 @@ namespace SistemaEscola
             // telCelTxtBox
             // 
             this.telCelTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.telCelTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telCelTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.telCelTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.telCelTxtBox.Location = new System.Drawing.Point(613, 183);
             this.telCelTxtBox.Name = "telCelTxtBox";
-            this.telCelTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.telCelTxtBox.Size = new System.Drawing.Size(336, 24);
             this.telCelTxtBox.TabIndex = 58;
             this.telCelTxtBox.Text = "Telefone Celular";
             this.telCelTxtBox.Enter += new System.EventHandler(this.telCelTxtBox_Enter);
@@ -249,11 +249,11 @@ namespace SistemaEscola
             // respTxtBox
             // 
             this.respTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.respTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.respTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.respTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.respTxtBox.Location = new System.Drawing.Point(613, 271);
             this.respTxtBox.Name = "respTxtBox";
-            this.respTxtBox.Size = new System.Drawing.Size(336, 22);
+            this.respTxtBox.Size = new System.Drawing.Size(336, 24);
             this.respTxtBox.TabIndex = 58;
             this.respTxtBox.Text = "Nome do Responsável";
             this.respTxtBox.Enter += new System.EventHandler(this.respTxtBox_Enter);
