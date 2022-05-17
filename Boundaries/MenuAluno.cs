@@ -12,15 +12,17 @@ namespace SistemaEscola
 {
     public partial class MenuAluno : Form
     {
-        public MenuAluno()
+        Form1 _mainForm;        
+
+        public MenuAluno(Form1 mainForm)
         {
             InitializeComponent();
+            _mainForm = mainForm;
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            CadastrarAluno ca = new CadastrarAluno();
-            ca.Show();
+            _mainForm.OpenChildForm(new CadastrarAluno(_mainForm), sender);
         }
     }
 }

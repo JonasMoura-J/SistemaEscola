@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Drawing;
 using SistemaEscola.Controllers;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {
@@ -24,9 +25,9 @@ namespace SistemaEscola
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (userTxtBox.Text != "Usuário" && senhaTxtBox.Text != "Senha")
+            if (!(userTxtBox.ForeColor == Color.LightSteelBlue || senhaTxtBox.ForeColor == Color.LightSteelBlue))
             {
-                if (userTxtBox.Text != null && senhaTxtBox.Text != null)
+                if (userTxtBox.Text != "" && senhaTxtBox.Text != "")
                 {
                     var form = new FormularioLogin
                     {
@@ -47,46 +48,22 @@ namespace SistemaEscola
 
         private void userTxtBox_Enter(object sender, EventArgs e)
         {
-            if (userTxtBox.Text == "Usuário")
-            {
-                userTxtBox.Text = "";
-
-                userTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(userTxtBox, "Usuário");
         }
 
         private void userTxtBox_Leave(object sender, EventArgs e)
         {
-            if (userTxtBox.Text == "")
-            {
-                userTxtBox.Text = "Usuário";
-
-                userTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(userTxtBox, "Usuário");
         }
 
         private void senhaTxtBox_Enter(object sender, EventArgs e)
         {
-            if (senhaTxtBox.Text == "Senha")
-            {
-                senhaTxtBox.Text = "";
-
-                senhaTxtBox.ForeColor = Color.Black;
-
-                senhaTxtBox.PasswordChar = '•';
-            }
+            TextBoxTools.ClearPassword(senhaTxtBox, "Senha");
         }
 
         private void senhaTxtBox_Leave(object sender, EventArgs e)
         {
-            if (senhaTxtBox.Text == "")
-            {
-                senhaTxtBox.Text = "Senha";
-
-                senhaTxtBox.ForeColor = Color.LightSteelBlue;
-
-                senhaTxtBox.PasswordChar = '\0';
-            }
+            TextBoxTools.FillPassword(senhaTxtBox, "Senha");
         }
 
         private void panel4_Click(object sender, EventArgs e)

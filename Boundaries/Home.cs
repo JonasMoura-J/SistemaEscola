@@ -37,8 +37,8 @@ namespace SistemaEscola
 
         private void alunoBtn_Click(object sender, EventArgs e)
         {
-            CadastrarAluno ca = new CadastrarAluno();
-            ca.Show();
+            //CadastrarAluno ca = new CadastrarAluno();
+            //ca.Show();
         }
     }
 }

@@ -9,207 +9,140 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
+using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {
     public partial class CadastrarAluno : Form
     {
+        Form1 _mainForm;
         ControladorAluno controladorAluno = new ControladorAluno();
+        List<TextBox> textBoxes = new List<TextBox>();
 
-        public CadastrarAluno()
+        public CadastrarAluno(Form1 mainForm)
         {
             InitializeComponent();
+            _mainForm = mainForm;
         }
-
-        private void enviarBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        // Provisoriamente
+        
         private void CadastrarAluno_Load(object sender, EventArgs e)
         {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    textBoxes.Add((TextBox)c);
+                }
+            }
+
+            // Provisoriamente
             controladorAluno.FindAll().ForEach(a => comboBox1.Items.Add(a.Nome));
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            var form = new FormularioAluno
+            if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
-                Id = int.Parse(idTxtBox.Text),
-                Nome = nomeTxtBox.Text,
-                Cpf = cpfTxtBox.Text,
-                Rg = rgTxtBox.Text,
-                TelefoneResidencial = telResTxtBox.Text,
-                TelefoneCelular = telCelTxtBox.Text,
-                Email = emailTxtBox.Text,
-                NomeResponsavel = respTxtBox.Text,
-                Matricula = matriculaTxtBox.Text
-            };
+                if (!textBoxes.Any(t => t.Text == ""))
+                {
+                    var form = new FormularioAluno
+                    {
+                        Id = int.Parse(idTxtBox.Text),
+                        Nome = nomeTxtBox.Text,
+                        Cpf = cpfTxtBox.Text,
+                        Rg = rgTxtBox.Text,
+                        TelefoneResidencial = telResTxtBox.Text,
+                        TelefoneCelular = telCelTxtBox.Text,
+                        Email = emailTxtBox.Text,
+                        NomeResponsavel = respTxtBox.Text,
+                        Matricula = matriculaTxtBox.Text
+                    };
 
-            controladorAluno.Add(form);
+                    controladorAluno.Add(form);
 
-            Close();
+                    _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
+                }
+            }
         }
 
         private void nomeTxtBox_Enter(object sender, EventArgs e)
         {
-            if (nomeTxtBox.Text == "Nome")
-            {
-                nomeTxtBox.Text = "";
-
-                nomeTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(nomeTxtBox, "Nome");
         }
 
         private void nomeTxtBox_Leave(object sender, EventArgs e)
         {
-            if (nomeTxtBox.Text == "")
-            {
-                nomeTxtBox.Text = "Nome";
-
-                nomeTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(nomeTxtBox, "Nome");
         }
 
         private void cpfTxtBox_Enter(object sender, EventArgs e)
         {
-            if (cpfTxtBox.Text == "CPF")
-            {
-                cpfTxtBox.Text = "";
-
-                cpfTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(cpfTxtBox, "CPF");
         }
 
         private void cpfTxtBox_Leave(object sender, EventArgs e)
         {
-            if (cpfTxtBox.Text == "")
-            {
-                cpfTxtBox.Text = "CPF";
-
-                cpfTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(cpfTxtBox, "CPF");
         }
 
         private void rgTxtBox_Enter(object sender, EventArgs e)
         {
-            if (rgTxtBox.Text == "RG")
-            {
-                rgTxtBox.Text = "";
-
-                rgTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(rgTxtBox, "RG");
         }
 
         private void rgTxtBox_Leave(object sender, EventArgs e)
         {
-            if (rgTxtBox.Text == "")
-            {
-                rgTxtBox.Text = "RG";
-
-                rgTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(rgTxtBox, "RG");
         }
 
         private void emailTxtBox_Enter(object sender, EventArgs e)
         {
-            if (emailTxtBox.Text == "E-mail")
-            {
-                emailTxtBox.Text = "";
-
-                emailTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(emailTxtBox, "E-mail");
         }
 
         private void emailTxtBox_Leave(object sender, EventArgs e)
         {
-            if (emailTxtBox.Text == "")
-            {
-                emailTxtBox.Text = "E-mail";
-
-                emailTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(emailTxtBox, "E-mail");
         }
 
         private void telResTxtBox_Enter(object sender, EventArgs e)
         {
-            if (telResTxtBox.Text == "Telefone Residencial")
-            {
-                telResTxtBox.Text = "";
-
-                telResTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(telResTxtBox, "Telefone Residencial");
         }
 
         private void telResTxtBox_Leave(object sender, EventArgs e)
         {
-            if (telResTxtBox.Text == "")
-            {
-                telResTxtBox.Text = "Telefone Residencial";
-
-                telResTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(telResTxtBox, "Telefone Residencial");
         }
 
         private void telCelTxtBox_Enter(object sender, EventArgs e)
         {
-            if (telCelTxtBox.Text == "Telefone Celular")
-            {
-                telCelTxtBox.Text = "";
-
-                telCelTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(telCelTxtBox, "Telefone Celular");
         }
 
         private void telCelTxtBox_Leave(object sender, EventArgs e)
         {
-            if (telCelTxtBox.Text == "")
-            {
-                telCelTxtBox.Text = "Telefone Celular";
-
-                telCelTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(telCelTxtBox, "Telefone Celular");
         }
 
         private void respTxtBox_Enter(object sender, EventArgs e)
         {
-            if (respTxtBox.Text == "Nome do Responsável")
-            {
-                respTxtBox.Text = "";
-
-                respTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(respTxtBox, "Nome do Responsável");
         }
 
         private void respTxtBox_Leave(object sender, EventArgs e)
         {
-            if (respTxtBox.Text == "")
-            {
-                respTxtBox.Text = "Nome do Responsável";
-
-                respTxtBox.ForeColor = Color.LightSteelBlue;
-            }
+            TextBoxTools.Fill(respTxtBox, "Nome do Responsável");
         }
 
         private void matriculaTxtBox_Enter(object sender, EventArgs e)
         {
-            if (matriculaTxtBox.Text == "Matrícula")
-            {
-                matriculaTxtBox.Text = "";
-
-                matriculaTxtBox.ForeColor = Color.Black;
-            }
+            TextBoxTools.Clear(matriculaTxtBox, "Matrícula");
         }
 
         private void matriculaTxtBox_Leave(object sender, EventArgs e)
         {
-            if (matriculaTxtBox.Text == "")
-            {
-                matriculaTxtBox.Text = "Matrícula";
-
-                matriculaTxtBox.ForeColor = Color.LightSteelBlue;
-            }
-        }
+            TextBoxTools.Fill(matriculaTxtBox, "Matrícula");
+        }    
     }
 }

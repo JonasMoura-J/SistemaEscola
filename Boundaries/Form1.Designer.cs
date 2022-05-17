@@ -30,12 +30,12 @@ namespace SistemaEscola
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.alunosBtn = new System.Windows.Forms.Button();
-            this.professorBtn = new System.Windows.Forms.Button();
-            this.turmaBtn = new System.Windows.Forms.Button();
             this.disciplinaBtn = new System.Windows.Forms.Button();
+            this.turmaBtn = new System.Windows.Forms.Button();
+            this.professorBtn = new System.Windows.Forms.Button();
+            this.alunosBtn = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.titleLb = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -63,6 +63,71 @@ namespace SistemaEscola
             this.panel2.Size = new System.Drawing.Size(191, 708);
             this.panel2.TabIndex = 1;
             // 
+            // disciplinaBtn
+            // 
+            this.disciplinaBtn.BackColor = System.Drawing.Color.Transparent;
+            this.disciplinaBtn.FlatAppearance.BorderSize = 0;
+            this.disciplinaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.disciplinaBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.disciplinaBtn.ForeColor = System.Drawing.Color.White;
+            this.disciplinaBtn.Location = new System.Drawing.Point(0, 267);
+            this.disciplinaBtn.Name = "disciplinaBtn";
+            this.disciplinaBtn.Size = new System.Drawing.Size(191, 66);
+            this.disciplinaBtn.TabIndex = 4;
+            this.disciplinaBtn.Text = "Disciplina";
+            this.disciplinaBtn.UseVisualStyleBackColor = false;
+            // 
+            // turmaBtn
+            // 
+            this.turmaBtn.BackColor = System.Drawing.Color.Transparent;
+            this.turmaBtn.FlatAppearance.BorderSize = 0;
+            this.turmaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.turmaBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.turmaBtn.ForeColor = System.Drawing.Color.White;
+            this.turmaBtn.Location = new System.Drawing.Point(0, 204);
+            this.turmaBtn.Name = "turmaBtn";
+            this.turmaBtn.Size = new System.Drawing.Size(191, 66);
+            this.turmaBtn.TabIndex = 3;
+            this.turmaBtn.Text = "Turma";
+            this.turmaBtn.UseVisualStyleBackColor = false;
+            // 
+            // professorBtn
+            // 
+            this.professorBtn.BackColor = System.Drawing.Color.Transparent;
+            this.professorBtn.FlatAppearance.BorderSize = 0;
+            this.professorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.professorBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.professorBtn.ForeColor = System.Drawing.Color.White;
+            this.professorBtn.Location = new System.Drawing.Point(0, 141);
+            this.professorBtn.Name = "professorBtn";
+            this.professorBtn.Size = new System.Drawing.Size(191, 66);
+            this.professorBtn.TabIndex = 2;
+            this.professorBtn.Text = "Professor";
+            this.professorBtn.UseVisualStyleBackColor = false;
+            // 
+            // alunosBtn
+            // 
+            this.alunosBtn.BackColor = System.Drawing.Color.Transparent;
+            this.alunosBtn.FlatAppearance.BorderSize = 0;
+            this.alunosBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.alunosBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alunosBtn.ForeColor = System.Drawing.Color.White;
+            this.alunosBtn.Location = new System.Drawing.Point(0, 79);
+            this.alunosBtn.Name = "alunosBtn";
+            this.alunosBtn.Size = new System.Drawing.Size(191, 66);
+            this.alunosBtn.TabIndex = 1;
+            this.alunosBtn.Text = "Aluno";
+            this.alunosBtn.UseVisualStyleBackColor = false;
+            this.alunosBtn.Click += new System.EventHandler(this.alunosBtn_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(31)))), ((int)(((byte)(75)))));
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(191, 80);
+            this.panel4.TabIndex = 0;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
@@ -73,81 +138,16 @@ namespace SistemaEscola
             this.panel3.Size = new System.Drawing.Size(1131, 80);
             this.panel3.TabIndex = 2;
             // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(31)))), ((int)(((byte)(75)))));
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(191, 80);
-            this.panel4.TabIndex = 0;
-            // 
-            // alunosBtn
-            // 
-            this.alunosBtn.BackColor = System.Drawing.Color.Transparent;
-            this.alunosBtn.FlatAppearance.BorderSize = 0;
-            this.alunosBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.alunosBtn.Font = new System.Drawing.Font("Lucida Sans Unicode", 12F, System.Drawing.FontStyle.Bold);
-            this.alunosBtn.ForeColor = System.Drawing.Color.White;
-            this.alunosBtn.Location = new System.Drawing.Point(0, 79);
-            this.alunosBtn.Name = "alunosBtn";
-            this.alunosBtn.Size = new System.Drawing.Size(191, 66);
-            this.alunosBtn.TabIndex = 1;
-            this.alunosBtn.Text = "Aluno";
-            this.alunosBtn.UseVisualStyleBackColor = false;
-            this.alunosBtn.Click += new System.EventHandler(this.alunosBtn_Click);
-            // 
-            // professorBtn
-            // 
-            this.professorBtn.BackColor = System.Drawing.Color.Transparent;
-            this.professorBtn.FlatAppearance.BorderSize = 0;
-            this.professorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.professorBtn.Font = new System.Drawing.Font("Lucida Sans Unicode", 12F, System.Drawing.FontStyle.Bold);
-            this.professorBtn.ForeColor = System.Drawing.Color.White;
-            this.professorBtn.Location = new System.Drawing.Point(0, 141);
-            this.professorBtn.Name = "professorBtn";
-            this.professorBtn.Size = new System.Drawing.Size(191, 66);
-            this.professorBtn.TabIndex = 2;
-            this.professorBtn.Text = "Professor";
-            this.professorBtn.UseVisualStyleBackColor = false;
-            // 
-            // turmaBtn
-            // 
-            this.turmaBtn.BackColor = System.Drawing.Color.Transparent;
-            this.turmaBtn.FlatAppearance.BorderSize = 0;
-            this.turmaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.turmaBtn.Font = new System.Drawing.Font("Lucida Sans Unicode", 12F, System.Drawing.FontStyle.Bold);
-            this.turmaBtn.ForeColor = System.Drawing.Color.White;
-            this.turmaBtn.Location = new System.Drawing.Point(0, 204);
-            this.turmaBtn.Name = "turmaBtn";
-            this.turmaBtn.Size = new System.Drawing.Size(191, 66);
-            this.turmaBtn.TabIndex = 3;
-            this.turmaBtn.Text = "Turma";
-            this.turmaBtn.UseVisualStyleBackColor = false;
-            // 
-            // disciplinaBtn
-            // 
-            this.disciplinaBtn.BackColor = System.Drawing.Color.Transparent;
-            this.disciplinaBtn.FlatAppearance.BorderSize = 0;
-            this.disciplinaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.disciplinaBtn.Font = new System.Drawing.Font("Lucida Sans Unicode", 12F, System.Drawing.FontStyle.Bold);
-            this.disciplinaBtn.ForeColor = System.Drawing.Color.White;
-            this.disciplinaBtn.Location = new System.Drawing.Point(0, 267);
-            this.disciplinaBtn.Name = "disciplinaBtn";
-            this.disciplinaBtn.Size = new System.Drawing.Size(191, 66);
-            this.disciplinaBtn.TabIndex = 4;
-            this.disciplinaBtn.Text = "Disciplina";
-            this.disciplinaBtn.UseVisualStyleBackColor = false;
-            // 
             // titleLb
             // 
-            this.titleLb.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.titleLb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.titleLb.AutoSize = true;
             this.titleLb.BackColor = System.Drawing.Color.Transparent;
-            this.titleLb.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLb.Font = new System.Drawing.Font("Comfortaa", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLb.ForeColor = System.Drawing.Color.White;
-            this.titleLb.Location = new System.Drawing.Point(450, 9);
+            this.titleLb.Location = new System.Drawing.Point(467, -3);
             this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(173, 65);
+            this.titleLb.Size = new System.Drawing.Size(199, 75);
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "HOME";
             // 
@@ -155,10 +155,12 @@ namespace SistemaEscola
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1322, 708);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

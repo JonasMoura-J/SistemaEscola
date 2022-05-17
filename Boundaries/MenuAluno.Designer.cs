@@ -45,7 +45,7 @@ namespace SistemaEscola
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.White;
-            this.addBtn.Location = new System.Drawing.Point(151, 102);
+            this.addBtn.Location = new System.Drawing.Point(146, 126);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(218, 92);
             this.addBtn.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace SistemaEscola
             this.editBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editBtn.ForeColor = System.Drawing.Color.White;
-            this.editBtn.Location = new System.Drawing.Point(431, 102);
+            this.editBtn.Location = new System.Drawing.Point(457, 126);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(218, 92);
             this.editBtn.TabIndex = 7;
@@ -74,7 +74,7 @@ namespace SistemaEscola
             this.removeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeBtn.ForeColor = System.Drawing.Color.White;
-            this.removeBtn.Location = new System.Drawing.Point(698, 102);
+            this.removeBtn.Location = new System.Drawing.Point(766, 126);
             this.removeBtn.Name = "removeBtn";
             this.removeBtn.Size = new System.Drawing.Size(218, 92);
             this.removeBtn.TabIndex = 8;
@@ -88,7 +88,7 @@ namespace SistemaEscola
             this.listButn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.listButn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listButn.ForeColor = System.Drawing.Color.White;
-            this.listButn.Location = new System.Drawing.Point(151, 244);
+            this.listButn.Location = new System.Drawing.Point(146, 268);
             this.listButn.Name = "listButn";
             this.listButn.Size = new System.Drawing.Size(218, 92);
             this.listButn.TabIndex = 9;
@@ -102,7 +102,7 @@ namespace SistemaEscola
             this.buscarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buscarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buscarBtn.ForeColor = System.Drawing.Color.White;
-            this.buscarBtn.Location = new System.Drawing.Point(431, 244);
+            this.buscarBtn.Location = new System.Drawing.Point(457, 268);
             this.buscarBtn.Name = "buscarBtn";
             this.buscarBtn.Size = new System.Drawing.Size(218, 92);
             this.buscarBtn.TabIndex = 10;
@@ -116,7 +116,7 @@ namespace SistemaEscola
             this.avaliarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.avaliarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.avaliarBtn.ForeColor = System.Drawing.Color.White;
-            this.avaliarBtn.Location = new System.Drawing.Point(698, 244);
+            this.avaliarBtn.Location = new System.Drawing.Point(766, 268);
             this.avaliarBtn.Name = "avaliarBtn";
             this.avaliarBtn.Size = new System.Drawing.Size(218, 92);
             this.avaliarBtn.TabIndex = 11;
@@ -130,7 +130,7 @@ namespace SistemaEscola
             this.boletimBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.boletimBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.boletimBtn.ForeColor = System.Drawing.Color.White;
-            this.boletimBtn.Location = new System.Drawing.Point(431, 382);
+            this.boletimBtn.Location = new System.Drawing.Point(457, 406);
             this.boletimBtn.Name = "boletimBtn";
             this.boletimBtn.Size = new System.Drawing.Size(218, 92);
             this.boletimBtn.TabIndex = 12;
