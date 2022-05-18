@@ -1,5 +1,6 @@
-﻿using SistemaEscola.Entities;
+﻿using System;
 using System.Collections.Generic;
+using SistemaEscola.Entities;
 
 namespace SistemaEscola.Db
 {
@@ -14,11 +15,14 @@ namespace SistemaEscola.Db
 
         private TempDb()
         {
-            Alunos.Add(new Aluno(1, "Joao", "12345678910", "4312312345", "23451123",
+            Alunos.Add(new Aluno(1, "Joao", "12345678910", "4312312345",
+                DateTime.Parse("12/22/2222"), "23451123",
                 "912341234", "joao@gmail.com", "Maria", "0321323"));
-            Alunos.Add(new Aluno(2, "Maria", "64734664743", "7665092996", "66543213",
+            Alunos.Add(new Aluno(2, "Maria", "64734664743", "7665092996",
+                DateTime.Parse("12/22/2222"), "66543213",
                 "923672345", "mari@gmail.com", "Miguel", "2839102"));
-            Alunos.Add(new Aluno(3, "Miguel", "00594837251", "2283011830", "22550594",
+            Alunos.Add(new Aluno(3, "Miguel", "00594837251", "2283011830",
+                DateTime.Parse("12/22/2222"), "22550594",
                 "900339283", "migueleocara@gmail.com", "Unknown", "9932432"));
 
             Professores.Add(new Professor(1, "Leo", "00483923812", "9233813048", "46382917",

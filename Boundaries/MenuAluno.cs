@@ -12,9 +12,9 @@ namespace SistemaEscola
 {
     public partial class MenuAluno : Form
     {
-        Form1 _mainForm;        
+        Home _mainForm;        
 
-        public MenuAluno(Form1 mainForm)
+        public MenuAluno(Home mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;

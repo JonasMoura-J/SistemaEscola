@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,12 +88,6 @@
     <Compile Include="Entities\Professor.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Boundaries\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Boundaries\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Boundaries\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,9 +120,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\CadastrarTurma.resx">
       <DependentUpon>CadastrarTurma.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

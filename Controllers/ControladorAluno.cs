@@ -12,8 +12,8 @@ namespace SistemaEscola.Controllers
         public void Add(FormularioAluno form)
         {
             _context.Alunos.Add(new Aluno(form.Id, form.Nome, form.Cpf, form.Rg,
-                form.TelefoneResidencial, form.TelefoneCelular, form.Email, form.NomeResponsavel,
-                form.Matricula));
+                form.DataNascimento, form.TelefoneResidencial, form.TelefoneCelular,
+                form.Email, form.Matricula, form.NomePai, form.NomeMae, form.NomeResponsavel));
         }
 
         public void Delete(int Id)
@@ -33,8 +33,8 @@ namespace SistemaEscola.Controllers
                 _context.Alunos.Remove(aluno);
 
                 _context.Alunos.Add(new Aluno(form.Id, form.Nome, form.Cpf, form.Rg,
-                    form.TelefoneResidencial, form.TelefoneCelular, form.Email, form.NomeResponsavel,
-                    form.Matricula));
+                form.DataNascimento, form.TelefoneResidencial, form.TelefoneCelular,
+                form.Email, form.Matricula, form.NomePai, form.NomeMae, form.NomeResponsavel));
             }
         }
 

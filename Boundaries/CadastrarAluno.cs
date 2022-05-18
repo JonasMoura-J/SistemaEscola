@@ -10,28 +10,54 @@ using System.Windows.Forms;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
 using SistemaEscola.Utils;
+using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola
 {
     public partial class CadastrarAluno : Form
     {
-        Form1 _mainForm;
+        Home _mainForm;
         ControladorAluno controladorAluno = new ControladorAluno();
         List<TextBox> textBoxes = new List<TextBox>();
+        List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
+        List<TextBox> optionalTextBoxes = new List<TextBox>();
+        List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
 
-        public CadastrarAluno(Form1 mainForm)
+        public CadastrarAluno(Home mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
         }
-        
+
         private void CadastrarAluno_Load(object sender, EventArgs e)
         {
+            //Controls.Add(telCelTxtBox);
+
             foreach (Control c in Controls)
             {
                 if (c is TextBox)
                 {
-                    textBoxes.Add((TextBox)c);
+                    if (c.Name == "paiTxtBox" || c.Name == "maeTxtBox" || c.Name == "respTxtBox")
+                    {
+                        optionalTextBoxes.Add((TextBox)c);
+                    } else
+                    {
+                        textBoxes.Add((TextBox)c);
+                    }
+                }
+
+                if (c is MaskedTextBox)
+                {
+                    if (c.Name == "telResTxtBox" || c.Name == "telCelTxtBox")
+                    {
+                        optionalMaskedTextBoxes.Add((MaskedTextBox)c);
+                    }
+                    else
+                    {
+                        maskedTextBoxes.Add((MaskedTextBox)c);
+                    }
+                    
                 }
             }
 
@@ -41,26 +67,65 @@ namespace SistemaEscola
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+            if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
-                if (!textBoxes.Any(t => t.Text == ""))
+                if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
                 {
-                    var form = new FormularioAluno
+                    if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black))
                     {
-                        Id = int.Parse(idTxtBox.Text),
-                        Nome = nomeTxtBox.Text,
-                        Cpf = cpfTxtBox.Text,
-                        Rg = rgTxtBox.Text,
-                        TelefoneResidencial = telResTxtBox.Text,
-                        TelefoneCelular = telCelTxtBox.Text,
-                        Email = emailTxtBox.Text,
-                        NomeResponsavel = respTxtBox.Text,
-                        Matricula = matriculaTxtBox.Text
-                    };
+                        if (optionalTextBoxes.Any(t => t.ForeColor == Color.Black))
+                        {
+                            optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                                ToList().ForEach(t => t.Text = null);
 
-                    controladorAluno.Add(form);
+                            optionalTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                                ToList().ForEach(t => t.Text = null);
 
-                    _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
+                            DateTime dateResult;
+                            DateTime dataNascConverted;
+
+                            if (!DateTime.TryParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"),
+                                DateTimeStyles.None, out dateResult))
+                            {
+                                dataNascConverted = DateTime.MinValue;
+                            } else
+                            {
+                                dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                            }
+
+                            var form = new FormularioAluno
+                            {
+                                Id = controladorAluno.FindAll().Count() + 1,
+                                Nome = nomeTxtBox.Text,
+                                Cpf = cpfTxtBox.Text,
+                                Rg = rgTxtBox.Text,
+                                DataNascimento = dataNascConverted,
+                                TelefoneResidencial = telResTxtBox.Text,
+                                TelefoneCelular = telCelTxtBox.Text,
+                                Email = emailTxtBox.Text,
+                                NomePai = paiTxtBox.Text,
+                                NomeMae = maeTxtBox.Text,
+                                NomeResponsavel = respTxtBox.Text,
+                                Matricula = matriculaTxtBox.Text
+                            };
+
+                            ValidationContext validContext = new ValidationContext(form);
+                            List<ValidationResult> errors = new List<ValidationResult>();
+
+                            if (!Validator.TryValidateObject(form, validContext, errors))
+                            {
+                                foreach (ValidationResult result in errors)
+                                {
+                                    MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                            } else {
+                                controladorAluno.Add(form);
+
+                                _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -77,22 +142,53 @@ namespace SistemaEscola
 
         private void cpfTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.Clear(cpfTxtBox, "CPF");
+            TextBoxTools.ClearMask(cpfTxtBox, "CPF", "000.000.000-00");
+
         }
 
         private void cpfTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.Fill(cpfTxtBox, "CPF");
+            TextBoxTools.FillMask(cpfTxtBox, "CPF", "   .   .   -");
         }
 
         private void rgTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.Clear(rgTxtBox, "RG");
+            TextBoxTools.ClearMask(rgTxtBox, "RG", "00.000.000-0");
         }
 
         private void rgTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.Fill(rgTxtBox, "RG");
+            TextBoxTools.FillMask(rgTxtBox, "RG", "  .   .   -");
+        }
+
+        private void dataNascTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.ClearMask(dataNascTxtBox, "Data de Nascimento", "00/00/0000");
+        }
+
+        private void dataNascTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.FillMask(dataNascTxtBox, "Data de Nascimento", "  /  /");
+        }
+
+        private void telResTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.ClearMask(telResTxtBox, "Telefone Residencial", "(00) 0000-0000");
+        }
+
+        private void telResTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.FillMask(telResTxtBox, "Telefone Residencial", "(  )     -");
+        }
+
+        private void telCelTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.ClearMask(telCelTxtBox, "Telefone Celular", "(00) 0 0000-0000");
+        }
+
+        private void telCelTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.FillMask(telCelTxtBox, "Telefone Celular", "(  )       -");
         }
 
         private void emailTxtBox_Enter(object sender, EventArgs e)
@@ -105,24 +201,34 @@ namespace SistemaEscola
             TextBoxTools.Fill(emailTxtBox, "E-mail");
         }
 
-        private void telResTxtBox_Enter(object sender, EventArgs e)
+        private void matriculaTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.Clear(telResTxtBox, "Telefone Residencial");
+            TextBoxTools.Clear(matriculaTxtBox, "Matrícula");
         }
 
-        private void telResTxtBox_Leave(object sender, EventArgs e)
+        private void matriculaTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.Fill(telResTxtBox, "Telefone Residencial");
+            TextBoxTools.Fill(matriculaTxtBox, "Matrícula");
         }
 
-        private void telCelTxtBox_Enter(object sender, EventArgs e)
+        private void paiTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.Clear(telCelTxtBox, "Telefone Celular");
+            TextBoxTools.Clear(paiTxtBox, "Nome do Pai");
         }
 
-        private void telCelTxtBox_Leave(object sender, EventArgs e)
+        private void paiTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.Fill(telCelTxtBox, "Telefone Celular");
+            TextBoxTools.Fill(paiTxtBox, "Nome do Pai");
+        }
+
+        private void maeTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.Clear(maeTxtBox, "Nome da Mãe");
+        }
+
+        private void maeTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.Fill(maeTxtBox, "Nome da Mãe");
         }
 
         private void respTxtBox_Enter(object sender, EventArgs e)
@@ -135,14 +241,9 @@ namespace SistemaEscola
             TextBoxTools.Fill(respTxtBox, "Nome do Responsável");
         }
 
-        private void matriculaTxtBox_Enter(object sender, EventArgs e)
+        private void cadAluBackPanel_Click(object sender, EventArgs e)
         {
-            TextBoxTools.Clear(matriculaTxtBox, "Matrícula");
+            cadAluBackPanel.Focus();
         }
-
-        private void matriculaTxtBox_Leave(object sender, EventArgs e)
-        {
-            TextBoxTools.Fill(matriculaTxtBox, "Matrícula");
-        }    
     }
 }

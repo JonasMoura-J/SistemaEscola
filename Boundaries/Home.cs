@@ -12,33 +12,36 @@ namespace SistemaEscola
 {
     public partial class Home : Form
     {
+        private Form _activeForm;
+        private Button _currentBtn;
+
         public Home()
         {
             InitializeComponent();
         }
 
-        private void disciplinaBtn_Click(object sender, EventArgs e)
+
+        public void OpenChildForm(Form childForm, object btnSender)
         {
-            CadastrarDisciplina cd = new CadastrarDisciplina();
-            cd.Show();
+            if (_activeForm != null)
+            {
+                _activeForm.Close();
+            }
+
+            _activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel1.Controls.Add(childForm);
+            panel1.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
 
-        private void turmaBtn_Click(object sender, EventArgs e)
+        private void alunosBtn_Click(object sender, EventArgs e)
         {
-            CadastrarTurma ct = new CadastrarTurma();
-            ct.Show();
-        }
-
-        private void professorBtn_Click(object sender, EventArgs e)
-        {
-            CadastrarProfessor cp = new CadastrarProfessor();
-            cp.Show();
-        }
-
-        private void alunoBtn_Click(object sender, EventArgs e)
-        {
-            //CadastrarAluno ca = new CadastrarAluno();
-            //ca.Show();
+            OpenChildForm(new MenuAluno(this), sender);
+            titleLb.Text = "ALUNO";
         }
     }
 }

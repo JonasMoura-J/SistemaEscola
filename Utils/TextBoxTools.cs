@@ -48,5 +48,28 @@ namespace SistemaEscola.Utils
                 txtBox.PasswordChar = '\0';
             }
         }
+        public static void ClearMask(MaskedTextBox txtBox, string placeHolder, string mask)
+        {
+            if (txtBox.Text == placeHolder)
+            {
+                txtBox.Text = "";
+
+                txtBox.ForeColor = Color.Black;
+
+                txtBox.Mask = mask;
+            }
+        }
+
+        public static void FillMask(MaskedTextBox txtBox, string placeHolder, string maskEmpty)
+        {
+            if (txtBox.Text == maskEmpty)
+            {
+                txtBox.Mask = "";
+
+                txtBox.Text = placeHolder;
+
+                txtBox.ForeColor = Color.LightSteelBlue;
+            }
+        }
     }
 }

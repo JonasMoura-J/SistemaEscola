@@ -20,7 +20,7 @@ namespace SistemaEscola
 
         private void OpenNewForm(object obj)
         {
-            Application.Run(new Form1());
+            Application.Run(new Home());
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
