@@ -9,7 +9,7 @@ namespace SistemaEscola.Utils
         {
             if (txtBox.Text == placeHolder)
             {
-                txtBox.Text = "";
+                txtBox.Text = string.Empty;
 
                 txtBox.ForeColor = Color.Black;
             }
@@ -17,7 +17,7 @@ namespace SistemaEscola.Utils
 
         public static void Fill(TextBox txtBox, string placeHolder)
         {
-            if (txtBox.Text == "")
+            if (string.IsNullOrWhiteSpace(txtBox.Text))
             {
                 txtBox.Text = placeHolder;
 
@@ -29,7 +29,7 @@ namespace SistemaEscola.Utils
         {
             if (txtBox.Text == placeHolder)
             {
-                txtBox.Text = "";
+                txtBox.Text = string.Empty;
 
                 txtBox.ForeColor = Color.Black;
 
@@ -39,7 +39,7 @@ namespace SistemaEscola.Utils
 
         public static void FillPassword(TextBox txtBox, string placeHolder)
         {
-            if (txtBox.Text == "")
+            if (txtBox.Text == string.Empty)
             {
                 txtBox.Text = placeHolder;
 
@@ -52,7 +52,7 @@ namespace SistemaEscola.Utils
         {
             if (txtBox.Text == placeHolder)
             {
-                txtBox.Text = "";
+                txtBox.Text = string.Empty;
 
                 txtBox.ForeColor = Color.Black;
 
@@ -62,7 +62,7 @@ namespace SistemaEscola.Utils
 
         public static void FillMask(MaskedTextBox txtBox, string placeHolder, string maskEmpty)
         {
-            if (txtBox.Text == maskEmpty)
+            if (txtBox.Text == maskEmpty || txtBox.Text == string.Empty)
             {
                 txtBox.Mask = "";
 

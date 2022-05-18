@@ -106,9 +106,17 @@
     <Compile Include="Boundaries\MenuAluno.Designer.cs">
       <DependentUpon>MenuAluno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parsers\CpfParse.cs" />
+    <Compile Include="Parsers\PhoneNumberParse.cs" />
+    <Compile Include="Parsers\RgParse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\TextBoxTools.cs" />
+    <Compile Include="Validations\CpfAttribute.cs" />
+    <Compile Include="Validations\DateAttribute.cs" />
+    <Compile Include="Validations\MobilePhoneNumberAttribute.cs" />
+    <Compile Include="Validations\PhoneNumberAttribute.cs" />
+    <Compile Include="Validations\RgAttribute.cs" />
     <EmbeddedResource Include="Boundaries\CadastrarAluno.resx">
       <DependentUpon>CadastrarAluno.cs</DependentUpon>
     </EmbeddedResource>

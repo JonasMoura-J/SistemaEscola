@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
 using SistemaEscola.Utils;
-using System.Globalization;
-using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola
 {
@@ -32,8 +29,6 @@ namespace SistemaEscola
 
         private void CadastrarAluno_Load(object sender, EventArgs e)
         {
-            //Controls.Add(telCelTxtBox);
-
             foreach (Control c in Controls)
             {
                 if (c is TextBox)
@@ -57,7 +52,6 @@ namespace SistemaEscola
                     {
                         maskedTextBoxes.Add((MaskedTextBox)c);
                     }
-                    
                 }
             }
 
@@ -67,20 +61,24 @@ namespace SistemaEscola
 
         private void addBtn_Click(object sender, EventArgs e)
         {
+            // Check is any obligatory fields are empty
             if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
                 if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
                 {
+                    // Check if at least 1 optional field is filled
                     if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black))
                     {
                         if (optionalTextBoxes.Any(t => t.ForeColor == Color.Black))
                         {
+                            // Removes placeholder from optional fields
                             optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
-                                ToList().ForEach(t => t.Text = null);
+                                ToList().ForEach(t => t.Text = string.Empty);
 
                             optionalTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
-                                ToList().ForEach(t => t.Text = null);
+                                ToList().ForEach(t => t.Text = string.Empty);
 
+                            // Converts date to correct format (for dealing with errors)
                             DateTime dateResult;
                             DateTime dataNascConverted;
 
@@ -93,6 +91,7 @@ namespace SistemaEscola
                                 dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
                             }
 
+                            // Creates form to be sent to controller
                             var form = new FormularioAluno
                             {
                                 Id = controladorAluno.FindAll().Count() + 1,
@@ -109,19 +108,51 @@ namespace SistemaEscola
                                 Matricula = matriculaTxtBox.Text
                             };
 
-                            ValidationContext validContext = new ValidationContext(form);
+                            // Validates form
+                            ValidationContext validContext = new ValidationContext(form, null, null);
                             List<ValidationResult> errors = new List<ValidationResult>();
 
-                            if (!Validator.TryValidateObject(form, validContext, errors))
+                            if (!Validator.TryValidateObject(form, validContext, errors, true))
                             {
                                 foreach (ValidationResult result in errors)
                                 {
-                                    MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    // Returns placeholders to their text boxes
+                                    var emptyMaskedTextBoxes = optionalMaskedTextBoxes.Where(t => t.Text == string.Empty);
+                                    var emptyTextBoxes = optionalTextBoxes.Where(t => t.Text == string.Empty);
+
+                                    foreach (var mtb in emptyMaskedTextBoxes)
+                                    {
+                                        if (mtb.Name == "telResTxtBox")
+                                        {
+                                            TextBoxTools.FillMask(telResTxtBox, "Telefone Residencial", "(00) 0000-0000");
+                                        } else {
+                                            TextBoxTools.FillMask(telCelTxtBox, "Telefone Celular", "(00) 0 0000-0000");
+                                        }
+                                    }
+
+                                    foreach (var tb in emptyTextBoxes)
+                                    {
+                                        if (tb.Name == "paiTxtBox")
+                                        {
+                                            TextBoxTools.Fill(paiTxtBox, "Nome do Pai");                                            
+                                        } else if (tb.Name == "maeTxtBox")
+                                        {
+                                            TextBoxTools.Fill(maeTxtBox, "Nome da Mãe");
+                                        } else
+                                        {
+                                            TextBoxTools.Fill(respTxtBox, "Nome do Responsável");
+                                        }
+                                    }
+
+                                    //MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     return;
                                 }
                             } else {
+
+                                // Sends validated form to the controller
                                 controladorAluno.Add(form);
 
+                                // Returns to MenuAluno
                                 _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
                             }
                         }
@@ -201,16 +232,6 @@ namespace SistemaEscola
             TextBoxTools.Fill(emailTxtBox, "E-mail");
         }
 
-        private void matriculaTxtBox_Enter(object sender, EventArgs e)
-        {
-            TextBoxTools.Clear(matriculaTxtBox, "Matrícula");
-        }
-
-        private void matriculaTxtBox_Leave(object sender, EventArgs e)
-        {
-            TextBoxTools.Fill(matriculaTxtBox, "Matrícula");
-        }
-
         private void paiTxtBox_Enter(object sender, EventArgs e)
         {
             TextBoxTools.Clear(paiTxtBox, "Nome do Pai");
@@ -239,6 +260,16 @@ namespace SistemaEscola
         private void respTxtBox_Leave(object sender, EventArgs e)
         {
             TextBoxTools.Fill(respTxtBox, "Nome do Responsável");
+        }
+
+        private void matriculaTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.Clear(matriculaTxtBox, "Matrícula");
+        }
+
+        private void matriculaTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.Fill(matriculaTxtBox, "Matrícula");
         }
 
         private void cadAluBackPanel_Click(object sender, EventArgs e)
