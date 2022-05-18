@@ -18,11 +18,11 @@ namespace SistemaEscola.Entities.Formularios
         public string TelefoneCelular { get; set; }
         [Required, EmailAddress]
         public string Email { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$"), StringLength(100)]
+        [StringLength(100)]
         public string NomePai { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$"), StringLength(100)]
+        [StringLength(100)]
         public string NomeMae { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$"), StringLength(100)]
+        [StringLength(100)]
         public string NomeResponsavel { get; set; }
         [Required]
         public string Matricula { get; set; }
