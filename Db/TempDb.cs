@@ -40,8 +40,8 @@ namespace SistemaEscola.Db
             Disciplinas.Add(new Disciplina(2, "Portugues"));
             Disciplinas.Add(new Disciplina(3, "Biologia"));
 
-            Usuarios.Add(new Usuario("Coordenacao", "123456"));
-            Usuarios.Add(new Usuario("Professor", "123456789"));
+            Usuarios.Add(new Usuario("COORDENACAO", "123456"));
+            Usuarios.Add(new Usuario("PROFESSOR", "123456789"));
         }
     }
 }

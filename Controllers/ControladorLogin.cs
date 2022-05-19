@@ -12,11 +12,11 @@ namespace SistemaEscola.Controllers
 
         public bool ConfirmLogin(FormularioLogin form)
         {
-            var users = FindAll();
+            var user = FindByName(form.Nome);
 
-            if (FindAll().Any(u => u.Nome == form.Nome))
+            if (user != null)
             {
-                if (form.Senha == users.Where(u => u.Nome == form.Nome).ToList()[0].Senha)
+                if (form.Senha == user.Senha)
                 {
                     return true;
                 }
@@ -28,6 +28,18 @@ namespace SistemaEscola.Controllers
         public List<Usuario> FindAll()
         {
             return _context.Usuarios;
+        }
+
+        public Usuario FindByName(string name)
+        {
+            var user = _context.Usuarios.Where(u => u.Nome == name);
+
+            if (!user.Any())
+            {
+                return null;
+            }
+
+            return user.First();
         }
     }
 }

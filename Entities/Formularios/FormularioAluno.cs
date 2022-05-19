@@ -8,7 +8,7 @@ namespace SistemaEscola.Entities.Formularios
     {
         [Required, Cpf]
         public string Cpf { get; set; }
-        [Required, Rg]
+        [Required, Rg] // Fix validation and mask later, since it can me anything
         public string Rg { get; set; }
         [Required, Date("01/01/2000")] // set proper date later
         public DateTime DataNascimento { get; set; }

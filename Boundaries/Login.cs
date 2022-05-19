@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using SistemaEscola.Controllers;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Utils;
@@ -18,7 +20,7 @@ namespace SistemaEscola
             InitializeComponent();
         }
 
-        private void OpenNewForm(object obj)
+        private void OpenHomeForm(object obj)
         {
             Application.Run(new Home());
         }
@@ -27,18 +29,30 @@ namespace SistemaEscola
         {
             if (!(userTxtBox.ForeColor == Color.LightSteelBlue || senhaTxtBox.ForeColor == Color.LightSteelBlue))
             {
-                if (userTxtBox.Text != "" && senhaTxtBox.Text != "")
+                var form = new FormularioLogin
                 {
-                    var form = new FormularioLogin
-                    {
-                        Nome = userTxtBox.Text,
-                        Senha = senhaTxtBox.Text
-                    };
+                    Nome = userTxtBox.Text.ToUpper(),
+                    Senha = senhaTxtBox.Text
+                };
 
+                // Validates form (just for safety)
+                ValidationContext validContext = new ValidationContext(form, null, null);
+                List<ValidationResult> errors = new List<ValidationResult>();
+
+                if (!Validator.TryValidateObject(form, validContext, errors, true))
+                {
+                    foreach (ValidationResult result in errors)
+                    {
+                        //MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else
+                {
                     if (controladorLogin.ConfirmLogin(form))
                     {
                         Close();
-                        th = new Thread(OpenNewForm);
+                        th = new Thread(OpenHomeForm);
                         th.SetApartmentState(ApartmentState.STA);
                         th.Start();
                     }

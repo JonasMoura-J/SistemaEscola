@@ -1,4 +1,6 @@
-﻿namespace SistemaEscola.Entities.Formularios
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SistemaEscola.Entities.Formularios
 {
     class FormularioLogin : Formulario
     {
