@@ -36,9 +36,9 @@ namespace SistemaEscola.Db
             Turmas.Add(new Turma(2, "01A4N", "8° ano", 14));
             Turmas.Add(new Turma(3, "08A1N", "9° ano", 3));
 
-            Disciplinas.Add(new Disciplina(1, "Matematica"));
-            Disciplinas.Add(new Disciplina(2, "Portugues"));
-            Disciplinas.Add(new Disciplina(3, "Biologia"));
+            Disciplinas.Add(new Disciplina(1, "MATEMARICA"));
+            Disciplinas.Add(new Disciplina(2, "PORTUGUES"));
+            Disciplinas.Add(new Disciplina(3, "BIOLOGIA"));
 
             Usuarios.Add(new Usuario("COORDENACAO", "123456"));
             Usuarios.Add(new Usuario("PROFESSOR", "123456789"));

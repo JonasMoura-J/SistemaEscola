@@ -4,8 +4,12 @@ using SistemaEscola.Validations;
 
 namespace SistemaEscola.Entities.Formularios
 {
-    class FormularioAluno : Formulario
+    class FormularioAluno : IFormulario
     {
+        public int Id { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 2)]
+        public string Nome { get; set; }
         [Required, Cpf]
         public string Cpf { get; set; }
         [Required, Rg] // Fix validation and mask later, since it can me anything

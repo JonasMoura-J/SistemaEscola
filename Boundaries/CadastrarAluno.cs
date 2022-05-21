@@ -14,7 +14,8 @@ namespace SistemaEscola
 {
     public partial class CadastrarAluno : Form
     {
-        Home _mainForm;
+        private readonly Home _mainForm;
+
         ControladorAluno controladorAluno = new ControladorAluno();
         List<TextBox> textBoxes = new List<TextBox>();
         List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();

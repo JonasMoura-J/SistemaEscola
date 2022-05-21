@@ -76,6 +76,7 @@ namespace SistemaEscola
             this.disciplinaBtn.TabIndex = 4;
             this.disciplinaBtn.Text = "Disciplina";
             this.disciplinaBtn.UseVisualStyleBackColor = false;
+            this.disciplinaBtn.Click += new System.EventHandler(this.disciplinaBtn_Click);
             // 
             // turmaBtn
             // 
@@ -151,7 +152,7 @@ namespace SistemaEscola
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "HOME";
             // 
-            // Form1
+            // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -161,7 +162,7 @@ namespace SistemaEscola
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.panel2.ResumeLayout(false);

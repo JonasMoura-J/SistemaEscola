@@ -1,16 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SistemaEscola.Db;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Controllers
 {
-    class ControladorDisciplina
+    class ControladorDisciplina : IController<Disciplina>
     {
         private readonly TempDb _context = TempDb.Instanse;
 
         public void Add(FormularioDisciplina form)
         {
+            if (FindAll().Any(d => d.Nome == form.Nome))
+            {
+                throw new Exception("Disciplina já cadastrada");
+            }
+
             _context.Disciplinas.Add(new Disciplina(form.Id, form.Nome));
         }
 
@@ -21,7 +28,7 @@ namespace SistemaEscola.Controllers
 
         public void Delete(int Id)
         {
-            Disciplina disciplina = Find(Id);
+            Disciplina disciplina = FindById(Id);
 
             if (disciplina != null) 
             {
@@ -32,7 +39,7 @@ namespace SistemaEscola.Controllers
 
         public void Update(FormularioDisciplina form)
         {
-            Disciplina disciplina = Find(form.Id);
+            Disciplina disciplina = FindById(form.Id);
 
             if (disciplina != null) {
 
@@ -41,7 +48,7 @@ namespace SistemaEscola.Controllers
             }
         }
 
-        public Disciplina Find(int Id)
+        public Disciplina FindById(int Id)
         {
             return _context.Disciplinas.Find(x => x.Id == Id);
         }

@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola.Entities.Formularios
 {
-    class FormularioProfessor : Formulario
+    class FormularioProfessor : IFormulario
     {
+        public int Id { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 2)]
+        public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
         public string TelefoneResidencial { get; set; }

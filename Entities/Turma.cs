@@ -2,7 +2,7 @@
 
 namespace SistemaEscola.Entities
 {
-    class Turma
+    class Turma : IEntity
     {
         public int Id { get; set; }
         public string Codigo { get; set; }

@@ -76,15 +76,17 @@
     <Compile Include="Controllers\ControladorLogin.cs" />
     <Compile Include="Controllers\ControladorProfessor.cs" />
     <Compile Include="Controllers\ControladorTurma.cs" />
+    <Compile Include="Controllers\Interfaces\IController.cs" />
     <Compile Include="Db\TempDb.cs" />
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Entities\Disciplina.cs" />
-    <Compile Include="Entities\Formularios\Formulario.cs" />
+    <Compile Include="Entities\Formularios\Interfaces\IFormulario.cs" />
     <Compile Include="Entities\Formularios\FormularioAluno.cs" />
     <Compile Include="Entities\Formularios\FormularioDisciplina.cs" />
     <Compile Include="Entities\Formularios\FormularioLogin.cs" />
     <Compile Include="Entities\Formularios\FormularioProfessor.cs" />
     <Compile Include="Entities\Formularios\FormularioTurma.cs" />
+    <Compile Include="Entities\Interfaces\IEntity.cs" />
     <Compile Include="Entities\Professor.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Usuario.cs" />
@@ -105,6 +107,12 @@
     </Compile>
     <Compile Include="Boundaries\MenuAluno.Designer.cs">
       <DependentUpon>MenuAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundaries\MenuDisciplina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\MenuDisciplina.Designer.cs">
+      <DependentUpon>MenuDisciplina.cs</DependentUpon>
     </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
@@ -137,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\MenuAluno.resx">
       <DependentUpon>MenuAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\MenuDisciplina.resx">
+      <DependentUpon>MenuDisciplina.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

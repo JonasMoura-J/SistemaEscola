@@ -2,7 +2,7 @@
 
 namespace SistemaEscola.Entities
 {
-    class Disciplina
+    class Disciplina : IEntity
     {
         public int Id { get; set; }
         public string Nome { get; set; }

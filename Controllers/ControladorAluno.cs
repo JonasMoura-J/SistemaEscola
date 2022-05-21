@@ -5,7 +5,7 @@ using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Controllers
 {
-    class ControladorAluno
+    class ControladorAluno : IController<Aluno>
     {
         private readonly TempDb _context = TempDb.Instanse;
 
@@ -18,16 +18,16 @@ namespace SistemaEscola.Controllers
 
         public void Delete(int Id)
         {
-            Aluno aluno = Find(Id);
+            Aluno aluno = FindById(Id);
 
             if (aluno != null) {
-                _context.Alunos.Remove(Find(Id));
+                _context.Alunos.Remove(FindById(Id));
             }
         }
 
         public void Update(FormularioAluno form)
         {
-            Aluno aluno = Find(form.Id);
+            Aluno aluno = FindById(form.Id);
 
             if (aluno != null) {
                 _context.Alunos.Remove(aluno);
@@ -43,7 +43,7 @@ namespace SistemaEscola.Controllers
             return _context.Alunos;
         }
 
-        public Aluno Find(int Id)
+        public Aluno FindById(int Id)
         {
             return _context.Alunos.Find(x => x.Id == Id);
         }

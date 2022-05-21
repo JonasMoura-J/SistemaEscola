@@ -2,7 +2,7 @@
 
 namespace SistemaEscola.Entities
 {
-    class Professor
+    class Professor : IEntity
     {
         public int Id { get; set; }
         public string Nome { get; set; }

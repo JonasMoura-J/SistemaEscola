@@ -6,7 +6,7 @@ using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Controllers
 {
-    class ControladorLogin
+    class ControladorLogin : IController<Usuario>
     {
         private readonly TempDb _context = TempDb.Instanse;
 

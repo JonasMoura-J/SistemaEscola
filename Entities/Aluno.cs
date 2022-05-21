@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SistemaEscola.Entities
 {
-    class Aluno
+    class Aluno : IEntity
     {
         public int Id { get; set; }
         public string Nome { get; set; }
