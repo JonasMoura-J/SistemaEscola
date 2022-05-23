@@ -51,7 +51,7 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        //MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }

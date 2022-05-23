@@ -65,7 +65,7 @@ namespace SistemaEscola
             // 
             // disciplinaBtn
             // 
-            this.disciplinaBtn.BackColor = System.Drawing.Color.Transparent;
+            this.disciplinaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(57)))), ((int)(((byte)(108)))));
             this.disciplinaBtn.FlatAppearance.BorderSize = 0;
             this.disciplinaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.disciplinaBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -80,7 +80,7 @@ namespace SistemaEscola
             // 
             // turmaBtn
             // 
-            this.turmaBtn.BackColor = System.Drawing.Color.Transparent;
+            this.turmaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(57)))), ((int)(((byte)(108)))));
             this.turmaBtn.FlatAppearance.BorderSize = 0;
             this.turmaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.turmaBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -91,10 +91,11 @@ namespace SistemaEscola
             this.turmaBtn.TabIndex = 3;
             this.turmaBtn.Text = "Turma";
             this.turmaBtn.UseVisualStyleBackColor = false;
+            this.turmaBtn.Click += new System.EventHandler(this.turmaBtn_Click);
             // 
             // professorBtn
             // 
-            this.professorBtn.BackColor = System.Drawing.Color.Transparent;
+            this.professorBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(57)))), ((int)(((byte)(108)))));
             this.professorBtn.FlatAppearance.BorderSize = 0;
             this.professorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.professorBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -108,7 +109,7 @@ namespace SistemaEscola
             // 
             // alunosBtn
             // 
-            this.alunosBtn.BackColor = System.Drawing.Color.Transparent;
+            this.alunosBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(57)))), ((int)(((byte)(108)))));
             this.alunosBtn.FlatAppearance.BorderSize = 0;
             this.alunosBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.alunosBtn.Font = new System.Drawing.Font("Comfortaa", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

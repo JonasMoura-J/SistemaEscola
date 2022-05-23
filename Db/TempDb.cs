@@ -15,13 +15,13 @@ namespace SistemaEscola.Db
 
         private TempDb()
         {
-            Alunos.Add(new Aluno(1, "Joao", "12345678910", "4312312345",
+            Alunos.Add(new Aluno(1, "JOAO AUGUSTO", "12345678910", "4312312345",
                 DateTime.Parse("12/22/2222"), "23451123",
                 "912341234", "joao@gmail.com", "Maria", "0321323"));
-            Alunos.Add(new Aluno(2, "Maria", "64734664743", "7665092996",
+            Alunos.Add(new Aluno(2, "MARIA DA SILVA", "64734664743", "7665092996",
                 DateTime.Parse("12/22/2222"), "66543213",
                 "923672345", "mari@gmail.com", "Miguel", "2839102"));
-            Alunos.Add(new Aluno(3, "Miguel", "00594837251", "2283011830",
+            Alunos.Add(new Aluno(3, "MIGUEL WAWRZASZEK", "00594837251", "2283011830",
                 DateTime.Parse("12/22/2222"), "22550594",
                 "900339283", "migueleocara@gmail.com", "Unknown", "9932432"));
 

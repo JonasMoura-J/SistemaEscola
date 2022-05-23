@@ -15,6 +15,28 @@ namespace SistemaEscola.Utils
             }
         }
 
+        public static void Clear(MaskedTextBox txtBox, string placeHolder)
+        {
+            if (txtBox.Text == placeHolder)
+            {
+                txtBox.Text = string.Empty;
+
+                txtBox.ForeColor = Color.Black;
+            }
+        }
+
+        public static void Clear(MaskedTextBox txtBox, string placeHolder, string mask)
+        {
+            if (txtBox.Text == placeHolder)
+            {
+                txtBox.Text = string.Empty;
+
+                txtBox.ForeColor = Color.Black;
+
+                txtBox.Mask = mask;
+            }
+        }
+
         public static void Fill(TextBox txtBox, string placeHolder)
         {
             if (string.IsNullOrWhiteSpace(txtBox.Text))
@@ -25,6 +47,26 @@ namespace SistemaEscola.Utils
             }
         }
 
+        public static void Fill(MaskedTextBox txtBox, string placeHolder)
+        {
+            if (string.IsNullOrWhiteSpace(txtBox.Text))
+            {
+                txtBox.Text = placeHolder;
+
+                txtBox.ForeColor = Color.LightSteelBlue;
+            }
+        }
+        public static void Fill(MaskedTextBox txtBox, string placeHolder, string maskEmpty)
+        {
+            if (txtBox.Text == maskEmpty || txtBox.Text == string.Empty)
+            {
+                txtBox.Mask = "";
+
+                txtBox.Text = placeHolder;
+
+                txtBox.ForeColor = Color.LightSteelBlue;
+            }
+        }
         public static void ClearPassword(TextBox txtBox, string placeHolder)
         {
             if (txtBox.Text == placeHolder)
@@ -46,29 +88,6 @@ namespace SistemaEscola.Utils
                 txtBox.ForeColor = Color.LightSteelBlue;
 
                 txtBox.PasswordChar = '\0';
-            }
-        }
-        public static void ClearMask(MaskedTextBox txtBox, string placeHolder, string mask)
-        {
-            if (txtBox.Text == placeHolder)
-            {
-                txtBox.Text = string.Empty;
-
-                txtBox.ForeColor = Color.Black;
-
-                txtBox.Mask = mask;
-            }
-        }
-
-        public static void FillMask(MaskedTextBox txtBox, string placeHolder, string maskEmpty)
-        {
-            if (txtBox.Text == maskEmpty || txtBox.Text == string.Empty)
-            {
-                txtBox.Mask = "";
-
-                txtBox.Text = placeHolder;
-
-                txtBox.ForeColor = Color.LightSteelBlue;
             }
         }
     }

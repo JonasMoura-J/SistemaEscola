@@ -60,6 +60,40 @@ namespace SistemaEscola
             controladorAluno.FindAll().ForEach(a => comboBox1.Items.Add(a.Nome));
         }
 
+        private void ResetPlaceHolders()
+        {
+            var emptyMaskedTextBoxes = optionalMaskedTextBoxes.Where(t => t.Text == string.Empty);
+            var emptyTextBoxes = optionalTextBoxes.Where(t => t.Text == string.Empty);
+
+            foreach (var mtb in emptyMaskedTextBoxes)
+            {
+                if (mtb.Name == "telResTxtBox")
+                {
+                    TextBoxTools.Fill(telResTxtBox, "Telefone Residencial", "(00) 0000-0000");
+                }
+                else
+                {
+                    TextBoxTools.Fill(telCelTxtBox, "Telefone Celular", "(00) 0 0000-0000");
+                }
+            }
+
+            foreach (var tb in emptyTextBoxes)
+            {
+                if (tb.Name == "paiTxtBox")
+                {
+                    TextBoxTools.Fill(paiTxtBox, "Nome do Pai");
+                }
+                else if (tb.Name == "maeTxtBox")
+                {
+                    TextBoxTools.Fill(maeTxtBox, "Nome da Mãe");
+                }
+                else
+                {
+                    TextBoxTools.Fill(respTxtBox, "Nome do Responsável");
+                }
+            }
+        }
+
         private void addBtn_Click(object sender, EventArgs e)
         {
             // Check is any obligatory fields are empty
@@ -118,43 +152,26 @@ namespace SistemaEscola
                                 foreach (ValidationResult result in errors)
                                 {
                                     // Returns placeholders to their text boxes
-                                    var emptyMaskedTextBoxes = optionalMaskedTextBoxes.Where(t => t.Text == string.Empty);
-                                    var emptyTextBoxes = optionalTextBoxes.Where(t => t.Text == string.Empty);
+                                    ResetPlaceHolders();
 
-                                    foreach (var mtb in emptyMaskedTextBoxes)
-                                    {
-                                        if (mtb.Name == "telResTxtBox")
-                                        {
-                                            TextBoxTools.FillMask(telResTxtBox, "Telefone Residencial", "(00) 0000-0000");
-                                        } else {
-                                            TextBoxTools.FillMask(telCelTxtBox, "Telefone Celular", "(00) 0 0000-0000");
-                                        }
-                                    }
-
-                                    foreach (var tb in emptyTextBoxes)
-                                    {
-                                        if (tb.Name == "paiTxtBox")
-                                        {
-                                            TextBoxTools.Fill(paiTxtBox, "Nome do Pai");                                            
-                                        } else if (tb.Name == "maeTxtBox")
-                                        {
-                                            TextBoxTools.Fill(maeTxtBox, "Nome da Mãe");
-                                        } else
-                                        {
-                                            TextBoxTools.Fill(respTxtBox, "Nome do Responsável");
-                                        }
-                                    }
-
-                                    //MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     return;
                                 }
                             } else {
+                                try
+                                {
+                                    // Sends validated form to the controller
+                                    controladorAluno.Add(form);
 
-                                // Sends validated form to the controller
-                                controladorAluno.Add(form);
-
-                                // Returns to MenuAluno
-                                _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
+                                    // Returns to MenuAluno
+                                    _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
+                                
+                                } catch (Exception error)
+                                {
+                                    ResetPlaceHolders();
+                                    MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                
                             }
                         }
                     }
@@ -174,53 +191,55 @@ namespace SistemaEscola
 
         private void cpfTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.ClearMask(cpfTxtBox, "CPF", "000.000.000-00");
+            TextBoxTools.Clear(cpfTxtBox, "CPF", "000.000.000-00");
 
         }
 
         private void cpfTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.FillMask(cpfTxtBox, "CPF", "   .   .   -");
+            TextBoxTools.Fill(cpfTxtBox, "CPF", "   .   .   -");
         }
 
         private void rgTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.ClearMask(rgTxtBox, "RG", "00.000.000-0");
+            //TextBoxTools.ClearMask(rgTxtBox, "RG", "00.000.000-0");
+            TextBoxTools.Clear(rgTxtBox, "RG");
         }
 
         private void rgTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.FillMask(rgTxtBox, "RG", "  .   .   -");
+            //TextBoxTools.FillMask(rgTxtBox, "RG", "  .   .   -");
+            TextBoxTools.Fill(rgTxtBox, "RG");
         }
 
         private void dataNascTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.ClearMask(dataNascTxtBox, "Data de Nascimento", "00/00/0000");
+            TextBoxTools.Clear(dataNascTxtBox, "Data de Nascimento", "00/00/0000");
         }
 
         private void dataNascTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.FillMask(dataNascTxtBox, "Data de Nascimento", "  /  /");
+            TextBoxTools.Fill(dataNascTxtBox, "Data de Nascimento", "  /  /");
         }
 
         private void telResTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.ClearMask(telResTxtBox, "Telefone Residencial", "(00) 0000-0000");
+            TextBoxTools.Clear(telResTxtBox, "Telefone Residencial", "(00) 0000-0000");
         }
 
         private void telResTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.FillMask(telResTxtBox, "Telefone Residencial", "(  )     -");
+            TextBoxTools.Fill(telResTxtBox, "Telefone Residencial", "(  )     -");
         }
 
         private void telCelTxtBox_Enter(object sender, EventArgs e)
         {
-            TextBoxTools.ClearMask(telCelTxtBox, "Telefone Celular", "(00) 0 0000-0000");
+            TextBoxTools.Clear(telCelTxtBox, "Telefone Celular", "(00) 0 0000-0000");
         }
 
         private void telCelTxtBox_Leave(object sender, EventArgs e)
         {
-            TextBoxTools.FillMask(telCelTxtBox, "Telefone Celular", "(  )       -");
+            TextBoxTools.Fill(telCelTxtBox, "Telefone Celular", "(  )       -");
         }
 
         private void emailTxtBox_Enter(object sender, EventArgs e)

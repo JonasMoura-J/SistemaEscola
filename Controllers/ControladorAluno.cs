@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SistemaEscola.Db;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
@@ -11,6 +13,12 @@ namespace SistemaEscola.Controllers
 
         public void Add(FormularioAluno form)
         {
+            if (FindAll().Any(d => d.Cpf == form.Cpf || d.Matricula == form.Matricula ||
+                d.Email == form.Email))
+            {
+                throw new Exception("Aluno já cadastrado");
+            }
+
             _context.Alunos.Add(new Aluno(form.Id, form.Nome, form.Cpf, form.Rg,
                 form.DataNascimento, form.TelefoneResidencial, form.TelefoneCelular,
                 form.Email, form.Matricula, form.NomePai, form.NomeMae, form.NomeResponsavel));

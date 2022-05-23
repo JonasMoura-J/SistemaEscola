@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace SistemaEscola
 {
-    public partial class MenuAluno : Form
+    public partial class MenuTurma : Form
     {
-        private readonly Home _mainForm;        
+        private readonly Home _mainForm;
 
-        public MenuAluno(Home mainForm)
+        public MenuTurma(Home mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
@@ -15,7 +15,7 @@ namespace SistemaEscola
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            _mainForm.OpenChildForm(new CadastrarAluno(_mainForm), sender);
+            _mainForm.OpenChildForm(new CadastrarTurma(_mainForm), sender);
         }
     }
 }

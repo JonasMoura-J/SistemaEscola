@@ -23,6 +23,7 @@ namespace SistemaEscola
 
         private void enviarBtn_Click(object sender, EventArgs e)
         {
+            /*
             var form = new FormularioProfessor
             {
                 Id = int.Parse(idTxtBox.Text),
@@ -37,6 +38,7 @@ namespace SistemaEscola
             controladorProfessor.Add(form);
 
             Close();
+            */
         }
 
         // Provisoriamente

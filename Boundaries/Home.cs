@@ -49,5 +49,11 @@ namespace SistemaEscola
             OpenChildForm(new MenuDisciplina(this), sender);
             titleLb.Text = "DISCIPLINA";
         }
+
+        private void turmaBtn_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new MenuTurma(this), sender);
+            titleLb.Text = "TURMA";
+        }
     }
 }
