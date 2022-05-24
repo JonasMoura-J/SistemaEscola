@@ -24,6 +24,9 @@ namespace SistemaEscola.Db
             Alunos.Add(new Aluno(3, "MIGUEL WAWRZASZEK", "00594837251", "2283011830",
                 DateTime.Parse("12/22/2222"), "22550594",
                 "900339283", "migueleocara@gmail.com", "Unknown", "9932432"));
+            Alunos.Add(new Aluno(4, "ALBERTO WAWRZASZEK", "00394857151", "2283011830",
+                DateTime.Parse("12/22/2222"), "22543594",
+                "900339283", "albertftw@gmail.com", "Unknown", "9952432"));
 
             Professores.Add(new Professor(1, "Leo", "00483923812", "9233813048", "46382917",
                 "928371164", "leoprof@gmail.com"));
@@ -32,9 +35,9 @@ namespace SistemaEscola.Db
             Professores.Add(new Professor(3, "Thy", "77424678911", "6654356776", "12342231",
                 "922335463", "thygamer@gmail.com"));
 
-            Turmas.Add(new Turma(1, "03A3N", "7° ano", 20));
-            Turmas.Add(new Turma(2, "01A4N", "8° ano", 14));
-            Turmas.Add(new Turma(3, "08A1N", "9° ano", 3));
+            Turmas.Add(new Turma(1, "03A3N", "7° ano", 20, new List<Aluno>()));
+            Turmas.Add(new Turma(2, "01A4N", "8° ano", 14, new List<Aluno>()));
+            Turmas.Add(new Turma(3, "08A1N", "9° ano", 3, new List<Aluno>()));
 
             Disciplinas.Add(new Disciplina(1, "MATEMARICA"));
             Disciplinas.Add(new Disciplina(2, "PORTUGUES"));

@@ -32,13 +32,13 @@ namespace SistemaEscola
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.matriculaTxtBox = new System.Windows.Forms.TextBox();
+            this.codigoTxtBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.label2 = new System.Windows.Forms.Label();
+            this.nomeTxtBox = new System.Windows.Forms.TextBox();
+            this.alunosFlwLayPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.addAlunoBtn = new FontAwesome.Sharp.IconButton();
+            this.alunosLb = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -73,16 +73,18 @@ namespace SistemaEscola
             this.panel5.Size = new System.Drawing.Size(265, 2);
             this.panel5.TabIndex = 104;
             // 
-            // matriculaTxtBox
+            // codigoTxtBox
             // 
-            this.matriculaTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.matriculaTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.matriculaTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
-            this.matriculaTxtBox.Location = new System.Drawing.Point(262, 303);
-            this.matriculaTxtBox.Name = "matriculaTxtBox";
-            this.matriculaTxtBox.Size = new System.Drawing.Size(267, 24);
-            this.matriculaTxtBox.TabIndex = 98;
-            this.matriculaTxtBox.Text = "Código";
+            this.codigoTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.codigoTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codigoTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
+            this.codigoTxtBox.Location = new System.Drawing.Point(262, 303);
+            this.codigoTxtBox.Name = "codigoTxtBox";
+            this.codigoTxtBox.Size = new System.Drawing.Size(267, 24);
+            this.codigoTxtBox.TabIndex = 98;
+            this.codigoTxtBox.Text = "Código";
+            this.codigoTxtBox.Enter += new System.EventHandler(this.codigoTxtBox_Enter);
+            this.codigoTxtBox.Leave += new System.EventHandler(this.codigoTxtBox_Leave);
             // 
             // panel1
             // 
@@ -92,61 +94,63 @@ namespace SistemaEscola
             this.panel1.Size = new System.Drawing.Size(266, 2);
             this.panel1.TabIndex = 96;
             // 
-            // textBox2
+            // nomeTxtBox
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.LightSteelBlue;
-            this.textBox2.Location = new System.Drawing.Point(263, 172);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(268, 24);
-            this.textBox2.TabIndex = 95;
-            this.textBox2.Text = "Nome";
+            this.nomeTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nomeTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomeTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
+            this.nomeTxtBox.Location = new System.Drawing.Point(263, 172);
+            this.nomeTxtBox.Name = "nomeTxtBox";
+            this.nomeTxtBox.Size = new System.Drawing.Size(268, 24);
+            this.nomeTxtBox.TabIndex = 95;
+            this.nomeTxtBox.Text = "Nome";
+            this.nomeTxtBox.Enter += new System.EventHandler(this.nomeTxtBox_Enter);
+            this.nomeTxtBox.Leave += new System.EventHandler(this.nomeTxtBox_Leave);
             // 
-            // flowLayoutPanel1
+            // alunosFlwLayPnl
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(604, 210);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(273, 183);
-            this.flowLayoutPanel1.TabIndex = 118;
+            this.alunosFlwLayPnl.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.alunosFlwLayPnl.Location = new System.Drawing.Point(604, 210);
+            this.alunosFlwLayPnl.Name = "alunosFlwLayPnl";
+            this.alunosFlwLayPnl.Size = new System.Drawing.Size(273, 183);
+            this.alunosFlwLayPnl.TabIndex = 118;
             // 
-            // label1
+            // addAlunoBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(842, 565);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 119;
-            this.label1.Text = "label1";
-            this.label1.Visible = false;
+            this.addAlunoBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
+            this.addAlunoBtn.FlatAppearance.BorderSize = 0;
+            this.addAlunoBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addAlunoBtn.ForeColor = System.Drawing.Color.White;
+            this.addAlunoBtn.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.addAlunoBtn.IconColor = System.Drawing.Color.White;
+            this.addAlunoBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.addAlunoBtn.IconSize = 40;
+            this.addAlunoBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.addAlunoBtn.Location = new System.Drawing.Point(829, 145);
+            this.addAlunoBtn.Name = "addAlunoBtn";
+            this.addAlunoBtn.Size = new System.Drawing.Size(48, 44);
+            this.addAlunoBtn.TabIndex = 121;
+            this.addAlunoBtn.UseVisualStyleBackColor = false;
+            this.addAlunoBtn.Click += new System.EventHandler(this.addAlunoBtn_Click);
             // 
-            // iconButton1
+            // alunosLb
             // 
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.ForeColor = System.Drawing.Color.White;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.iconButton1.IconColor = System.Drawing.Color.White;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 40;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.iconButton1.Location = new System.Drawing.Point(829, 145);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(48, 44);
-            this.iconButton1.TabIndex = 121;
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.alunosLb.AutoSize = true;
+            this.alunosLb.Font = new System.Drawing.Font("Comfortaa", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alunosLb.Location = new System.Drawing.Point(597, 145);
+            this.alunosLb.Name = "alunosLb";
+            this.alunosLb.Size = new System.Drawing.Size(102, 38);
+            this.alunosLb.TabIndex = 122;
+            this.alunosLb.Text = "Alunos";
+            this.alunosLb.Click += new System.EventHandler(this.alunosLb_Click);
             // 
-            // label2
+            // panel2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Comfortaa", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(597, 145);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 38);
-            this.label2.TabIndex = 122;
-            this.label2.Text = "Alunos";
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1119, 592);
+            this.panel2.TabIndex = 123;
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
             // CadastrarTurma
             // 
@@ -154,16 +158,16 @@ namespace SistemaEscola
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1116, 590);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.iconButton1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.alunosLb);
+            this.Controls.Add(this.addAlunoBtn);
+            this.Controls.Add(this.alunosFlwLayPnl);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.matriculaTxtBox);
+            this.Controls.Add(this.codigoTxtBox);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.nomeTxtBox);
             this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.panel2);
             this.Name = "CadastrarTurma";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CadastrarTurma";
@@ -178,12 +182,12 @@ namespace SistemaEscola
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox matriculaTxtBox;
+        private System.Windows.Forms.TextBox codigoTxtBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label1;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox nomeTxtBox;
+        private System.Windows.Forms.FlowLayoutPanel alunosFlwLayPnl;
+        private FontAwesome.Sharp.IconButton addAlunoBtn;
+        private System.Windows.Forms.Label alunosLb;
+        private System.Windows.Forms.Panel panel2;
     }
 }

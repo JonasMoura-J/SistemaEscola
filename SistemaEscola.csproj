@@ -54,6 +54,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boundaries\Dialog\AddFromList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Dialog\AddFromList.Designer.cs">
+      <DependentUpon>AddFromList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Boundaries\UserControls\AlunoPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     <Compile Include="Validations\MobilePhoneNumberAttribute.cs" />
     <Compile Include="Validations\PhoneNumberAttribute.cs" />
     <Compile Include="Validations\RgAttribute.cs" />
+    <EmbeddedResource Include="Boundaries\Dialog\AddFromList.resx">
+      <DependentUpon>AddFromList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\UserControls\AlunoPanel.resx">
       <DependentUpon>AlunoPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,18 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\x icon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\x icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\x icon2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\x icon3.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\x icon4.png" />

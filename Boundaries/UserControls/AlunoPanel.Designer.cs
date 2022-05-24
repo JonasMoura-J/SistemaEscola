@@ -29,37 +29,37 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.nameLb = new System.Windows.Forms.Label();
+            this.deleteBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // nameLb
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(55, 14);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(498, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "VAZ MARKSON DE SOUZA MACSON WILSON SONSON";
+            this.nameLb.AutoSize = true;
+            this.nameLb.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLb.ForeColor = System.Drawing.Color.White;
+            this.nameLb.Location = new System.Drawing.Point(55, 14);
+            this.nameLb.Margin = new System.Windows.Forms.Padding(3);
+            this.nameLb.Name = "nameLb";
+            this.nameLb.Size = new System.Drawing.Size(0, 22);
+            this.nameLb.TabIndex = 0;
             // 
-            // button1
+            // deleteBtn
             // 
-            this.button1.BackgroundImage = global::SistemaEscola.Properties.Resources.x_icon4;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Comfortaa", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 51);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
+            this.deleteBtn.BackgroundImage = global::SistemaEscola.Properties.Resources.x_icon4;
+            this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deleteBtn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.deleteBtn.FlatAppearance.BorderSize = 0;
+            this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteBtn.Font = new System.Drawing.Font("Comfortaa", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteBtn.ForeColor = System.Drawing.Color.Transparent;
+            this.deleteBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.deleteBtn.Location = new System.Drawing.Point(0, 0);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(52, 51);
+            this.deleteBtn.TabIndex = 1;
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // AlunoPanel
             // 
@@ -67,8 +67,8 @@ namespace SistemaEscola
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.nameLb);
+            this.Controls.Add(this.deleteBtn);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.MaximumSize = new System.Drawing.Size(0, 51);
             this.MinimumSize = new System.Drawing.Size(0, 51);
@@ -83,7 +83,7 @@ namespace SistemaEscola
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label nameLb;
+        private System.Windows.Forms.Button deleteBtn;
     }
 }

@@ -2,5 +2,6 @@
 {
     interface IEntity
     {
+        string Nome { get; set; }
     }
 }

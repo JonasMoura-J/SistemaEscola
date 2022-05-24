@@ -55,5 +55,10 @@ namespace SistemaEscola.Controllers
         {
             return _context.Alunos.Find(x => x.Id == Id);
         }
+
+        public Aluno FindByName(string name)
+        {
+            return _context.Alunos.Find(x => x.Nome == name);
+        }
     }
 }

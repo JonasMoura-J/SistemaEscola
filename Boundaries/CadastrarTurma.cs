@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaEscola.Controllers;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {
@@ -17,103 +15,152 @@ namespace SistemaEscola
         private readonly Home _mainForm;
         
         ControladorTurma controladorTurma = new ControladorTurma();
+        ControladorAluno controladorAluno = new ControladorAluno();
         
         List<AlunoPanel> panels = new List<AlunoPanel>();
-        List<int> lengths = new List<int>();
+        List<int> panelLengths = new List<int>();
 
-        int c = 0;
+        List<TextBox> textBoxes = new List<TextBox>();
+
+        List<string> nomeAlunos = new List<string>();
+        
+        public List<string> selectedAlunos = new List<string>();
 
         public CadastrarTurma(Home mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            lengths.Add(273);
-        }
-
-        private void enviarBtn_Click(object sender, EventArgs e)
-        {
-            /*
-            var form = new FormularioTurma
-            {
-                Id = int.Parse(idTxtBox.Text),
-                Nome = nomeTxtBox.Text,
-                Codigo = codigoTxtBox.Text,
-                QuantidadeAlunos = int.Parse(quantTxtBox.Text)
-            };*/
-
-            //controladorTurma.Add(form);
-
-            Close();
         }
 
         private void CadastrarTurma_Load(object sender, EventArgs e)
         {
+            // Temporario
             controladorTurma.FindAll().ForEach(t => comboBox1.Items.Add(t.Nome));
+
+            // Set up textboxes            
+            foreach (var c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    textBoxes.Add((TextBox)c);
+                }               
+            }
+
+            // Flow Layout Panel Settings
+            panelLengths.Add(alunosFlwLayPnl.Width);
+            alunosFlwLayPnl.FlowDirection = FlowDirection.TopDown;
+            alunosFlwLayPnl.AutoScroll = true;
+            alunosFlwLayPnl.WrapContents = false;
+
+            // Busca alunos no DB
+            controladorAluno.FindAll().ForEach(a => nomeAlunos.Add(a.Nome));
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (panels.Count == 0)
+            if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
-                panels.Add(new AlunoPanel("Wilsonson"));
-                flowLayoutPanel1.Controls.Add(panels[0]);
-
-                lengths.Add(panels[0].Width);
-                panels[0].AutoSize = false;
-                panels[0].Width = lengths.Max();
-
-                c++;
-            } else
-            {
-                panels.Add(new AlunoPanel(textBox2.Text));
-                flowLayoutPanel1.Controls.Add(panels[c]);
-
-                lengths.Add(panels[c].Width);
-                panels[c].AutoSize = false;
-                panels.ForEach(p => p.Width = lengths.Max());
-                c++;
-            }
-
-            
-
-
-            //panels.Add(new AlunoPanel());
-            //panels.Add(new AlunoPanel());
-
-            //panels[2].lb.Text = "Willson";
-            //panels[1].lb.Text = "Wilsonson";
-            //panels[0].lb.Text = "Wilsonsonson";
-            //lengths.Add(panels[0].Width.ToString());
-            //lengths.Add(panels[1].Width.ToString());
-            //lengths.Add(panels[2].Width.ToString());
-            //var lb = new Label();
-            //lb.Text = "Hello, World!";
-            
-            /*
-            foreach (AlunoPanel p in panels)
-            {
-                flowLayoutPanel1.Controls.Add(p);
-                lengths.Add(p.Width);
-                if (c != 0)
+                var form = new FormularioTurma
                 {
-                    p.AutoSize = false;
-                    p.Width = lengths.Max();
+                    Id = controladorTurma.FindAll().Count() + 1,
+                    Nome = nomeTxtBox.Text.ToUpper(),
+                    Codigo = codigoTxtBox.Text.ToUpper(),
+                    Alunos = selectedAlunos,
+                    QuantidadeAlunos = selectedAlunos.Count
+                };
+
+                // Validates form
+                ValidationContext validContext = new ValidationContext(form, null, null);
+                List<ValidationResult> errors = new List<ValidationResult>();
+
+                if (!Validator.TryValidateObject(form, validContext, errors, true))
+                {
+                    foreach (ValidationResult result in errors)
+                    {
+                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
-                c++;
+                else
+                {
+                    try
+                    {
+                        // Sends validated form to the controller
+                        controladorTurma.Add(form);
+
+                        // Returns to MenuDisciplina
+                        _mainForm.OpenChildForm(new MenuTurma(_mainForm), sender);
+
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             }
-            */
-            //flowLayoutPanel1.Controls.Add(panels[0]);
-            //flowLayoutPanel1.Controls.Add(panels[1]);
-            //flowLayoutPanel1.Controls.Add(panels[2]);
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.WrapContents = false;
-            //panels[1].lb.Text = "sdsdof";
-            //panels.ForEach(p => p.Width = lengths.Max());
-            //label1.Text = lengths.Max().ToString();
-            label1.Text = lengths.Max().ToString();
-            //flowLayoutPanel1.Controls[1].BackColor = "sadsausdahu asduhdasuh uhsad";
-            //flowLayoutPanel1.Controls[2].Text = "sadsau asd uhsad";
+        }
+
+        private void addAlunoBtn_Click(object sender, EventArgs e)
+        {
+            // Reset selectedAlunos list to match FlowLayout
+            selectedAlunos.Clear();
+
+            foreach (AlunoPanel control in alunosFlwLayPnl.Controls)
+            {
+                selectedAlunos.Add(control.lb.Text);
+            }
+
+            // Open dialog
+            AddFromList form = new AddFromList(nomeAlunos, selectedAlunos);
+            form.ShowDialog();
+
+            // Receive updated list
+            selectedAlunos = form.ReturnCheckedItems();
+
+            // Reset FlowLayout based on updated list
+            alunosFlwLayPnl.Controls.Clear();
+
+            foreach (string aluno in selectedAlunos)
+            {
+                var panel = new AlunoPanel(aluno, alunosFlwLayPnl);
+
+                panels.Add(panel);
+                alunosFlwLayPnl.Controls.Add(panel);
+
+                panelLengths.Add(panel.Width);
+                panel.AutoSize = false;
+                panels.ForEach(p => p.Width = panelLengths.Max());
+            }
+        }
+
+        private void nomeTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.Clear(nomeTxtBox, "Nome");
+        }
+
+        private void nomeTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.Fill(nomeTxtBox, "Nome");
+        }
+
+        private void codigoTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.Clear(codigoTxtBox, "Código");
+        }
+
+        private void codigoTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.Fill(codigoTxtBox, "Código");
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            panel2.Focus();
+        }
+
+        private void alunosLb_Click(object sender, EventArgs e)
+        {
+            alunosLb.Focus();
         }
     }
 }

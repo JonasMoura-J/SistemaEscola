@@ -1,28 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaEscola
 {
     public partial class AlunoPanel : UserControl
     {
+        FlowLayoutPanel _panel;
+
         public Label lb;
 
-        public AlunoPanel(string text)
+        public AlunoPanel(string text, FlowLayoutPanel panel)
         {
             InitializeComponent();
-            lb = label1;
-            label1.MouseEnter += AlunoPanel_MouseEnter;
-            label1.MouseLeave += AlunoPanel_MouseLeave;
-            button1.MouseEnter += AlunoPanel_MouseEnter;
-            button1.MouseLeave += AlunoPanel_MouseLeave;
+            lb = nameLb;
+            nameLb.MouseEnter += AlunoPanel_MouseEnter;
+            nameLb.MouseLeave += AlunoPanel_MouseLeave;
+            deleteBtn.MouseEnter += AlunoPanel_MouseEnter;
+            deleteBtn.MouseLeave += AlunoPanel_MouseLeave;
             lb.Text = text;
+            _panel = panel; 
         }
 
         private void AlunoPanel_MouseLeave(object sender, EventArgs e)
@@ -38,13 +35,18 @@ namespace SistemaEscola
         private void HighlightPanel()
         {
             BackColor = ColorTranslator.FromHtml("#0484D4");
-            button1.BackColor = BackColor;
+            deleteBtn.BackColor = BackColor;
         }
 
         private void ResetPanel()
         {
             BackColor = ColorTranslator.FromHtml("#005B96");
-            button1.BackColor = BackColor;
+            deleteBtn.BackColor = BackColor;
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            _panel.Controls.Remove(this);
         }
     }
 }
