@@ -29,31 +29,10 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.findTxtBox = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.checkedListBox = new System.Windows.Forms.CheckedListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(194)))));
-            this.panel1.Location = new System.Drawing.Point(12, 40);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 2);
-            this.panel1.TabIndex = 98;
-            // 
-            // findTxtBox
-            // 
-            this.findTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.findTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
-            this.findTxtBox.Location = new System.Drawing.Point(12, 12);
-            this.findTxtBox.Name = "findTxtBox";
-            this.findTxtBox.Size = new System.Drawing.Size(268, 24);
-            this.findTxtBox.TabIndex = 97;
-            this.findTxtBox.Text = "Procurar";
             // 
             // addBtn
             // 
@@ -76,17 +55,17 @@ namespace SistemaEscola
             this.checkedListBox.CheckOnClick = true;
             this.checkedListBox.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.checkedListBox.FormattingEnabled = true;
-            this.checkedListBox.Location = new System.Drawing.Point(12, 62);
+            this.checkedListBox.Location = new System.Drawing.Point(12, 10);
             this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(266, 286);
+            this.checkedListBox.Size = new System.Drawing.Size(266, 338);
             this.checkedListBox.TabIndex = 119;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(194)))));
-            this.panel2.Location = new System.Drawing.Point(10, 60);
+            this.panel2.Location = new System.Drawing.Point(10, 8);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(270, 290);
+            this.panel2.Size = new System.Drawing.Size(270, 342);
             this.panel2.TabIndex = 120;
             // 
             // AddFromList
@@ -97,22 +76,16 @@ namespace SistemaEscola
             this.ClientSize = new System.Drawing.Size(291, 433);
             this.Controls.Add(this.checkedListBox);
             this.Controls.Add(this.addBtn);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.findTxtBox);
             this.Controls.Add(this.panel2);
             this.Name = "AddFromList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddFromList";
             this.Load += new System.EventHandler(this.AddFromList_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox findTxtBox;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.CheckedListBox checkedListBox;
         private System.Windows.Forms.Panel panel2;
