@@ -35,7 +35,7 @@ namespace SistemaEscola.Db
             Professores.Add(new Professor(3, "THY", "77424678911", "6654356776", "12342231",
                 "922335463", "thygamer@gmail.com", new List<Disciplina>()));
 
-            Turmas.Add(new Turma(1, "03A3N", "7° ANO", 20, new List<Aluno>(), new List<Disciplina>()));
+            Turmas.Add(new Turma(1, "03A3N", "7° ANO", 20, new List<Aluno>() { Alunos[0], Alunos[1], Alunos[2] } , new List<Disciplina>()));
             Turmas.Add(new Turma(2, "01A4N", "8° ANO", 14, new List<Aluno>(), new List<Disciplina>()));
             Turmas.Add(new Turma(3, "08A1N", "9° ANO", 3, new List<Aluno>(), new List<Disciplina>()));
 
@@ -45,6 +45,9 @@ namespace SistemaEscola.Db
 
             Usuarios.Add(new Usuario(1, "COORDENACAO", "123456"));
             Usuarios.Add(new Usuario(2, "PROFESSOR", "123456789"));
+
+
+            Alunos.ForEach(a => a.AddDisciplina(Disciplinas[2]));
         }
     }
 }

@@ -75,5 +75,10 @@ namespace SistemaEscola.Controllers
         {
             return _context.Turmas.Find(x => x.Id == Id);
         }
+
+        public Turma FindByName(string nome)
+        {
+            return _context.Turmas.Find(x => x.Nome == nome);
+        }
     }
 }

@@ -15,8 +15,8 @@ namespace SistemaEscola.Controllers
         public void Add(FormularioAluno form)
         {
             // Checks if Aluno already exists
-            if (FindAll().Any(d => d.Cpf == form.Cpf || d.Matricula == form.Matricula ||
-                d.Email == form.Email))
+            if (FindAll().Any(a => a.Cpf == form.Cpf || a.Matricula == form.Matricula ||
+                a.Email == form.Email))
             {
                 throw new Exception("Aluno já cadastrado");
             }
@@ -65,6 +65,13 @@ namespace SistemaEscola.Controllers
         public Aluno FindByName(string name)
         {
             return _context.Alunos.Find(x => x.Nome == name);
+        }
+
+        public void AddFaltas(string nomeAluno, Disciplina disciplina, int faltas = 1)
+        {
+            var aluno = FindByName(nomeAluno);
+
+            aluno.AddFaltas(disciplina, faltas);
         }
     }
 }

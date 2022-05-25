@@ -20,6 +20,7 @@ namespace SistemaEscola.Entities
         public string Matricula { get; set; }
         public Turma Turma { get; set; }
         public List<Disciplina> Disciplinas { get; set; } = new List<Disciplina>();
+        public List<FaltaDisciplina> FaltaDisciplinas { get; set; } = new List<FaltaDisciplina>();
 
         public Aluno(int id, string nome, string cpf, string rg, DateTime dataNascimento, 
             string telefoneResidencial, string telefoneCelular, string email,
@@ -49,6 +50,7 @@ namespace SistemaEscola.Entities
             if (!Disciplinas.Any(d => d.Id == disciplina.Id))
             {
                 Disciplinas.Add(disciplina);
+                FaltaDisciplinas.Add(new FaltaDisciplina { Disciplina = disciplina });
             }
         }
         public void RemoveDisciplina(Disciplina disciplina)
@@ -56,7 +58,24 @@ namespace SistemaEscola.Entities
             if (Disciplinas.Any(d => d.Id == disciplina.Id))
             {
                 Disciplinas.Remove(disciplina);
+
+                var faltaDisc = FaltaDisciplinas.Where(fd => fd.Disciplina.Id == disciplina.Id).First();
+
+                FaltaDisciplinas.Remove(faltaDisc);
             }
+        }
+
+        public void AddFaltas(Disciplina disciplina, int faltas)
+        {
+            var faltaDisc = FaltaDisciplinas.Where(fd => fd.Disciplina.Id == disciplina.Id).First();
+
+            faltaDisc.Faltas += faltas;
+        }
+        public void EditFaltas(Disciplina disciplina, int faltas)
+        {
+            var faltaDisc = FaltaDisciplinas.Where(fd => fd.Disciplina.Id == disciplina.Id).First();
+
+            faltaDisc.Faltas = faltas;
         }
     }
 }

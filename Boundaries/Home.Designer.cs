@@ -36,9 +36,9 @@ namespace SistemaEscola
             this.alunosBtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.titleLb = new System.Windows.Forms.Label();
             this.returnBtn = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
+            this.titleLb = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -145,19 +145,6 @@ namespace SistemaEscola
             this.panel3.Size = new System.Drawing.Size(1131, 80);
             this.panel3.TabIndex = 2;
             // 
-            // titleLb
-            // 
-            this.titleLb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.titleLb.AutoSize = true;
-            this.titleLb.BackColor = System.Drawing.Color.Transparent;
-            this.titleLb.Font = new System.Drawing.Font("Comfortaa", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLb.ForeColor = System.Drawing.Color.White;
-            this.titleLb.Location = new System.Drawing.Point(447, -3);
-            this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(199, 75);
-            this.titleLb.TabIndex = 0;
-            this.titleLb.Text = "HOME";
-            // 
             // returnBtn
             // 
             this.returnBtn.BackgroundImage = global::SistemaEscola.Properties.Resources.Return_icon;
@@ -193,6 +180,19 @@ namespace SistemaEscola
             this.homeBtn.UseVisualStyleBackColor = true;
             this.homeBtn.Visible = false;
             this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
+            // 
+            // titleLb
+            // 
+            this.titleLb.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.titleLb.AutoSize = true;
+            this.titleLb.BackColor = System.Drawing.Color.Transparent;
+            this.titleLb.Font = new System.Drawing.Font("Comfortaa", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLb.ForeColor = System.Drawing.Color.White;
+            this.titleLb.Location = new System.Drawing.Point(447, -3);
+            this.titleLb.Name = "titleLb";
+            this.titleLb.Size = new System.Drawing.Size(199, 75);
+            this.titleLb.TabIndex = 0;
+            this.titleLb.Text = "HOME";
             // 
             // Home
             // 

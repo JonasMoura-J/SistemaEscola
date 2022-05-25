@@ -17,5 +17,10 @@ namespace SistemaEscola
         {
             _mainForm.OpenNewForm(new CadastrarTurma(_mainForm), sender);
         }
+
+        private void presencaBtn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new SelectTurmaDisciplina(_mainForm), sender);
+        }
     }
 }

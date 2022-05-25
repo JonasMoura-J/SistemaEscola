@@ -106,6 +106,7 @@
     <Compile Include="Entities\Formularios\FormularioProfessor.cs" />
     <Compile Include="Entities\Formularios\FormularioTurma.cs" />
     <Compile Include="Entities\Interfaces\IEntity.cs" />
+    <Compile Include="Entities\FaltaDisciplina.cs" />
     <Compile Include="Entities\Professor.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Usuario.cs" />
@@ -145,11 +146,29 @@
     <Compile Include="Boundaries\Professor\MenuProfessor.Designer.cs">
       <DependentUpon>MenuProfessor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\UserControls\NamePresencaPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Boundaries\UserControls\NamePresencaPanel.Designer.cs">
+      <DependentUpon>NamePresencaPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
     <Compile Include="Parsers\RgParse.cs" />
+    <Compile Include="Boundaries\Turma\Presenca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Turma\Presenca.Designer.cs">
+      <DependentUpon>Presenca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Boundaries\Selections\SelectTurmaDisciplina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Selections\SelectTurmaDisciplina.Designer.cs">
+      <DependentUpon>SelectTurmaDisciplina.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\TextBoxTools.cs" />
     <Compile Include="Validations\CpfAttribute.cs" />
     <Compile Include="Validations\DateAttribute.cs" />
@@ -192,6 +211,12 @@
     <EmbeddedResource Include="Boundaries\Turma\MenuTurma.resx">
       <DependentUpon>MenuTurma.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\UserControls\NamePresencaPanel.resx">
+      <DependentUpon>NamePresencaPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Turma\Presenca.resx">
+      <DependentUpon>Presenca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -202,6 +227,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Boundaries\Selections\SelectTurmaDisciplina.resx">
+      <DependentUpon>SelectTurmaDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -225,5 +253,6 @@
   <ItemGroup>
     <None Include="Resources\Return icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

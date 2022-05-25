@@ -127,5 +127,16 @@ namespace SistemaEscola
         {
             OpenPreviousForm(sender);
         }
+
+        private void DisableBtn(Button btn)
+        {
+            //btn.Enabled = false;
+            btn.BackColor = ColorTranslator.FromHtml("#047FCC");
+        }
+
+        private void EnableBtn(Button btn)
+        {
+            btn.BackColor = ColorTranslator.FromHtml("#03396C");
+        }
     }
 }
