@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SistemaEscola.Entities
 {
@@ -17,7 +18,8 @@ namespace SistemaEscola.Entities
         public string NomeMae { get; set; }
         public string NomeResponsavel { get; set; }
         public string Matricula { get; set; }
-        public List<Disciplina> Disciplinas { get; set; }
+        public Turma Turma { get; set; }
+        public List<Disciplina> Disciplinas { get; set; } = new List<Disciplina>();
 
         public Aluno(int id, string nome, string cpf, string rg, DateTime dataNascimento, 
             string telefoneResidencial, string telefoneCelular, string email,
@@ -36,6 +38,25 @@ namespace SistemaEscola.Entities
             NomeMae = nomeMae;
             NomeResponsavel = nomeResponsavel;
             Matricula = matricula;
+        }
+        public void UpdateTurma(Turma turma)
+        {
+            Turma = turma;
+        }
+
+        public void AddDisciplina(Disciplina disciplina)
+        {
+            if (!Disciplinas.Any(d => d.Id == disciplina.Id))
+            {
+                Disciplinas.Add(disciplina);
+            }
+        }
+        public void RemoveDisciplina(Disciplina disciplina)
+        {
+            if (Disciplinas.Any(d => d.Id == disciplina.Id))
+            {
+                Disciplinas.Remove(disciplina);
+            }
         }
     }
 }

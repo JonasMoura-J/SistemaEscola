@@ -60,39 +60,39 @@
     <Compile Include="Boundaries\Dialog\AddFromList.Designer.cs">
       <DependentUpon>AddFromList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\UserControls\AlunoPanel.cs">
+    <Compile Include="Boundaries\UserControls\NamePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Boundaries\UserControls\AlunoPanel.Designer.cs">
-      <DependentUpon>AlunoPanel.cs</DependentUpon>
+    <Compile Include="Boundaries\UserControls\NamePanel.Designer.cs">
+      <DependentUpon>NamePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\CadastrarDisciplina.cs">
+    <Compile Include="Boundaries\Disciplina\CadastrarDisciplina.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\CadastrarDisciplina.Designer.cs">
+    <Compile Include="Boundaries\Disciplina\CadastrarDisciplina.Designer.cs">
       <DependentUpon>CadastrarDisciplina.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\CadastrarTurma.cs">
+    <Compile Include="Boundaries\Turma\CadastrarTurma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\CadastrarTurma.Designer.cs">
+    <Compile Include="Boundaries\Turma\CadastrarTurma.Designer.cs">
       <DependentUpon>CadastrarTurma.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\CadastrarAluno.cs">
+    <Compile Include="Boundaries\Aluno\CadastrarAluno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\CadastrarAluno.Designer.cs">
+    <Compile Include="Boundaries\Aluno\CadastrarAluno.Designer.cs">
       <DependentUpon>CadastrarAluno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\CadastrarProfessor.cs">
+    <Compile Include="Boundaries\Professor\CadastrarProfessor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\CadastrarProfessor.Designer.cs">
+    <Compile Include="Boundaries\Professor\CadastrarProfessor.Designer.cs">
       <DependentUpon>CadastrarProfessor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ControladorAluno.cs" />
     <Compile Include="Controllers\ControladorDisciplina.cs" />
-    <Compile Include="Controllers\ControladorLogin.cs" />
+    <Compile Include="Controllers\ControladorUsuario.cs" />
     <Compile Include="Controllers\ControladorProfessor.cs" />
     <Compile Include="Controllers\ControladorTurma.cs" />
     <Compile Include="Controllers\Interfaces\IController.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Entities\Formularios\Interfaces\IFormulario.cs" />
     <Compile Include="Entities\Formularios\FormularioAluno.cs" />
     <Compile Include="Entities\Formularios\FormularioDisciplina.cs" />
-    <Compile Include="Entities\Formularios\FormularioLogin.cs" />
+    <Compile Include="Entities\Formularios\FormularioUsuario.cs" />
     <Compile Include="Entities\Formularios\FormularioProfessor.cs" />
     <Compile Include="Entities\Formularios\FormularioTurma.cs" />
     <Compile Include="Entities\Interfaces\IEntity.cs" />
@@ -121,23 +121,29 @@
     <Compile Include="Boundaries\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\MenuAluno.cs">
+    <Compile Include="Boundaries\Aluno\MenuAluno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\MenuAluno.Designer.cs">
+    <Compile Include="Boundaries\Aluno\MenuAluno.Designer.cs">
       <DependentUpon>MenuAluno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\MenuDisciplina.cs">
+    <Compile Include="Boundaries\Disciplina\MenuDisciplina.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\MenuDisciplina.Designer.cs">
+    <Compile Include="Boundaries\Disciplina\MenuDisciplina.Designer.cs">
       <DependentUpon>MenuDisciplina.cs</DependentUpon>
     </Compile>
-    <Compile Include="Boundaries\MenuTurma.cs">
+    <Compile Include="Boundaries\Turma\MenuTurma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boundaries\MenuTurma.Designer.cs">
+    <Compile Include="Boundaries\Turma\MenuTurma.Designer.cs">
       <DependentUpon>MenuTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundaries\Professor\MenuProfessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Professor\MenuProfessor.Designer.cs">
+      <DependentUpon>MenuProfessor.cs</DependentUpon>
     </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
@@ -153,19 +159,22 @@
     <EmbeddedResource Include="Boundaries\Dialog\AddFromList.resx">
       <DependentUpon>AddFromList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\UserControls\AlunoPanel.resx">
-      <DependentUpon>AlunoPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Boundaries\Professor\MenuProfessor.resx">
+      <DependentUpon>MenuProfessor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\CadastrarAluno.resx">
+    <EmbeddedResource Include="Boundaries\UserControls\NamePanel.resx">
+      <DependentUpon>NamePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Aluno\CadastrarAluno.resx">
       <DependentUpon>CadastrarAluno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\CadastrarDisciplina.resx">
+    <EmbeddedResource Include="Boundaries\Disciplina\CadastrarDisciplina.resx">
       <DependentUpon>CadastrarDisciplina.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\CadastrarProfessor.resx">
+    <EmbeddedResource Include="Boundaries\Professor\CadastrarProfessor.resx">
       <DependentUpon>CadastrarProfessor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\CadastrarTurma.resx">
+    <EmbeddedResource Include="Boundaries\Turma\CadastrarTurma.resx">
       <DependentUpon>CadastrarTurma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Home.resx">
@@ -174,13 +183,13 @@
     <EmbeddedResource Include="Boundaries\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\MenuAluno.resx">
+    <EmbeddedResource Include="Boundaries\Aluno\MenuAluno.resx">
       <DependentUpon>MenuAluno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\MenuDisciplina.resx">
+    <EmbeddedResource Include="Boundaries\Disciplina\MenuDisciplina.resx">
       <DependentUpon>MenuDisciplina.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\MenuTurma.resx">
+    <EmbeddedResource Include="Boundaries\Turma\MenuTurma.resx">
       <DependentUpon>MenuTurma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -209,6 +218,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\x icon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home icon 2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,7 +13,7 @@ namespace SistemaEscola
     public partial class Login : Form
     {
         Thread th;
-        ControladorLogin controladorLogin = new ControladorLogin();
+        ControladorUsuario controladorLogin = new ControladorUsuario();
 
         public Login()
         {
@@ -29,7 +29,7 @@ namespace SistemaEscola
         {
             if (!(userTxtBox.ForeColor == Color.LightSteelBlue || senhaTxtBox.ForeColor == Color.LightSteelBlue))
             {
-                var form = new FormularioLogin
+                var form = new FormularioUsuario
                 {
                     Nome = userTxtBox.Text.ToUpper(),
                     Senha = senhaTxtBox.Text
@@ -43,7 +43,7 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        //MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }

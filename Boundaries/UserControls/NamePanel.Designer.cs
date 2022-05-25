@@ -1,7 +1,7 @@
 ﻿
 namespace SistemaEscola
 {
-    partial class AlunoPanel
+    partial class NamePanel
     {
         /// <summary> 
         /// Required designer variable.
@@ -73,9 +73,9 @@ namespace SistemaEscola
             this.MaximumSize = new System.Drawing.Size(0, 51);
             this.MinimumSize = new System.Drawing.Size(0, 51);
             this.Name = "AlunoPanel";
-            this.Size = new System.Drawing.Size(556, 51);
-            this.MouseEnter += new System.EventHandler(this.AlunoPanel_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.AlunoPanel_MouseLeave);
+            this.Size = new System.Drawing.Size(58, 51);
+            this.MouseEnter += new System.EventHandler(this.NamePanel_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.NamePanel_MouseLeave);
             this.ResumeLayout(false);
             this.PerformLayout();
 

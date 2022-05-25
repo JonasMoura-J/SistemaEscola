@@ -37,6 +37,7 @@ namespace SistemaEscola
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.titleLb = new System.Windows.Forms.Label();
+            this.homeBtn = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -106,6 +107,7 @@ namespace SistemaEscola
             this.professorBtn.TabIndex = 2;
             this.professorBtn.Text = "Professor";
             this.professorBtn.UseVisualStyleBackColor = false;
+            this.professorBtn.Click += new System.EventHandler(this.professorBtn_Click);
             // 
             // alunosBtn
             // 
@@ -133,6 +135,7 @@ namespace SistemaEscola
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
+            this.panel3.Controls.Add(this.homeBtn);
             this.panel3.Controls.Add(this.titleLb);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(191, 0);
@@ -147,11 +150,29 @@ namespace SistemaEscola
             this.titleLb.BackColor = System.Drawing.Color.Transparent;
             this.titleLb.Font = new System.Drawing.Font("Comfortaa", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLb.ForeColor = System.Drawing.Color.White;
-            this.titleLb.Location = new System.Drawing.Point(467, -3);
+            this.titleLb.Location = new System.Drawing.Point(447, -3);
             this.titleLb.Name = "titleLb";
             this.titleLb.Size = new System.Drawing.Size(199, 75);
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "HOME";
+            // 
+            // homeBtn
+            // 
+            this.homeBtn.BackgroundImage = global::SistemaEscola.Properties.Resources.home_icon_2;
+            this.homeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.homeBtn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.homeBtn.FlatAppearance.BorderSize = 0;
+            this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeBtn.Font = new System.Drawing.Font("Comfortaa", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeBtn.ForeColor = System.Drawing.Color.Transparent;
+            this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.homeBtn.Location = new System.Drawing.Point(0, 0);
+            this.homeBtn.Name = "homeBtn";
+            this.homeBtn.Size = new System.Drawing.Size(86, 80);
+            this.homeBtn.TabIndex = 2;
+            this.homeBtn.UseVisualStyleBackColor = true;
+            this.homeBtn.Visible = false;
+            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
             // 
             // Home
             // 
@@ -162,6 +183,7 @@ namespace SistemaEscola
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -184,6 +206,7 @@ namespace SistemaEscola
         private System.Windows.Forms.Button turmaBtn;
         private System.Windows.Forms.Button professorBtn;
         private System.Windows.Forms.Label titleLb;
+        private System.Windows.Forms.Button homeBtn;
     }
 }
 

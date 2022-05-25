@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SistemaEscola.Entities
 {
@@ -12,6 +13,22 @@ namespace SistemaEscola.Entities
         {
             Id = id;
             Nome = nome;
+        }
+
+        public void AddProfessor(Professor professor)
+        {
+            if (!Professores.Any(d => d.Id == professor.Id))
+            {
+                Professores.Add(professor);
+            }
+        }
+
+        public void RemoveProfessor(Professor professor)
+        {
+            if (Professores.Any(d => d.Id == professor.Id))
+            {
+                Professores.Remove(professor);
+            }
         }
     }
 }

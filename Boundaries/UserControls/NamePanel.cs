@@ -4,32 +4,22 @@ using System.Windows.Forms;
 
 namespace SistemaEscola
 {
-    public partial class AlunoPanel : UserControl
+    public partial class NamePanel : UserControl
     {
         FlowLayoutPanel _panel;
 
         public Label lb;
 
-        public AlunoPanel(string text, FlowLayoutPanel panel)
+        public NamePanel(string text, FlowLayoutPanel panel)
         {
             InitializeComponent();
             lb = nameLb;
-            nameLb.MouseEnter += AlunoPanel_MouseEnter;
-            nameLb.MouseLeave += AlunoPanel_MouseLeave;
-            deleteBtn.MouseEnter += AlunoPanel_MouseEnter;
-            deleteBtn.MouseLeave += AlunoPanel_MouseLeave;
+            nameLb.MouseEnter += NamePanel_MouseEnter;
+            nameLb.MouseLeave += NamePanel_MouseLeave;
+            deleteBtn.MouseEnter += NamePanel_MouseEnter;
+            deleteBtn.MouseLeave += NamePanel_MouseLeave;
             lb.Text = text;
             _panel = panel; 
-        }
-
-        private void AlunoPanel_MouseLeave(object sender, EventArgs e)
-        {
-            ResetPanel();
-        }
-
-        private void AlunoPanel_MouseEnter(object sender, EventArgs e)
-        {
-            HighlightPanel();
         }
 
         private void HighlightPanel()
@@ -47,6 +37,16 @@ namespace SistemaEscola
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             _panel.Controls.Remove(this);
+        }
+
+        private void NamePanel_MouseEnter(object sender, EventArgs e)
+        {
+            HighlightPanel();
+        }
+
+        private void NamePanel_MouseLeave(object sender, EventArgs e)
+        {
+            ResetPanel();
         }
     }
 }

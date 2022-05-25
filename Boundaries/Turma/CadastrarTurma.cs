@@ -16,15 +16,20 @@ namespace SistemaEscola
         
         ControladorTurma controladorTurma = new ControladorTurma();
         ControladorAluno controladorAluno = new ControladorAluno();
+        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
         
-        List<AlunoPanel> panels = new List<AlunoPanel>();
-        List<int> panelLengths = new List<int>();
+        List<NamePanel> alunosPanels = new List<NamePanel>();
+        List<int> alunosPanelLengths = new List<int>();
+        List<NamePanel> disciplinasPanels = new List<NamePanel>();
+        List<int> disciplinasPanelLengths = new List<int>();
 
         List<TextBox> textBoxes = new List<TextBox>();
 
         List<string> nomeAlunos = new List<string>();
+        List<string> nomeDisciplinas = new List<string>();
         
         public List<string> selectedAlunos = new List<string>();
+        public List<string> selectedDisciplinas = new List<string>();
 
         public CadastrarTurma(Home mainForm)
         {
@@ -47,13 +52,21 @@ namespace SistemaEscola
             }
 
             // Flow Layout Panel Settings
-            panelLengths.Add(alunosFlwLayPnl.Width);
+            alunosPanelLengths.Add(alunosFlwLayPnl.Width);
             alunosFlwLayPnl.FlowDirection = FlowDirection.TopDown;
             alunosFlwLayPnl.AutoScroll = true;
             alunosFlwLayPnl.WrapContents = false;
 
+            disciplinasPanelLengths.Add(disciplinasFlwLayPnl.Width);
+            disciplinasFlwLayPnl.FlowDirection = FlowDirection.TopDown;
+            disciplinasFlwLayPnl.AutoScroll = true;
+            disciplinasFlwLayPnl.WrapContents = false;
+
             // Busca alunos no DB
             controladorAluno.FindAll().ForEach(a => nomeAlunos.Add(a.Nome));
+
+            // Busca disciplinas no DB
+            controladorDisciplina.FindAll().ForEach(a => nomeDisciplinas.Add(a.Nome));
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -65,6 +78,7 @@ namespace SistemaEscola
                     Id = controladorTurma.FindAll().Count() + 1,
                     Nome = nomeTxtBox.Text.ToUpper(),
                     Codigo = codigoTxtBox.Text.ToUpper(),
+                    Disciplinas = selectedDisciplinas,
                     Alunos = selectedAlunos,
                     QuantidadeAlunos = selectedAlunos.Count
                 };
@@ -102,35 +116,14 @@ namespace SistemaEscola
 
         private void addAlunoBtn_Click(object sender, EventArgs e)
         {
-            // Reset selectedAlunos list to match FlowLayout
-            selectedAlunos.Clear();
+            ControlFlowLayoutPanel(alunosFlwLayPnl, alunosPanels, alunosPanelLengths,
+                nomeAlunos, selectedAlunos);
+        }
 
-            foreach (AlunoPanel control in alunosFlwLayPnl.Controls)
-            {
-                selectedAlunos.Add(control.lb.Text);
-            }
-
-            // Open dialog
-            AddFromList form = new AddFromList(nomeAlunos, selectedAlunos);
-            form.ShowDialog();
-
-            // Receive updated list
-            selectedAlunos = form.ReturnCheckedItems();
-
-            // Reset FlowLayout based on updated list
-            alunosFlwLayPnl.Controls.Clear();
-
-            foreach (string aluno in selectedAlunos)
-            {
-                var panel = new AlunoPanel(aluno, alunosFlwLayPnl);
-
-                panels.Add(panel);
-                alunosFlwLayPnl.Controls.Add(panel);
-
-                panelLengths.Add(panel.Width);
-                panel.AutoSize = false;
-                panels.ForEach(p => p.Width = panelLengths.Max());
-            }
+        private void addDisciplinaBtn_Click(object sender, EventArgs e)
+        {
+            ControlFlowLayoutPanel(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
+                nomeDisciplinas, selectedDisciplinas);
         }
 
         private void nomeTxtBox_Enter(object sender, EventArgs e)
@@ -161,6 +154,45 @@ namespace SistemaEscola
         private void alunosLb_Click(object sender, EventArgs e)
         {
             alunosLb.Focus();
+        }
+
+        private void disciplinasLb_Click(object sender, EventArgs e)
+        {
+            disciplinasLb.Focus();
+        }
+
+        private void ControlFlowLayoutPanel(FlowLayoutPanel flwLayPnl, List<NamePanel> panels,
+            List<int> lengths, List<string> items, List<string> selectedItems)
+        {
+            // Reset selectedItems list to match FlowLayout
+            selectedItems.Clear();
+
+            foreach (NamePanel control in flwLayPnl.Controls)
+            {
+                selectedItems.Add(control.lb.Text);
+            }
+
+            // Open dialog
+            AddFromList form = new AddFromList(items, selectedItems);
+            form.ShowDialog();
+
+            // Receive updated list
+            selectedItems = form.ReturnCheckedItems();
+
+            // Reset FlowLayout based on updated list
+            flwLayPnl.Controls.Clear();
+
+            foreach (string disc in selectedItems)
+            {
+                var panel = new NamePanel(disc, flwLayPnl);
+
+                panels.Add(panel);
+                flwLayPnl.Controls.Add(panel);
+
+                lengths.Add(panel.Width);
+                panel.AutoSize = false;
+                panels.ForEach(p => p.Width = lengths.Max());
+            }
         }
     }
 }

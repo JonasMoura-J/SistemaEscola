@@ -28,23 +28,23 @@ namespace SistemaEscola.Db
                 DateTime.Parse("12/22/2222"), "22543594",
                 "900339283", "albertftw@gmail.com", "Unknown", "9952432"));
 
-            Professores.Add(new Professor(1, "Leo", "00483923812", "9233813048", "46382917",
-                "928371164", "leoprof@gmail.com"));
-            Professores.Add(new Professor(2, "Ale", "93820128553", "1188372048", "09382837",
-                "955774488", "aleprof@gmail.com"));
-            Professores.Add(new Professor(3, "Thy", "77424678911", "6654356776", "12342231",
-                "922335463", "thygamer@gmail.com"));
+            Professores.Add(new Professor(1, "LEO", "00483923812", "9233813048", "46382917",
+                "928371164", "leoprof@gmail.com", new List<Disciplina>()));
+            Professores.Add(new Professor(2, "ALE", "93820128553", "1188372048", "09382837",
+                "955774488", "aleprof@gmail.com", new List<Disciplina>()));
+            Professores.Add(new Professor(3, "THY", "77424678911", "6654356776", "12342231",
+                "922335463", "thygamer@gmail.com", new List<Disciplina>()));
 
-            Turmas.Add(new Turma(1, "03A3N", "7° ano", 20, new List<Aluno>()));
-            Turmas.Add(new Turma(2, "01A4N", "8° ano", 14, new List<Aluno>()));
-            Turmas.Add(new Turma(3, "08A1N", "9° ano", 3, new List<Aluno>()));
+            Turmas.Add(new Turma(1, "03A3N", "7° ANO", 20, new List<Aluno>(), new List<Disciplina>()));
+            Turmas.Add(new Turma(2, "01A4N", "8° ANO", 14, new List<Aluno>(), new List<Disciplina>()));
+            Turmas.Add(new Turma(3, "08A1N", "9° ANO", 3, new List<Aluno>(), new List<Disciplina>()));
 
-            Disciplinas.Add(new Disciplina(1, "MATEMARICA"));
+            Disciplinas.Add(new Disciplina(1, "MATEMATICA"));
             Disciplinas.Add(new Disciplina(2, "PORTUGUES"));
             Disciplinas.Add(new Disciplina(3, "BIOLOGIA"));
 
-            Usuarios.Add(new Usuario("COORDENACAO", "123456"));
-            Usuarios.Add(new Usuario("PROFESSOR", "123456789"));
+            Usuarios.Add(new Usuario(1, "COORDENACAO", "123456"));
+            Usuarios.Add(new Usuario(2, "PROFESSOR", "123456789"));
         }
     }
 }

@@ -9,14 +9,17 @@ namespace SistemaEscola.Entities
         public string Nome { get; set; }
         public int QuantidadeAlunos { get; set; }
         public List<Aluno> Alunos { get; set; }
+        public List<Disciplina> Disciplinas { get; set; }
 
-        public Turma(int id, string codigo, string nome, int quantidadeAlunos, List<Aluno> alunos)
+        public Turma(int id, string codigo, string nome, int quantidadeAlunos,
+            List<Aluno> alunos, List<Disciplina> disciplinas)
         {
             Id = id;
             Codigo = codigo;
             Nome = nome;
             QuantidadeAlunos = quantidadeAlunos;
             Alunos = alunos;
+            Disciplinas = disciplinas;
         }
     }
 }

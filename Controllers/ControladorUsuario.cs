@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SistemaEscola.Db;
 using SistemaEscola.Entities;
@@ -6,11 +7,11 @@ using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Controllers
 {
-    class ControladorLogin : IController<Usuario>
+    class ControladorUsuario : IController<Usuario>
     {
         private readonly TempDb _context = TempDb.Instanse;
 
-        public bool ConfirmLogin(FormularioLogin form)
+        public bool ConfirmLogin(FormularioUsuario form)
         {
             var user = FindByName(form.Nome);
 
@@ -23,6 +24,20 @@ namespace SistemaEscola.Controllers
             }
 
             return false;
+        }
+
+        public void Add(FormularioUsuario form)
+        {
+            // Check if already exists
+            if (FindAll().Any(u => u.Nome == form.Nome))
+            {
+                throw new Exception("Usuário já cadastrado");
+            }
+
+            // Adds new Usuario to Db
+            var usuario = new Usuario(FindAll().Count + 1, form.Nome, form.Senha);
+
+            _context.Usuarios.Add(usuario);
         }
 
         public List<Usuario> FindAll()

@@ -36,12 +36,14 @@ namespace SistemaEscola
             panel1.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+            homeBtn.Visible = true;
         }
 
         private void alunosBtn_Click(object sender, EventArgs e)
         {
             OpenChildForm(new MenuAluno(this), sender);
             titleLb.Text = "ALUNO";
+            
         }
 
         private void disciplinaBtn_Click(object sender, EventArgs e)
@@ -54,6 +56,19 @@ namespace SistemaEscola
         {
             OpenChildForm(new MenuTurma(this), sender);
             titleLb.Text = "TURMA";
+        }
+
+        private void professorBtn_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new MenuProfessor(this), sender);
+            titleLb.Text = "PROFESSOR";
+        }
+
+        private void homeBtn_Click(object sender, EventArgs e)
+        {
+            _activeForm.Close();
+            titleLb.Text = "HOME";
+            homeBtn.Visible = false;
         }
     }
 }

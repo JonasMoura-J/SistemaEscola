@@ -13,12 +13,16 @@ namespace SistemaEscola.Controllers
 
         public void Add(FormularioDisciplina form)
         {
+            // Checks if Disciplina already exists
             if (FindAll().Any(d => d.Nome == form.Nome))
             {
                 throw new Exception("Disciplina já cadastrada");
             }
 
-            _context.Disciplinas.Add(new Disciplina(form.Id, form.Nome));
+            // Adds new Disciplina do Db
+            var disciplina = new Disciplina(form.Id, form.Nome);
+
+            _context.Disciplinas.Add(disciplina);
         }
 
         public List<Disciplina> FindAll()
@@ -51,6 +55,11 @@ namespace SistemaEscola.Controllers
         public Disciplina FindById(int Id)
         {
             return _context.Disciplinas.Find(x => x.Id == Id);
+        }
+
+        public Disciplina FindByName(string nome)
+        {
+            return _context.Disciplinas.Find(x => x.Nome == nome);
         }
     }
 }

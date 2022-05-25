@@ -17,6 +17,7 @@ namespace SistemaEscola
         private readonly Home _mainForm;
 
         ControladorAluno controladorAluno = new ControladorAluno();
+
         List<TextBox> textBoxes = new List<TextBox>();
         List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
         List<TextBox> optionalTextBoxes = new List<TextBox>();
@@ -130,7 +131,7 @@ namespace SistemaEscola
                             var form = new FormularioAluno
                             {
                                 Id = controladorAluno.FindAll().Count() + 1,
-                                Nome = nomeTxtBox.Text,
+                                Nome = nomeTxtBox.Text.ToUpper(),
                                 Cpf = cpfTxtBox.Text,
                                 Rg = rgTxtBox.Text,
                                 DataNascimento = dataNascConverted,

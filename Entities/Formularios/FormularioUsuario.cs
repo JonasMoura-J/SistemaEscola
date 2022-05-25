@@ -2,7 +2,7 @@
 
 namespace SistemaEscola.Entities.Formularios
 {
-    class FormularioLogin : IFormulario
+    class FormularioUsuario : IFormulario
     {
         [Required]
         [StringLength(100, MinimumLength = 2)]
