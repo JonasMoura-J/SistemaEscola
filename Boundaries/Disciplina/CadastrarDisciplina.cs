@@ -58,7 +58,7 @@ namespace SistemaEscola
                         controladorDisciplina.Add(form);
                         
                         // Returns to MenuDisciplina
-                        _mainForm.OpenChildForm(new MenuDisciplina(_mainForm), sender);
+                        _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender);
                     
                     } catch (Exception error)
                     {

@@ -35,7 +35,7 @@ namespace SistemaEscola.Controllers
             }
 
             // Adds new Usuario to Db
-            var usuario = new Usuario(FindAll().Count + 1, form.Nome, form.Senha);
+            var usuario = new Usuario(FindAll().Count + 1, form.Nome.ToUpper(), form.Senha);
 
             _context.Usuarios.Add(usuario);
         }

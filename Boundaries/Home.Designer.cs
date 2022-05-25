@@ -37,6 +37,7 @@ namespace SistemaEscola
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.titleLb = new System.Windows.Forms.Label();
+            this.returnBtn = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -135,6 +136,7 @@ namespace SistemaEscola
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
+            this.panel3.Controls.Add(this.returnBtn);
             this.panel3.Controls.Add(this.homeBtn);
             this.panel3.Controls.Add(this.titleLb);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -155,6 +157,24 @@ namespace SistemaEscola
             this.titleLb.Size = new System.Drawing.Size(199, 75);
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "HOME";
+            // 
+            // returnBtn
+            // 
+            this.returnBtn.BackgroundImage = global::SistemaEscola.Properties.Resources.Return_icon;
+            this.returnBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.returnBtn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.returnBtn.FlatAppearance.BorderSize = 0;
+            this.returnBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.returnBtn.Font = new System.Drawing.Font("Comfortaa", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.returnBtn.ForeColor = System.Drawing.Color.Transparent;
+            this.returnBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.returnBtn.Location = new System.Drawing.Point(86, 0);
+            this.returnBtn.Name = "returnBtn";
+            this.returnBtn.Size = new System.Drawing.Size(86, 80);
+            this.returnBtn.TabIndex = 3;
+            this.returnBtn.UseVisualStyleBackColor = true;
+            this.returnBtn.Visible = false;
+            this.returnBtn.Click += new System.EventHandler(this.returnBtn_Click);
             // 
             // homeBtn
             // 
@@ -207,6 +227,7 @@ namespace SistemaEscola
         private System.Windows.Forms.Button professorBtn;
         private System.Windows.Forms.Label titleLb;
         private System.Windows.Forms.Button homeBtn;
+        private System.Windows.Forms.Button returnBtn;
     }
 }
 

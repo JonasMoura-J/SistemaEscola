@@ -15,7 +15,7 @@ namespace SistemaEscola
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            _mainForm.OpenChildForm(new CadastrarTurma(_mainForm), sender);
+            _mainForm.OpenNewForm(new CadastrarTurma(_mainForm), sender);
         }
     }
 }

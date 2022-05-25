@@ -103,7 +103,7 @@ namespace SistemaEscola
                         controladorTurma.Add(form);
 
                         // Returns to MenuDisciplina
-                        _mainForm.OpenChildForm(new MenuTurma(_mainForm), sender);
+                        _mainForm.OpenNewForm(new MenuTurma(_mainForm), sender);
 
                     }
                     catch (Exception error)

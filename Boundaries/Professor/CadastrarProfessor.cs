@@ -126,11 +126,11 @@ namespace SistemaEscola
                             Id = controladorProfessor.FindAll().Count() + 1,
                             Nome = nomeTxtBox.Text.ToUpper(),
                             Cpf = cpfTxtBox.Text,
-                            Rg = rgTxtBox.Text,
+                            Rg = rgTxtBox.Text.ToUpper(),
                             DataNascimento = dataNascConverted,
                             TelefoneResidencial = telResTxtBox.Text,
                             TelefoneCelular = telCelTxtBox.Text,
-                            Email = emailTxtBox.Text,
+                            Email = emailTxtBox.Text.ToUpper(),
                             Disciplinas = selectedDisciplinas
                         };
 
@@ -157,7 +157,7 @@ namespace SistemaEscola
                                 controladorProfessor.Add(form);
 
                                 // Returns to MenuAluno
-                                _mainForm.OpenChildForm(new MenuProfessor(_mainForm), sender);
+                                _mainForm.OpenNewForm(new MenuProfessor(_mainForm), sender);
 
                             }
                             catch (Exception error)

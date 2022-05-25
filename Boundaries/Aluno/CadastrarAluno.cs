@@ -133,15 +133,15 @@ namespace SistemaEscola
                                 Id = controladorAluno.FindAll().Count() + 1,
                                 Nome = nomeTxtBox.Text.ToUpper(),
                                 Cpf = cpfTxtBox.Text,
-                                Rg = rgTxtBox.Text,
+                                Rg = rgTxtBox.Text.ToUpper(),
                                 DataNascimento = dataNascConverted,
                                 TelefoneResidencial = telResTxtBox.Text,
                                 TelefoneCelular = telCelTxtBox.Text,
-                                Email = emailTxtBox.Text,
-                                NomePai = paiTxtBox.Text,
-                                NomeMae = maeTxtBox.Text,
-                                NomeResponsavel = respTxtBox.Text,
-                                Matricula = matriculaTxtBox.Text
+                                Email = emailTxtBox.Text.ToUpper(),
+                                NomePai = paiTxtBox.Text.ToUpper(),
+                                NomeMae = maeTxtBox.Text.ToUpper(),
+                                NomeResponsavel = respTxtBox.Text.ToUpper(),
+                                Matricula = matriculaTxtBox.Text.ToUpper()
                             };
 
                             // Validates form
@@ -165,7 +165,7 @@ namespace SistemaEscola
                                     controladorAluno.Add(form);
 
                                     // Returns to MenuAluno
-                                    _mainForm.OpenChildForm(new MenuAluno(_mainForm), sender);
+                                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender);
                                 
                                 } catch (Exception error)
                                 {
