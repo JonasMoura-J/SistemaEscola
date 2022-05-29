@@ -103,12 +103,13 @@ namespace SistemaEscola
                         controladorTurma.Add(form);
 
                         // Returns to MenuDisciplina
-                        _mainForm.OpenNewForm(new MenuTurma(_mainForm), sender);
+                        _mainForm.OpenNewForm(new MenuTurma(_mainForm), sender, null, true);
 
                     }
                     catch (Exception error)
                     {
                         MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        throw error.InnerException;
                     }
                 }
             }

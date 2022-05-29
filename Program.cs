@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SistemaEscola.Data;
+using System;
 using System.Windows.Forms;
 
 namespace SistemaEscola
@@ -14,6 +12,10 @@ namespace SistemaEscola
         [STAThread]
         static void Main()
         {
+            var seedingService = new SeedingService();
+
+            seedingService.Seed();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login());

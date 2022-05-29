@@ -22,12 +22,11 @@ namespace SistemaEscola.Entities
         public List<Disciplina> Disciplinas { get; set; } = new List<Disciplina>();
         public List<FaltaDisciplina> FaltaDisciplinas { get; set; } = new List<FaltaDisciplina>();
 
-        public Aluno(int id, string nome, string cpf, string rg, DateTime dataNascimento, 
+        public Aluno(string nome, string cpf, string rg, DateTime dataNascimento, 
             string telefoneResidencial, string telefoneCelular, string email,
             string matricula, string nomePai = null, string nomeMae = null,
             string nomeResponsavel = null)
         {
-            Id = id;
             Nome = nome;
             Cpf = cpf;
             Rg = rg;

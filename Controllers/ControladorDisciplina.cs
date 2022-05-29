@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Db;
+using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
 
@@ -9,7 +9,7 @@ namespace SistemaEscola.Controllers
 {
     class ControladorDisciplina : IController<Disciplina>
     {
-        private readonly TempDb _context = TempDb.Instanse;
+        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
         public void Add(FormularioDisciplina form)
         {
@@ -20,14 +20,16 @@ namespace SistemaEscola.Controllers
             }
 
             // Adds new Disciplina do Db
-            var disciplina = new Disciplina(form.Id, form.Nome);
+            var disciplina = new Disciplina(form.Nome);
 
             _context.Disciplinas.Add(disciplina);
+
+            _context.SaveChanges();
         }
 
         public List<Disciplina> FindAll()
         {
-            return _context.Disciplinas;
+            return _context.Disciplinas.ToList();
         }
 
         public void Delete(int Id)
@@ -48,18 +50,32 @@ namespace SistemaEscola.Controllers
             if (disciplina != null) {
 
                 _context.Disciplinas.Remove(disciplina);
-                _context.Disciplinas.Add(new Disciplina(form.Id, form.Nome));
+                _context.Disciplinas.Add(new Disciplina(form.Nome));
             }
         }
 
-        public Disciplina FindById(int Id)
+        public Disciplina FindById(int id)
         {
-            return _context.Disciplinas.Find(x => x.Id == Id);
+            var disciplina = _context.Disciplinas.Where(d => d.Id == id);
+
+            if (!disciplina.Any())
+            {
+                return null;
+            }
+
+            return disciplina.First();
         }
 
-        public Disciplina FindByName(string nome)
+        public Disciplina FindByName(string name)
         {
-            return _context.Disciplinas.Find(x => x.Nome == nome);
+            var disciplina = _context.Disciplinas.Where(d => d.Nome == name);
+
+            if (!disciplina.Any())
+            {
+                return null;
+            }
+
+            return disciplina.First();
         }
     }
 }

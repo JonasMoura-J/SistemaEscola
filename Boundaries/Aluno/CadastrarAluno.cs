@@ -165,7 +165,7 @@ namespace SistemaEscola
                                     controladorAluno.Add(form);
 
                                     // Returns to MenuAluno
-                                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender);
+                                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
                                 
                                 } catch (Exception error)
                                 {

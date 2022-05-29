@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Db;
+using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
 
@@ -9,7 +9,7 @@ namespace SistemaEscola.Controllers
 {
     class ControladorUsuario : IController<Usuario>
     {
-        private readonly TempDb _context = TempDb.Instanse;
+        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
         public bool ConfirmLogin(FormularioUsuario form)
         {
@@ -35,14 +35,16 @@ namespace SistemaEscola.Controllers
             }
 
             // Adds new Usuario to Db
-            var usuario = new Usuario(FindAll().Count + 1, form.Nome.ToUpper(), form.Senha);
+            var usuario = new Usuario(form.Nome.ToUpper(), form.Senha);
 
             _context.Usuarios.Add(usuario);
+
+            _context.SaveChanges();
         }
 
         public List<Usuario> FindAll()
         {
-            return _context.Usuarios;
+            return _context.Usuarios.ToList();
         }
 
         public Usuario FindByName(string name)

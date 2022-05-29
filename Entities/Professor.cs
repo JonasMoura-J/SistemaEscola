@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Entities
 {
@@ -11,21 +12,28 @@ namespace SistemaEscola.Entities
         public string TelefoneResidencial { get; set; }
         public string TelefoneCelular { get; set; }
         public string Email { get; set; }
-        public List<Disciplina> Disciplinas { get; set; }
+        public List<ProfessorDisciplina> ProfessorDisciplinas { get; set; } = new List<ProfessorDisciplina>();
         public List<Turma> Turmas { get; set; } = new List<Turma>();
 
-        public Professor(int id, string nome, string cpf, string rg,
-            string telefoneResidencial, string telefoneCelular, string email,
-            List<Disciplina> disciplinas)
+        public Professor(string nome, string cpf, string rg,
+            string telefoneResidencial, string telefoneCelular, string email)
         {
-            Id = id;
             Nome = nome;
             Cpf = cpf;
             Rg = rg;
             TelefoneResidencial = telefoneResidencial;
             TelefoneCelular = telefoneCelular;
             Email = email;
-            Disciplinas = disciplinas;
+        }
+
+        public void InsertDisciplinas(List<Disciplina> disciplinas)
+        {
+            disciplinas.ForEach(d => ProfessorDisciplinas.Add(new ProfessorDisciplina {
+                ProfessorId = Id,
+                DisciplinaId = d.Id,
+                Professor = this,
+                Disciplina = d
+            }));
         }
     }
 }

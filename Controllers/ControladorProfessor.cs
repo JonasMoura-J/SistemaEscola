@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Db;
+using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Parsers;
@@ -10,7 +10,7 @@ namespace SistemaEscola.Controllers
 {
     class ControladorProfessor : IController<Professor>
     {
-        private readonly TempDb _context = TempDb.Instanse;
+        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
         private readonly ControladorDisciplina _controladorDisciplina = new ControladorDisciplina();
         private readonly ControladorUsuario _controladorUsuario = new ControladorUsuario();
@@ -32,10 +32,11 @@ namespace SistemaEscola.Controllers
             }
 
             // Adds new Professor to Db
-            var professor = new Professor(form.Id, form.Nome, CpfParse.ToNumber(form.Cpf),
+            var professor = new Professor(form.Nome, CpfParse.ToNumber(form.Cpf),
                 RgParse.ToNumber(form.Rg), PhoneNumberParse.ToNumber(form.TelefoneResidencial),
-                PhoneNumberParse.ToNumber(form.TelefoneCelular), form.Email,
-                disciplinasToInsert);
+                PhoneNumberParse.ToNumber(form.TelefoneCelular), form.Email);
+
+            professor.InsertDisciplinas(disciplinasToInsert);
 
             _context.Professores.Add(professor);
 
@@ -50,11 +51,8 @@ namespace SistemaEscola.Controllers
             };
 
             _controladorUsuario.Add(usuario);
-        }
 
-        public List<Professor> FindAll()
-        {
-            return _context.Professores;
+            _context.SaveChanges();
         }
 
         public void Delete(int Id)
@@ -80,9 +78,33 @@ namespace SistemaEscola.Controllers
             }
         }
 
-        public Professor FindById(int Id)
+        public List<Professor> FindAll()
         {
-            return _context.Professores.Find(x => x.Id == Id);
+            return _context.Professores.ToList();
+        }
+
+        public Professor FindById(int id)
+        {
+            var professor = _context.Professores.Where(p => p.Id == id);
+
+            if (!professor.Any())
+            {
+                return null;
+            }
+
+            return professor.First();
+        }
+
+        public Professor FindByName(string name)
+        {
+            var professor = _context.Professores.Where(p => p.Nome == name);
+
+            if (!professor.Any())
+            {
+                return null;
+            }
+
+            return professor.First();
         }
     }
 }

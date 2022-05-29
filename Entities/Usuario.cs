@@ -6,9 +6,8 @@
         public string Nome { get; set; }
         public string Senha { get; set; }
 
-        public Usuario(int id, string nome, string senha)
+        public Usuario(string nome, string senha)
         {
-            Id = id;
             Nome = nome;
             Senha = senha;
         }

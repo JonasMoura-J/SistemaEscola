@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Db;
+using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
 
@@ -9,7 +9,8 @@ namespace SistemaEscola.Controllers
 {
     class ControladorTurma : IController<Turma>
     {
-        private readonly TempDb _context = TempDb.Instanse;
+        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+
         private readonly ControladorAluno _controladorAluno = new ControladorAluno();
         private readonly ControladorDisciplina _controladorDisciplina = new ControladorDisciplina();
 
@@ -25,29 +26,26 @@ namespace SistemaEscola.Controllers
             var alunosToInsert = new List<Aluno>();
             var disciplinasToInsert = new List<Disciplina>();
 
-            foreach (string aluno in form.Alunos)
-            {
-                alunosToInsert.Add(_controladorAluno.FindByName(aluno));
-            }
+            form.Alunos.ForEach(a => alunosToInsert.Add(_controladorAluno.FindByName(a)));
+            _context.Alunos.AttachRange(alunosToInsert);
 
-            foreach (string disc in form.Disciplinas)
-            {
-                disciplinasToInsert.Add(_controladorDisciplina.FindByName(disc));
-            }
+            form.Disciplinas.ForEach(d => disciplinasToInsert.Add(_controladorDisciplina.FindByName(d)));
+            _context.Disciplinas.AttachRange(disciplinasToInsert);
 
             // Adds new Turma to Db
-            var turma = new Turma(form.Id, form.Codigo, form.Nome,
-                form.QuantidadeAlunos, alunosToInsert, disciplinasToInsert);
+            var turma = new Turma(form.Codigo, form.Nome,
+                form.QuantidadeAlunos);
+
+            turma.InsertAlunos(alunosToInsert);
+            turma.InsertDisciplinas(disciplinasToInsert);
 
             _context.Turmas.Add(turma);
 
             // Updates Aluno with new data
             alunosToInsert.ForEach(a => a.UpdateTurma(turma));
             alunosToInsert.ForEach(a => disciplinasToInsert.ForEach(d => a.AddDisciplina(d)));
-        }
-        public List<Turma> FindAll()
-        {
-            return _context.Turmas;
+
+            _context.SaveChanges();
         }
 
         public void Delete(int Id)
@@ -71,14 +69,33 @@ namespace SistemaEscola.Controllers
             }
         }
 
-        public Turma FindById(int Id)
+        public List<Turma> FindAll()
         {
-            return _context.Turmas.Find(x => x.Id == Id);
+            return _context.Turmas.ToList();
         }
 
-        public Turma FindByName(string nome)
+        public Turma FindById(int id)
         {
-            return _context.Turmas.Find(x => x.Nome == nome);
+            var turma = _context.Turmas.Where(t => t.Id == id);
+
+            if (!turma.Any())
+            {
+                return null;
+            }
+
+            return turma.First();
+        }
+
+        public Turma FindByName(string name)
+        {
+            var turma = _context.Turmas.Where(t => t.Nome == name);
+
+            if (!turma.Any())
+            {
+                return null;
+            }
+
+            return turma.First();
         }
     }
 }
