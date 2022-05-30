@@ -17,5 +17,16 @@ namespace SistemaEscola
         {
             _mainForm.OpenNewForm(new CadastrarAluno(_mainForm), sender);
         }
+
+        private void listButn_Click(object sender, EventArgs e)
+        {
+            AlunoTestForm form = new AlunoTestForm();
+            form.Show();
+        }
+
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new RemoverAluno(_mainForm), sender);
+        }
     }
 }

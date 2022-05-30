@@ -10,7 +10,7 @@ using SistemaEscola.Data;
 namespace SistemaEscola.Migrations
 {
     [DbContext(typeof(SistemaEscolaDbContext))]
-    [Migration("20220528235645_InitialMigration")]
+    [Migration("20220530170028_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,7 @@ namespace SistemaEscola.Migrations
                     b.Property<string>("TelefoneResidencial")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TurmaId")
+                    b.Property<int>("TurmaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -78,9 +78,6 @@ namespace SistemaEscola.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AlunoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -89,36 +86,27 @@ namespace SistemaEscola.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlunoId");
-
                     b.HasIndex("TurmaId");
 
                     b.ToTable("Disciplinas");
                 });
 
-            modelBuilder.Entity("SistemaEscola.Entities.FaltaDisciplina", b =>
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.AlunoFaltaDisciplina", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AlunoId")
+                    b.Property<int>("AlunoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DisciplinaId")
+                    b.Property<int>("DisciplinaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Faltas")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
+                    b.HasKey("AlunoId", "DisciplinaId");
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("FaltaDisciplina");
+                    b.ToTable("AlunoFaltaDisciplinas");
                 });
 
             modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.ProfessorDisciplina", b =>
@@ -214,29 +202,31 @@ namespace SistemaEscola.Migrations
                 {
                     b.HasOne("SistemaEscola.Entities.Turma", "Turma")
                         .WithMany("Alunos")
-                        .HasForeignKey("TurmaId");
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SistemaEscola.Entities.Disciplina", b =>
                 {
-                    b.HasOne("SistemaEscola.Entities.Aluno", null)
-                        .WithMany("Disciplinas")
-                        .HasForeignKey("AlunoId");
-
                     b.HasOne("SistemaEscola.Entities.Turma", null)
                         .WithMany("Disciplinas")
                         .HasForeignKey("TurmaId");
                 });
 
-            modelBuilder.Entity("SistemaEscola.Entities.FaltaDisciplina", b =>
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.AlunoFaltaDisciplina", b =>
                 {
-                    b.HasOne("SistemaEscola.Entities.Aluno", null)
-                        .WithMany("FaltaDisciplinas")
-                        .HasForeignKey("AlunoId");
+                    b.HasOne("SistemaEscola.Entities.Aluno", "Aluno")
+                        .WithMany("AlunoFaltaDisciplinas")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SistemaEscola.Entities.Disciplina", "Disciplina")
-                        .WithMany()
-                        .HasForeignKey("DisciplinaId");
+                        .WithMany("AlunoFaltaDisciplinas")
+                        .HasForeignKey("DisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.ProfessorDisciplina", b =>

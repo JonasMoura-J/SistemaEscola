@@ -32,43 +32,58 @@ namespace SistemaEscola.Controllers
             _context.SaveChanges();
         }
 
-        public void Delete(int Id)
+        public void Delete(int id)
         {
-            Aluno aluno = FindById(Id);
+            Aluno aluno = FindById(id);
 
             if (aluno != null) {
-                _context.Alunos.Remove(FindById(Id));
+                _context.Alunos.Remove(aluno);
             }
+
+            _context.SaveChanges();
         }
 
         public void Update(FormularioAluno form)
         {
+            /*
             Aluno aluno = FindById(form.Id);
 
             if (aluno != null) {
-                _context.Alunos.Remove(aluno);
 
-                _context.Alunos.Add(new Aluno(form.Nome, form.Cpf, form.Rg,
-                form.DataNascimento, form.TelefoneResidencial, form.TelefoneCelular,
-                form.Email, form.Matricula, form.NomePai, form.NomeMae, form.NomeResponsavel));
+                aluno.UpdateTurma(form.t)
+
+                _context.Alunos.Update(aluno);
+                _context.SaveChanges();
+            }
+            */
+        }
+
+        public void Update(Aluno aluno)
+        {
+            if (aluno != null)
+            {
+                var a = FindById(aluno.Id);
+                
+                _context.Alunos.Update(a);
+                _context.SaveChanges();
             }
         }
 
         public List<Aluno> FindAll()
         {
-            return _context.Alunos.ToList();
+            return _context.Alunos.OrderBy(a => a.Nome).ToList();
         }
 
         public Aluno FindById(int id)
         {
-            var aluno = _context.Alunos.Where(a => a.Id == id);
+            var aluno = _context.Alunos.Find(id);
 
-            if (!aluno.Any())
+            if (aluno == null)
             {
                 return null;
             }
 
-            return aluno.First();
+            return aluno;
         }
 
         public Aluno FindByName(string name)

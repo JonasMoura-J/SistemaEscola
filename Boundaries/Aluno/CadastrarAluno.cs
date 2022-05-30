@@ -130,7 +130,6 @@ namespace SistemaEscola
                             // Creates form to be sent to controller
                             var form = new FormularioAluno
                             {
-                                Id = controladorAluno.FindAll().Count() + 1,
                                 Nome = nomeTxtBox.Text.ToUpper(),
                                 Cpf = cpfTxtBox.Text,
                                 Rg = rgTxtBox.Text.ToUpper(),
@@ -171,6 +170,7 @@ namespace SistemaEscola
                                 {
                                     ResetPlaceHolders();
                                     MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    //throw error.InnerException;
                                 }
                                 
                             }

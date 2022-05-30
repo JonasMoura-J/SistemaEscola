@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.JoinClasses;
-using System.IO;
-using System.Configuration;
 
 namespace SistemaEscola.Data
 {
@@ -15,6 +12,7 @@ namespace SistemaEscola.Data
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<ProfessorDisciplina> ProfessorDisciplinas { get; set; }
+        public DbSet<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; }
 
         public string DbPath { get; }
 
@@ -25,15 +23,25 @@ namespace SistemaEscola.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            //options.UseSqlite($"Data Source={DbPath}");
-            //options.UseSqlite($@"Data Source={Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\Data\Database\SistemaEscola.db");
-            //options.UseMySql(ConfigurationManager.ConnectionStrings["DbLocation"].ConnectionString);
-            //options.UseSqlite($@"Data Source=d:\trabalhos\uni\5th p\es\schoolapp v1.1\sistemaescola\data\database\SistemaEscola.db");
             options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=SistemaEscola.db;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Aluno _1______n_ AlunoFaltaDisciplina _n______1_ Disciplina
+            modelBuilder.Entity<AlunoFaltaDisciplina>().HasKey(x => new { x.AlunoId, x.DisciplinaId });
+
+            modelBuilder.Entity<AlunoFaltaDisciplina>()
+                .HasOne(afd => afd.Aluno)
+                .WithMany(a => a.AlunoFaltaDisciplinas)
+                .HasForeignKey(afd => afd.AlunoId);
+
+            modelBuilder.Entity<AlunoFaltaDisciplina>()
+                .HasOne(afd => afd.Disciplina)
+                .WithMany(d => d.AlunoFaltaDisciplinas)
+                .HasForeignKey(afd => afd.DisciplinaId);
+
+            // Professor _1______n_ ProfessorDisciplina _n______1_ Disciplina
             modelBuilder.Entity<ProfessorDisciplina>().HasKey(x => new { x.ProfessorId, x.DisciplinaId });
 
             modelBuilder.Entity<ProfessorDisciplina>()
@@ -46,9 +54,11 @@ namespace SistemaEscola.Data
                 .WithMany(d => d.ProfessorDisciplinas)
                 .HasForeignKey(pd => pd.DisciplinaId);
 
+            // Turma _1______n_ Aluno
             modelBuilder.Entity<Turma>()
                 .HasMany(t => t.Alunos)
-                .WithOne(a => a.Turma);
+                .WithOne(a => a.Turma)
+                .HasForeignKey(a => a.TurmaId);
         }
     }
 }

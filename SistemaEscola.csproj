@@ -224,6 +224,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boundaries\TestForms\AlunoTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\TestForms\AlunoTestForm.Designer.cs">
+      <DependentUpon>AlunoTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Boundaries\Dialog\AddFromList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +266,12 @@
     <Compile Include="Boundaries\Professor\CadastrarProfessor.Designer.cs">
       <DependentUpon>CadastrarProfessor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfirmDeletion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmDeletion.Designer.cs">
+      <DependentUpon>ConfirmDeletion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ControladorAluno.cs" />
     <Compile Include="Controllers\ControladorDisciplina.cs" />
     <Compile Include="Controllers\ControladorUsuario.cs" />
@@ -278,7 +290,7 @@
     <Compile Include="Entities\Formularios\FormularioProfessor.cs" />
     <Compile Include="Entities\Formularios\FormularioTurma.cs" />
     <Compile Include="Entities\Interfaces\IEntity.cs" />
-    <Compile Include="Entities\FaltaDisciplina.cs" />
+    <Compile Include="Entities\JoinClasses\AlunoFaltaDisciplina.cs" />
     <Compile Include="Entities\JoinClasses\ProfessorDisciplina.cs" />
     <Compile Include="Entities\Professor.cs" />
     <Compile Include="Entities\Turma.cs" />
@@ -325,9 +337,9 @@
     <Compile Include="Boundaries\UserControls\NamePresencaPanel.Designer.cs">
       <DependentUpon>NamePresencaPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220528235645_InitialMigration.cs" />
-    <Compile Include="Migrations\20220528235645_InitialMigration.designer.cs">
-      <DependentUpon>20220528235645_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20220530170028_InitialMigration.cs" />
+    <Compile Include="Migrations\20220530170028_InitialMigration.designer.cs">
+      <DependentUpon>20220530170028_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
     <Compile Include="Parsers\CpfParse.cs" />
@@ -347,17 +359,29 @@
     <Compile Include="Boundaries\Selections\SelectTurmaDisciplina.Designer.cs">
       <DependentUpon>SelectTurmaDisciplina.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Aluno\RemoverAluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Aluno\RemoverAluno.Designer.cs">
+      <DependentUpon>RemoverAluno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\TextBoxTools.cs" />
     <Compile Include="Validations\CpfAttribute.cs" />
     <Compile Include="Validations\DateAttribute.cs" />
     <Compile Include="Validations\MobilePhoneNumberAttribute.cs" />
     <Compile Include="Validations\PhoneNumberAttribute.cs" />
     <Compile Include="Validations\RgAttribute.cs" />
+    <EmbeddedResource Include="Boundaries\Aluno\RemoverAluno.resx">
+      <DependentUpon>RemoverAluno.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Dialog\AddFromList.resx">
       <DependentUpon>AddFromList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Professor\MenuProfessor.resx">
       <DependentUpon>MenuProfessor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\TestForms\AlunoTestForm.resx">
+      <DependentUpon>AlunoTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\UserControls\NamePanel.resx">
       <DependentUpon>NamePanel.cs</DependentUpon>
@@ -394,6 +418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Turma\Presenca.resx">
       <DependentUpon>Presenca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmDeletion.resx">
+      <DependentUpon>ConfirmDeletion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

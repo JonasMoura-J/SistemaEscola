@@ -19,16 +19,16 @@ namespace SistemaEscola.Data
 
             Aluno a1 = new Aluno("JOAO AUGUSTO", "12345678910", "4312312345",
                 DateTime.Parse("12/22/2222"), "23451123",
-                "912341234", "joao@gmail.com", "Maria", "0321323");
+                "912341234", "joao@gmail.com", "0321323", "Maria");
             Aluno a2 = new Aluno("MARIA DA SILVA", "64734664743", "7665092996",
                 DateTime.Parse("12/22/2222"), "66543213",
-                "923672345", "mari@gmail.com", "Miguel", "2839102");
+                "923672345", "mari@gmail.com", "2839102", "Miguel");
             Aluno a3 = new Aluno("MIGUEL WAWRZASZEK", "00594837251", "2283011830",
                 DateTime.Parse("12/22/2222"), "22550594",
-                "900339283", "migueleocara@gmail.com", "Unknown", "9932432");
+                "900339283", "migueleocara@gmail.com", "9932432", "Unknown");
             Aluno a4 = new Aluno("ALBERTO WAWRZASZEK", "00394857151", "2283011830",
                 DateTime.Parse("12/22/2222"), "22543594",
-                "900339283", "albertftw@gmail.com", "Unknown", "9952432");
+                "900339283", "albertftw@gmail.com", "9952432",  "Unknown");
 
             Professor p1 = new Professor("LEO", "00483923812", "9233813048", "46382917",
                 "928371164", "leoprof@gmail.com");

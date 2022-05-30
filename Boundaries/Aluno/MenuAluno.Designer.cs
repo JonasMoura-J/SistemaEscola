@@ -80,6 +80,7 @@ namespace SistemaEscola
             this.removeBtn.TabIndex = 8;
             this.removeBtn.Text = "Remover";
             this.removeBtn.UseVisualStyleBackColor = false;
+            this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
             // listButn
             // 
@@ -94,6 +95,7 @@ namespace SistemaEscola
             this.listButn.TabIndex = 9;
             this.listButn.Text = "Listar";
             this.listButn.UseVisualStyleBackColor = false;
+            this.listButn.Click += new System.EventHandler(this.listButn_Click);
             // 
             // buscarBtn
             // 

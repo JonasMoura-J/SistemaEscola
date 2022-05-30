@@ -41,11 +41,16 @@ namespace SistemaEscola.Controllers
 
             _context.Turmas.Add(turma);
 
+            _context.SaveChanges();
+
             // Updates Aluno with new data
             alunosToInsert.ForEach(a => a.UpdateTurma(turma));
             alunosToInsert.ForEach(a => disciplinasToInsert.ForEach(d => a.AddDisciplina(d)));
 
-            _context.SaveChanges();
+            alunosToInsert.ForEach(a => _controladorAluno.Update(a));
+            //_context.Alunos.UpdateRange(alunosToInsert);
+
+            //_context.SaveChanges();
         }
 
         public void Delete(int Id)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Entities
 {
@@ -18,14 +19,14 @@ namespace SistemaEscola.Entities
         public string NomeMae { get; set; }
         public string NomeResponsavel { get; set; }
         public string Matricula { get; set; }
+        public int TurmaId { get; set; }
         public Turma Turma { get; set; }
-        public List<Disciplina> Disciplinas { get; set; } = new List<Disciplina>();
-        public List<FaltaDisciplina> FaltaDisciplinas { get; set; } = new List<FaltaDisciplina>();
+        public List<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; } = new List<AlunoFaltaDisciplina>();
 
         public Aluno(string nome, string cpf, string rg, DateTime dataNascimento, 
             string telefoneResidencial, string telefoneCelular, string email,
             string matricula, string nomePai = null, string nomeMae = null,
-            string nomeResponsavel = null)
+            string nomeResponsavel = null, int turmaId = 1)
         {
             Nome = nome;
             Cpf = cpf;
@@ -34,10 +35,11 @@ namespace SistemaEscola.Entities
             TelefoneResidencial = telefoneResidencial;
             TelefoneCelular = telefoneCelular;
             Email = email;
+            Matricula = matricula;
             NomePai = nomePai;
             NomeMae = nomeMae;
             NomeResponsavel = nomeResponsavel;
-            Matricula = matricula;
+            TurmaId = turmaId;
         }
         public void UpdateTurma(Turma turma)
         {
@@ -46,35 +48,38 @@ namespace SistemaEscola.Entities
 
         public void AddDisciplina(Disciplina disciplina)
         {
-            if (!Disciplinas.Any(d => d.Id == disciplina.Id))
+            if (!AlunoFaltaDisciplinas.Any(d => d.Disciplina.Id == disciplina.Id))
             {
-                Disciplinas.Add(disciplina);
-                FaltaDisciplinas.Add(new FaltaDisciplina { Disciplina = disciplina });
+                AlunoFaltaDisciplinas.Add(new AlunoFaltaDisciplina
+                {
+                    AlunoId = Id,
+                    Aluno = this,
+                    DisciplinaId = disciplina.Id,
+                    Disciplina = disciplina
+                });
             }
         }
         public void RemoveDisciplina(Disciplina disciplina)
         {
-            if (Disciplinas.Any(d => d.Id == disciplina.Id))
+            if (AlunoFaltaDisciplinas.Any(d => d.Disciplina.Id == disciplina.Id))
             {
-                Disciplinas.Remove(disciplina);
+                var afd = AlunoFaltaDisciplinas.Where(a => a.DisciplinaId == disciplina.Id).First();
 
-                var faltaDisc = FaltaDisciplinas.Where(fd => fd.Disciplina.Id == disciplina.Id).First();
-
-                FaltaDisciplinas.Remove(faltaDisc);
+                AlunoFaltaDisciplinas.Remove(afd);
             }
         }
 
         public void AddFaltas(Disciplina disciplina, int faltas)
         {
-            var faltaDisc = FaltaDisciplinas.Where(fd => fd.Disciplina.Id == disciplina.Id).First();
+            var aluFaltaDisc = AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplina.Id).First();
 
-            faltaDisc.Faltas += faltas;
+            aluFaltaDisc.Faltas += faltas;
         }
         public void EditFaltas(Disciplina disciplina, int faltas)
         {
-            var faltaDisc = FaltaDisciplinas.Where(fd => fd.Disciplina.Id == disciplina.Id).First();
+            var aluFaltaDisc = AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplina.Id).First();
 
-            faltaDisc.Faltas = faltas;
+            aluFaltaDisc.Faltas = faltas;
         }
     }
 }

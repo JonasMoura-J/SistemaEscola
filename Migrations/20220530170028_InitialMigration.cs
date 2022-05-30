@@ -78,7 +78,7 @@ namespace SistemaEscola.Migrations
                     NomeMae = table.Column<string>(nullable: true),
                     NomeResponsavel = table.Column<string>(nullable: true),
                     Matricula = table.Column<string>(nullable: true),
-                    TurmaId = table.Column<int>(nullable: true)
+                    TurmaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,7 +88,7 @@ namespace SistemaEscola.Migrations
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,18 +98,11 @@ namespace SistemaEscola.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(nullable: true),
-                    AlunoId = table.Column<int>(nullable: true),
                     TurmaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Disciplinas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Disciplinas_Alunos_AlunoId",
-                        column: x => x.AlunoId,
-                        principalTable: "Alunos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Disciplinas_Turmas_TurmaId",
                         column: x => x.TurmaId,
@@ -119,30 +112,28 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FaltaDisciplina",
+                name: "AlunoFaltaDisciplinas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DisciplinaId = table.Column<int>(nullable: true),
-                    Faltas = table.Column<int>(nullable: false),
-                    AlunoId = table.Column<int>(nullable: true)
+                    AlunoId = table.Column<int>(nullable: false),
+                    DisciplinaId = table.Column<int>(nullable: false),
+                    Faltas = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FaltaDisciplina", x => x.Id);
+                    table.PrimaryKey("PK_AlunoFaltaDisciplinas", x => new { x.AlunoId, x.DisciplinaId });
                     table.ForeignKey(
-                        name: "FK_FaltaDisciplina_Alunos_AlunoId",
+                        name: "FK_AlunoFaltaDisciplinas_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FaltaDisciplina_Disciplinas_DisciplinaId",
+                        name: "FK_AlunoFaltaDisciplinas_Disciplinas_DisciplinaId",
                         column: x => x.DisciplinaId,
                         principalTable: "Disciplinas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,29 +161,19 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AlunoFaltaDisciplinas_DisciplinaId",
+                table: "AlunoFaltaDisciplinas",
+                column: "DisciplinaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Alunos_TurmaId",
                 table: "Alunos",
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Disciplinas_AlunoId",
-                table: "Disciplinas",
-                column: "AlunoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Disciplinas_TurmaId",
                 table: "Disciplinas",
                 column: "TurmaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FaltaDisciplina_AlunoId",
-                table: "FaltaDisciplina",
-                column: "AlunoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FaltaDisciplina_DisciplinaId",
-                table: "FaltaDisciplina",
-                column: "DisciplinaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProfessorDisciplinas_DisciplinaId",
@@ -208,7 +189,7 @@ namespace SistemaEscola.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FaltaDisciplina");
+                name: "AlunoFaltaDisciplinas");
 
             migrationBuilder.DropTable(
                 name: "ProfessorDisciplinas");
@@ -217,10 +198,10 @@ namespace SistemaEscola.Migrations
                 name: "Usuarios");
 
             migrationBuilder.DropTable(
-                name: "Disciplinas");
+                name: "Alunos");
 
             migrationBuilder.DropTable(
-                name: "Alunos");
+                name: "Disciplinas");
 
             migrationBuilder.DropTable(
                 name: "Turmas");
