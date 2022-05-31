@@ -20,8 +20,7 @@ namespace SistemaEscola
 
         private void listButn_Click(object sender, EventArgs e)
         {
-            AlunoTestForm form = new AlunoTestForm();
-            form.Show();
+            _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender);
         }
 
         private void removeBtn_Click(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿namespace SistemaEscola.Entities.Formularios
 {
-    interface IFormulario
+    public interface IFormulario
     {
+        string Nome { get; set; }
     }
 }

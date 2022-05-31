@@ -58,7 +58,7 @@ namespace SistemaEscola.Data
 
             professores.ForEach(p => p.InsertDisciplinas(new List<Disciplina>()));
 
-            turmas.ForEach(t => alunos.ForEach(a => t.InsertAluno(a)));
+            //turmas.ForEach(t => alunos.ForEach(a => t.InsertAluno(a)));
             turmas.ForEach(t => t.InsertDisciplinas(new List<Disciplina>()));
 
             //alunos.ForEach(a => a.AddDisciplina(d3));

@@ -4,7 +4,7 @@ using SistemaEscola.Validations;
 
 namespace SistemaEscola.Entities.Formularios
 {
-    class FormularioAluno : IFormulario
+    public class FormularioAluno : IFormulario
     {
         public int Id { get; set; }
         [Required]
@@ -30,5 +30,6 @@ namespace SistemaEscola.Entities.Formularios
         public string NomeResponsavel { get; set; }
         [Required, Display(Name = "Matrícula")]
         public string Matricula { get; set; }
+        public int? TurmaId { get; set; }
     }
 }

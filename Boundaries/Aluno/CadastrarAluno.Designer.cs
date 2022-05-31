@@ -29,7 +29,6 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.nomeTxtBox = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -56,16 +55,6 @@ namespace SistemaEscola
             this.telCelTxtBox = new System.Windows.Forms.MaskedTextBox();
             this.cadAluBackPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(857, 523);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(219, 21);
-            this.comboBox1.TabIndex = 41;
-            this.comboBox1.Visible = false;
             // 
             // nomeTxtBox
             // 
@@ -376,7 +365,6 @@ namespace SistemaEscola
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.addBtn);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.nomeTxtBox);
             this.Controls.Add(this.cadAluBackPanel);
             this.Name = "CadastrarAluno";
@@ -389,7 +377,6 @@ namespace SistemaEscola
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox nomeTxtBox;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Panel panel1;

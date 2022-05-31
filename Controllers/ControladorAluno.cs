@@ -123,5 +123,10 @@ namespace SistemaEscola.Controllers
 
             aluno.AddFaltas(disciplina, faltas);
         }
+
+        public List<AlunoFaltaDisciplina> FindAllAlunoFaltaDisciplinaByAluno(int alunoId)
+        {
+            return _context.AlunoFaltaDisciplinas.Where(afd => afd.AlunoId == alunoId).ToList();
+        }
     }
 }

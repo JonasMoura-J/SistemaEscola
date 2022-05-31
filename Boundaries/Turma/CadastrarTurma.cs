@@ -183,9 +183,9 @@ namespace SistemaEscola
             // Reset FlowLayout based on updated list
             flwLayPnl.Controls.Clear();
 
-            foreach (string disc in selectedItems)
+            foreach (string item in selectedItems)
             {
-                var panel = new NamePanel(disc, flwLayPnl);
+                var panel = new NamePanel(item, flwLayPnl);
 
                 panels.Add(panel);
                 flwLayPnl.Controls.Add(panel);

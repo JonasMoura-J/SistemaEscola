@@ -281,6 +281,12 @@
     <Compile Include="Data\SeedingService.cs" />
     <Compile Include="Data\SistemaEscolaDbContext.cs" />
     <Compile Include="Data\TempDb.cs" />
+    <Compile Include="Boundaries\Aluno\EditarAluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Aluno\EditarAluno.Designer.cs">
+      <DependentUpon>EditarAluno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Entities\Disciplina.cs" />
     <Compile Include="Entities\Formularios\Interfaces\IFormulario.cs" />
@@ -339,11 +345,23 @@
     <Compile Include="Boundaries\UserControls\NamePresencaPanel.Designer.cs">
       <DependentUpon>NamePresencaPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Aluno\ListarAlunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Aluno\ListarAlunos.Designer.cs">
+      <DependentUpon>ListarAlunos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20220531061358_InitialMigration.cs" />
     <Compile Include="Migrations\20220531061358_InitialMigration.designer.cs">
       <DependentUpon>20220531061358_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
+    <Compile Include="Boundaries\UserControls\NameEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Boundaries\UserControls\NameEditPanel.Designer.cs">
+      <DependentUpon>NameEditPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
     <Compile Include="Parsers\RgParse.cs" />
@@ -379,10 +397,10 @@
     <Compile Include="Boundaries\Professor\RemoverProfessor.Designer.cs">
       <DependentUpon>RemoverProfessor.cs</DependentUpon>
     </Compile>
-    <Compile Include="RemoverTurma.cs">
+    <Compile Include="Boundaries\Turma\RemoverTurma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RemoverTurma.Designer.cs">
+    <Compile Include="Boundaries\Turma\RemoverTurma.Designer.cs">
       <DependentUpon>RemoverTurma.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\TextBoxTools.cs" />
@@ -391,6 +409,12 @@
     <Compile Include="Validations\MobilePhoneNumberAttribute.cs" />
     <Compile Include="Validations\PhoneNumberAttribute.cs" />
     <Compile Include="Validations\RgAttribute.cs" />
+    <EmbeddedResource Include="Boundaries\Aluno\EditarAluno.resx">
+      <DependentUpon>EditarAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Aluno\ListarAlunos.resx">
+      <DependentUpon>ListarAlunos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Aluno\RemoverAluno.resx">
       <DependentUpon>RemoverAluno.cs</DependentUpon>
     </EmbeddedResource>
@@ -405,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\TestForms\AlunoTestForm.resx">
       <DependentUpon>AlunoTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\UserControls\NameEditPanel.resx">
+      <DependentUpon>NameEditPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\UserControls\NamePanel.resx">
       <DependentUpon>NamePanel.cs</DependentUpon>
@@ -461,7 +488,7 @@
     <EmbeddedResource Include="Boundaries\Professor\RemoverProfessor.resx">
       <DependentUpon>RemoverProfessor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RemoverTurma.resx">
+    <EmbeddedResource Include="Boundaries\Turma\RemoverTurma.resx">
       <DependentUpon>RemoverTurma.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -501,6 +528,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

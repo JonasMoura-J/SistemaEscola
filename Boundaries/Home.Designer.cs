@@ -184,15 +184,15 @@ namespace SistemaEscola
             // titleLb
             // 
             this.titleLb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.titleLb.AutoSize = true;
             this.titleLb.BackColor = System.Drawing.Color.Transparent;
             this.titleLb.Font = new System.Drawing.Font("Comfortaa", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLb.ForeColor = System.Drawing.Color.White;
-            this.titleLb.Location = new System.Drawing.Point(447, -3);
+            this.titleLb.Location = new System.Drawing.Point(-1, -17);
             this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(199, 75);
+            this.titleLb.Size = new System.Drawing.Size(1132, 97);
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "HOME";
+            this.titleLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Home
             // 
@@ -210,7 +210,6 @@ namespace SistemaEscola
             this.Text = "Form1";
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }

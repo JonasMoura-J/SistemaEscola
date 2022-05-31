@@ -98,7 +98,7 @@ namespace SistemaEscola
             this.Controls.Add(this.ausenteRBtn);
             this.Controls.Add(this.presenteRBtn);
             this.Controls.Add(this.nameLb);
-            this.Margin = new System.Windows.Forms.Padding(1);
+            this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.Name = "NamePresencaPanel";
             this.Size = new System.Drawing.Size(355, 51);
             this.MouseEnter += new System.EventHandler(this.NamePresencaPanel_MouseEnter);

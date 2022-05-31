@@ -56,9 +56,6 @@ namespace SistemaEscola
                     }
                 }
             }
-
-            // Provisoriamente
-            controladorAluno.FindAll().ForEach(a => comboBox1.Items.Add(a.Nome));
         }
 
         private void ResetPlaceHolders()
@@ -193,7 +190,6 @@ namespace SistemaEscola
         private void cpfTxtBox_Enter(object sender, EventArgs e)
         {
             TextBoxTools.Clear(cpfTxtBox, "CPF", "000.000.000-00");
-
         }
 
         private void cpfTxtBox_Leave(object sender, EventArgs e)
