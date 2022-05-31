@@ -13,6 +13,8 @@ namespace SistemaEscola.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<ProfessorDisciplina> ProfessorDisciplinas { get; set; }
         public DbSet<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; }
+        public DbSet<TurmaDisciplina> TurmaDisciplinas { get; set; }
+        public DbSet<TurmaProfessor> TurmaProfessores { get; set; }
 
         public string DbPath { get; }
 
@@ -54,11 +56,39 @@ namespace SistemaEscola.Data
                 .WithMany(d => d.ProfessorDisciplinas)
                 .HasForeignKey(pd => pd.DisciplinaId);
 
+            // Turma _1______n_ TurmaDisciplina _n______1_ Disciplina
+            modelBuilder.Entity<TurmaDisciplina>().HasKey(x => new { x.TurmaId, x.DisciplinaId });
+
+            modelBuilder.Entity<TurmaDisciplina>()
+                .HasOne(td => td.Turma)
+                .WithMany(t => t.TurmaDisciplinas)
+                .HasForeignKey(td => td.TurmaId);
+
+            modelBuilder.Entity<TurmaDisciplina>()
+                .HasOne(td => td.Disciplina)
+                .WithMany(d => d.TurmaDisciplinas)
+                .HasForeignKey(td => td.DisciplinaId);
+
+            // Turma _1______n_ TurmaProfessor _n______1_ Professor
+            modelBuilder.Entity<TurmaProfessor>().HasKey(x => new { x.TurmaId, x.ProfessorId });
+
+            modelBuilder.Entity<TurmaProfessor>()
+                .HasOne(tp => tp.Turma)
+                .WithMany(t => t.TurmaProfessores)
+                .HasForeignKey(tp => tp.TurmaId);
+
+            modelBuilder.Entity<TurmaProfessor>()
+                .HasOne(tp => tp.Professor)
+                .WithMany(p => p.TurmaProfessores)
+                .HasForeignKey(tp => tp.ProfessorId);
+
             // Turma _1______n_ Aluno
             modelBuilder.Entity<Turma>()
                 .HasMany(t => t.Alunos)
                 .WithOne(a => a.Turma)
-                .HasForeignKey(a => a.TurmaId);
+                .HasForeignKey(a => a.TurmaId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

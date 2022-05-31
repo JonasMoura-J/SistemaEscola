@@ -28,5 +28,10 @@ namespace SistemaEscola
         {
             _mainForm.OpenNewForm(new RemoverAluno(_mainForm), sender);
         }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

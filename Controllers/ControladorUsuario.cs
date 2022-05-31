@@ -11,21 +11,6 @@ namespace SistemaEscola.Controllers
     {
         private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
-        public bool ConfirmLogin(FormularioUsuario form)
-        {
-            var user = FindByName(form.Nome);
-
-            if (user != null)
-            {
-                if (form.Senha == user.Senha)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public void Add(FormularioUsuario form)
         {
             // Check if already exists
@@ -57,6 +42,21 @@ namespace SistemaEscola.Controllers
             }
 
             return user.First();
+        }
+
+        public bool ConfirmLogin(FormularioUsuario form)
+        {
+            var user = FindByName(form.Nome);
+
+            if (user != null)
+            {
+                if (form.Senha == user.Senha)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

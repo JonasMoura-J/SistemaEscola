@@ -16,6 +16,7 @@ namespace SistemaEscola
     public partial class AlunoTestForm : Form
     {
         ControladorAluno controladorAluno = new ControladorAluno();
+        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
 
         public AlunoTestForm()
         {
@@ -28,11 +29,6 @@ namespace SistemaEscola
 
             foreach (Aluno aluno in alunos)
             {
-                if (aluno.Id != 1 && aluno.Id != 2 && aluno.Id != 3 && aluno.Id != 4)
-                {
-                    
-                }
-
                 nomeBox.Items.Add(aluno.Nome);
                 cpfBox.Items.Add(CpfParse.ToDigit(aluno.Cpf));
                 rgBox.Items.Add(aluno.Rg);
@@ -40,14 +36,22 @@ namespace SistemaEscola
                 telResBox.Items.Add(PhoneNumberParse.ToDigit(aluno.TelefoneResidencial));
                 telCelBox.Items.Add(PhoneNumberParse.ToMobileDigit(aluno.TelefoneCelular));
                 emailBox.Items.Add(aluno.Email.ToLower());
-                paiBox.Items.Add(aluno.NomePai);
-                maeBox.Items.Add(aluno.NomeMae);
-                respBox.Items.Add(aluno.NomeResponsavel);
-                matriculaBox.Items.Add(aluno.Matricula);
-                turmaBox.Items.Add(aluno.TurmaId);
+                //paiBox.Items.Add(aluno.NomePai);
+                //maeBox.Items.Add(aluno.NomeMae);
+                //respBox.Items.Add(aluno.NomeResponsavel);
+                //matriculaBox.Items.Add(aluno.Matricula);
+                //turmaBox.Items.Add(aluno.TurmaId);
                 //aluno.Disciplinas.ForEach(d => disciplinasBox.Items.Add(d.Nome));
                 //aluno.FaltaDisciplinas.ForEach(fd => faltasBox.Items.Add(fd.Faltas));
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var aluno = controladorAluno.FindById(1);
+            var disciplina = controladorDisciplina.FindById(2);
+
+            //controladorAluno.AddFaltaDisciplina(aluno, disciplina);
         }
     }
 }

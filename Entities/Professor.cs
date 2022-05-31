@@ -13,7 +13,7 @@ namespace SistemaEscola.Entities
         public string TelefoneCelular { get; set; }
         public string Email { get; set; }
         public List<ProfessorDisciplina> ProfessorDisciplinas { get; set; } = new List<ProfessorDisciplina>();
-        public List<Turma> Turmas { get; set; } = new List<Turma>();
+        public List<TurmaProfessor> TurmaProfessores { get; set; } = new List<TurmaProfessor>();
 
         public Professor(string nome, string cpf, string rg,
             string telefoneResidencial, string telefoneCelular, string email)

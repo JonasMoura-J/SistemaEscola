@@ -8,6 +8,19 @@ namespace SistemaEscola.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Disciplinas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Disciplinas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Professores",
                 columns: table => new
                 {
@@ -26,6 +39,21 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Turmas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Codigo = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: true),
+                    QuantidadeAlunos = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Turmas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
@@ -40,25 +68,27 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Turmas",
+                name: "ProfessorDisciplinas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<string>(nullable: true),
-                    Nome = table.Column<string>(nullable: true),
-                    QuantidadeAlunos = table.Column<int>(nullable: false),
-                    ProfessorId = table.Column<int>(nullable: true)
+                    ProfessorId = table.Column<int>(nullable: false),
+                    DisciplinaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Turmas", x => x.Id);
+                    table.PrimaryKey("PK_ProfessorDisciplinas", x => new { x.ProfessorId, x.DisciplinaId });
                     table.ForeignKey(
-                        name: "FK_Turmas_Professores_ProfessorId",
+                        name: "FK_ProfessorDisciplinas_Disciplinas_DisciplinaId",
+                        column: x => x.DisciplinaId,
+                        principalTable: "Disciplinas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProfessorDisciplinas_Professores_ProfessorId",
                         column: x => x.ProfessorId,
                         principalTable: "Professores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,7 +108,7 @@ namespace SistemaEscola.Migrations
                     NomeMae = table.Column<string>(nullable: true),
                     NomeResponsavel = table.Column<string>(nullable: true),
                     Matricula = table.Column<string>(nullable: true),
-                    TurmaId = table.Column<int>(nullable: false)
+                    TurmaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,27 +118,55 @@ namespace SistemaEscola.Migrations
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TurmaDisciplinas",
+                columns: table => new
+                {
+                    TurmaId = table.Column<int>(nullable: false),
+                    DisciplinaId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TurmaDisciplinas", x => new { x.TurmaId, x.DisciplinaId });
+                    table.ForeignKey(
+                        name: "FK_TurmaDisciplinas_Disciplinas_DisciplinaId",
+                        column: x => x.DisciplinaId,
+                        principalTable: "Disciplinas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TurmaDisciplinas_Turmas_TurmaId",
+                        column: x => x.TurmaId,
+                        principalTable: "Turmas",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Disciplinas",
+                name: "TurmaProfessores",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
-                    TurmaId = table.Column<int>(nullable: true)
+                    TurmaId = table.Column<int>(nullable: false),
+                    ProfessorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Disciplinas", x => x.Id);
+                    table.PrimaryKey("PK_TurmaProfessores", x => new { x.TurmaId, x.ProfessorId });
                     table.ForeignKey(
-                        name: "FK_Disciplinas_Turmas_TurmaId",
+                        name: "FK_TurmaProfessores_Professores_ProfessorId",
+                        column: x => x.ProfessorId,
+                        principalTable: "Professores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TurmaProfessores_Turmas_TurmaId",
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,30 +194,6 @@ namespace SistemaEscola.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ProfessorDisciplinas",
-                columns: table => new
-                {
-                    ProfessorId = table.Column<int>(nullable: false),
-                    DisciplinaId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProfessorDisciplinas", x => new { x.ProfessorId, x.DisciplinaId });
-                    table.ForeignKey(
-                        name: "FK_ProfessorDisciplinas_Disciplinas_DisciplinaId",
-                        column: x => x.DisciplinaId,
-                        principalTable: "Disciplinas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProfessorDisciplinas_Professores_ProfessorId",
-                        column: x => x.ProfessorId,
-                        principalTable: "Professores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AlunoFaltaDisciplinas_DisciplinaId",
                 table: "AlunoFaltaDisciplinas",
@@ -171,18 +205,18 @@ namespace SistemaEscola.Migrations
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Disciplinas_TurmaId",
-                table: "Disciplinas",
-                column: "TurmaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProfessorDisciplinas_DisciplinaId",
                 table: "ProfessorDisciplinas",
                 column: "DisciplinaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turmas_ProfessorId",
-                table: "Turmas",
+                name: "IX_TurmaDisciplinas_DisciplinaId",
+                table: "TurmaDisciplinas",
+                column: "DisciplinaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TurmaProfessores_ProfessorId",
+                table: "TurmaProfessores",
                 column: "ProfessorId");
         }
 
@@ -195,6 +229,12 @@ namespace SistemaEscola.Migrations
                 name: "ProfessorDisciplinas");
 
             migrationBuilder.DropTable(
+                name: "TurmaDisciplinas");
+
+            migrationBuilder.DropTable(
+                name: "TurmaProfessores");
+
+            migrationBuilder.DropTable(
                 name: "Usuarios");
 
             migrationBuilder.DropTable(
@@ -204,10 +244,10 @@ namespace SistemaEscola.Migrations
                 name: "Disciplinas");
 
             migrationBuilder.DropTable(
-                name: "Turmas");
+                name: "Professores");
 
             migrationBuilder.DropTable(
-                name: "Professores");
+                name: "Turmas");
         }
     }
 }

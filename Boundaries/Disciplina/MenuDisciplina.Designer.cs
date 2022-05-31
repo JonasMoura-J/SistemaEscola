@@ -77,6 +77,7 @@ namespace SistemaEscola
             this.removeBtn.TabIndex = 15;
             this.removeBtn.Text = "Remover";
             this.removeBtn.UseVisualStyleBackColor = false;
+            this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
             // editBtn
             // 

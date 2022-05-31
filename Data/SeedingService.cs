@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SistemaEscola.Controllers;
 using SistemaEscola.Entities;
 
 namespace SistemaEscola.Data
@@ -8,6 +9,7 @@ namespace SistemaEscola.Data
     class SeedingService
     {
         private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+        private readonly ControladorTurma _controladorTurma = new ControladorTurma();
 
         public void Seed()
         {
@@ -19,7 +21,7 @@ namespace SistemaEscola.Data
 
             Aluno a1 = new Aluno("JOAO AUGUSTO", "12345678910", "4312312345",
                 DateTime.Parse("12/22/2222"), "23451123",
-                "912341234", "joao@gmail.com", "0321323", "Maria");
+                "912341234", "joao@gmail.com", "0321323", string.Empty, "Maria");
             Aluno a2 = new Aluno("MARIA DA SILVA", "64734664743", "7665092996",
                 DateTime.Parse("12/22/2222"), "66543213",
                 "923672345", "mari@gmail.com", "2839102", "Miguel");
@@ -56,10 +58,10 @@ namespace SistemaEscola.Data
 
             professores.ForEach(p => p.InsertDisciplinas(new List<Disciplina>()));
 
-            turmas.ForEach(t => t.InsertAlunos(alunos));
+            turmas.ForEach(t => alunos.ForEach(a => t.InsertAluno(a)));
             turmas.ForEach(t => t.InsertDisciplinas(new List<Disciplina>()));
 
-            alunos.ForEach(a => a.AddDisciplina(d3));
+            //alunos.ForEach(a => a.AddDisciplina(d3));
 
             // Insert in Db
             alunos.ForEach(a => _context.Alunos.Add(a));

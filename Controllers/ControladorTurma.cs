@@ -36,59 +36,33 @@ namespace SistemaEscola.Controllers
             var turma = new Turma(form.Codigo, form.Nome,
                 form.QuantidadeAlunos);
 
-            turma.InsertAlunos(alunosToInsert);
+            alunosToInsert.ForEach(a => turma.InsertAluno(a));
             turma.InsertDisciplinas(disciplinasToInsert);
 
             _context.Turmas.Add(turma);
 
-            _context.SaveChanges();
-
             // Updates Aluno with new data
-            alunosToInsert.ForEach(a => a.UpdateTurma(turma));
-            alunosToInsert.ForEach(a => disciplinasToInsert.ForEach(d => a.AddDisciplina(d)));
+            alunosToInsert.ForEach(a => disciplinasToInsert.ForEach(
+                d => _controladorAluno.AddFaltaDisciplina(a.Id, d.Id, true)));
 
-            alunosToInsert.ForEach(a => _controladorAluno.Update(a));
-            //_context.Alunos.UpdateRange(alunosToInsert);
-
-            //_context.SaveChanges();
-        }
-
-        public void Delete(int Id)
-        {
-            Turma turma = FindById(Id);
-
-            if (turma != null) {
-                _context.Turmas.Remove(turma);
-            }
-        }
-
-        // Not working for now
-        public void Update(FormularioTurma form)
-        {
-            Turma turma = FindById(form.Id);
-
-            if (turma != null) {
-
-                _context.Turmas.Remove(turma);
-                //_context.Turmas.Add(new Turma(form.Id, form.Codigo, form.Nome, form.QuantidadeAlunos, ));
-            }
+            _context.SaveChanges();
         }
 
         public List<Turma> FindAll()
         {
-            return _context.Turmas.ToList();
+            return _context.Turmas.OrderBy(t => t.Nome).ToList();
         }
 
         public Turma FindById(int id)
         {
-            var turma = _context.Turmas.Where(t => t.Id == id);
+            var turma = _context.Turmas.Find(id);
 
-            if (!turma.Any())
+            if (turma == null)
             {
                 return null;
             }
 
-            return turma.First();
+            return turma;
         }
 
         public Turma FindByName(string name)
@@ -102,5 +76,28 @@ namespace SistemaEscola.Controllers
 
             return turma.First();
         }
+
+        public void Delete(int Id)
+        {
+            Turma turma = FindById(Id);
+
+            if (turma != null) {
+                _context.Turmas.Remove(turma);
+            }
+
+            _context.SaveChanges();
+        }
+
+        // Not working for now
+        public void Update(FormularioTurma form)
+        {
+            Turma turma = FindById(form.Id);
+
+            if (turma != null) {
+
+                _context.Turmas.Remove(turma);
+                //_context.Turmas.Add(new Turma(form.Id, form.Codigo, form.Nome, form.QuantidadeAlunos, ));
+            }
+        }   
     }
 }

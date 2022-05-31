@@ -4,6 +4,7 @@ using System.Linq;
 using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Entities.JoinClasses;
 using SistemaEscola.Parsers;
 
 namespace SistemaEscola.Controllers
@@ -15,7 +16,7 @@ namespace SistemaEscola.Controllers
         public void Add(FormularioAluno form)
         {
             // Checks if Aluno already exists
-            if (FindAll().Any(a => a.Cpf == form.Cpf || a.Matricula == form.Matricula ||
+            if (FindAll().Any(a => CpfParse.ToDigit(a.Cpf) == form.Cpf || a.Matricula == form.Matricula ||
                 a.Email == form.Email))
             {
                 throw new Exception("Aluno já cadastrado");
@@ -30,6 +31,35 @@ namespace SistemaEscola.Controllers
             _context.Alunos.Add(aluno);
 
             _context.SaveChanges();
+        }
+
+        public List<Aluno> FindAll()
+        {
+            return _context.Alunos.OrderBy(a => a.Nome).ToList();
+        }
+
+        public Aluno FindById(int id)
+        {
+            var aluno = _context.Alunos.Find(id);
+
+            if (aluno == null)
+            {
+                return null;
+            }
+
+            return aluno;
+        }
+
+        public Aluno FindByName(string name)
+        {
+            var aluno = _context.Alunos.Where(a => a.Nome == name);
+
+            if (!aluno.Any())
+            {
+                return null;
+            }
+
+            return aluno.First();
         }
 
         public void Delete(int id)
@@ -69,33 +99,22 @@ namespace SistemaEscola.Controllers
             }
         }
 
-        public List<Aluno> FindAll()
+        public void AddFaltaDisciplina(int alunoId, int disciplinaId, bool isBugged = false)
         {
-            return _context.Alunos.OrderBy(a => a.Nome).ToList();
-        }
-
-        public Aluno FindById(int id)
-        {
-            var aluno = _context.Alunos.Find(id);
-
-            if (aluno == null)
+            if (!_context.AlunoFaltaDisciplinas.Any(afd => afd.AlunoId == alunoId &&
+            afd.DisciplinaId == disciplinaId))
             {
-                return null;
+                _context.AlunoFaltaDisciplinas.Add(new AlunoFaltaDisciplina()
+                {
+                    AlunoId = alunoId,
+                    DisciplinaId = disciplinaId,
+                });
+
+                if (!isBugged)
+                {
+                    _context.SaveChanges();
+                }
             }
-
-            return aluno;
-        }
-
-        public Aluno FindByName(string name)
-        {
-            var aluno = _context.Alunos.Where(a => a.Nome == name);
-
-            if (!aluno.Any())
-            {
-                return null;
-            }
-
-            return aluno.First();
         }
 
         public void AddFaltas(string nomeAluno, Disciplina disciplina, int faltas = 1)

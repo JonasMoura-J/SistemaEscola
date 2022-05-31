@@ -43,6 +43,7 @@ namespace SistemaEscola
             this.turmaBox = new System.Windows.Forms.ComboBox();
             this.disciplinasBox = new System.Windows.Forms.ComboBox();
             this.faltasBox = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nomeBox
@@ -171,11 +172,22 @@ namespace SistemaEscola
             this.faltasBox.Size = new System.Drawing.Size(219, 21);
             this.faltasBox.TabIndex = 55;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(231, 498);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 23);
+            this.button1.TabIndex = 56;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AlunoTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 488);
+            this.ClientSize = new System.Drawing.Size(553, 543);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.faltasBox);
             this.Controls.Add(this.disciplinasBox);
             this.Controls.Add(this.turmaBox);
@@ -213,5 +225,6 @@ namespace SistemaEscola
         private System.Windows.Forms.ComboBox turmaBox;
         private System.Windows.Forms.ComboBox disciplinasBox;
         private System.Windows.Forms.ComboBox faltasBox;
+        private System.Windows.Forms.Button button1;
     }
 }

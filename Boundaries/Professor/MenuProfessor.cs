@@ -17,5 +17,10 @@ namespace SistemaEscola
         {
             _mainForm.OpenNewForm(new CadastrarProfessor(_mainForm), sender);
         }
+
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new RemoverProfessor(_mainForm), sender);
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace SistemaEscola.Controllers
         public void Add(FormularioProfessor form)
         {
             // Check if Professor already exists
-            if (FindAll().Any(d => d.Cpf == form.Cpf || d.Email == form.Email))
+            if (FindAll().Any(d => CpfParse.ToDigit(d.Cpf) == form.Cpf || d.Email == form.Email))
             {
                 throw new Exception("Professor já cadastrado");
             }
@@ -26,10 +26,8 @@ namespace SistemaEscola.Controllers
             // Prepares the lists of Disciplinas and Alunos
             var disciplinasToInsert = new List<Disciplina>();
 
-            foreach (string disc in form.Disciplinas)
-            {
-                disciplinasToInsert.Add(_controladorDisciplina.FindByName(disc));
-            }
+            form.Disciplinas.ForEach(d => disciplinasToInsert.Add(_controladorDisciplina.FindByName(d)));
+            _context.Disciplinas.AttachRange(disciplinasToInsert);
 
             // Adds new Professor to Db
             var professor = new Professor(form.Nome, CpfParse.ToNumber(form.Cpf),
@@ -40,8 +38,7 @@ namespace SistemaEscola.Controllers
 
             _context.Professores.Add(professor);
 
-            // Updates Disciplina with new data
-            disciplinasToInsert.ForEach(a => a.AddProfessor(professor));
+            _context.SaveChanges();
 
             // Creates a new user profile
             var usuario = new FormularioUsuario
@@ -51,18 +48,46 @@ namespace SistemaEscola.Controllers
             };
 
             _controladorUsuario.Add(usuario);
-
-            _context.SaveChanges();
         }
 
-        public void Delete(int Id)
+        public List<Professor> FindAll()
         {
-            Professor professor = FindById(Id);
+            return _context.Professores.OrderBy(p => p.Nome).ToList();
+        }
+
+        public Professor FindById(int id)
+        {
+            var professor = _context.Professores.Find(id);
+
+            if (professor == null)
+            {
+                return null;
+            }
+
+            return professor;
+        }
+
+        public Professor FindByName(string name)
+        {
+            var professor = _context.Professores.Where(p => p.Nome == name);
+
+            if (!professor.Any())
+            {
+                return null;
+            }
+
+            return professor.First();
+        }
+
+        public void Delete(int id)
+        {
+            Professor professor = FindById(id);
 
             if (professor != null) {
                 _context.Professores.Remove(professor);
             }
 
+            _context.SaveChanges();
         }
 
         // Not working for now
@@ -76,35 +101,6 @@ namespace SistemaEscola.Controllers
                 //_context.Professores.Add(new Professor(form.Id, form.Nome, form.Cpf,
                 //form.Rg, form.TelefoneResidencial, form.TelefoneCelular, form.Email));
             }
-        }
-
-        public List<Professor> FindAll()
-        {
-            return _context.Professores.ToList();
-        }
-
-        public Professor FindById(int id)
-        {
-            var professor = _context.Professores.Where(p => p.Id == id);
-
-            if (!professor.Any())
-            {
-                return null;
-            }
-
-            return professor.First();
-        }
-
-        public Professor FindByName(string name)
-        {
-            var professor = _context.Professores.Where(p => p.Nome == name);
-
-            if (!professor.Any())
-            {
-                return null;
-            }
-
-            return professor.First();
         }
     }
 }

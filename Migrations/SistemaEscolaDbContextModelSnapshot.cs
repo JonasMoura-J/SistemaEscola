@@ -59,7 +59,7 @@ namespace SistemaEscola.Migrations
                     b.Property<string>("TelefoneResidencial")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TurmaId")
+                    b.Property<int?>("TurmaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -79,12 +79,7 @@ namespace SistemaEscola.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TurmaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TurmaId");
 
                     b.ToTable("Disciplinas");
                 });
@@ -120,6 +115,36 @@ namespace SistemaEscola.Migrations
                     b.HasIndex("DisciplinaId");
 
                     b.ToTable("ProfessorDisciplinas");
+                });
+
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.TurmaDisciplina", b =>
+                {
+                    b.Property<int>("TurmaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisciplinaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TurmaId", "DisciplinaId");
+
+                    b.HasIndex("DisciplinaId");
+
+                    b.ToTable("TurmaDisciplinas");
+                });
+
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.TurmaProfessor", b =>
+                {
+                    b.Property<int>("TurmaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfessorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TurmaId", "ProfessorId");
+
+                    b.HasIndex("ProfessorId");
+
+                    b.ToTable("TurmaProfessores");
                 });
 
             modelBuilder.Entity("SistemaEscola.Entities.Professor", b =>
@@ -165,15 +190,10 @@ namespace SistemaEscola.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProfessorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("QuantidadeAlunos")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfessorId");
 
                     b.ToTable("Turmas");
                 });
@@ -201,15 +221,7 @@ namespace SistemaEscola.Migrations
                     b.HasOne("SistemaEscola.Entities.Turma", "Turma")
                         .WithMany("Alunos")
                         .HasForeignKey("TurmaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SistemaEscola.Entities.Disciplina", b =>
-                {
-                    b.HasOne("SistemaEscola.Entities.Turma", null)
-                        .WithMany("Disciplinas")
-                        .HasForeignKey("TurmaId");
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.AlunoFaltaDisciplina", b =>
@@ -242,11 +254,34 @@ namespace SistemaEscola.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SistemaEscola.Entities.Turma", b =>
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.TurmaDisciplina", b =>
                 {
-                    b.HasOne("SistemaEscola.Entities.Professor", null)
-                        .WithMany("Turmas")
-                        .HasForeignKey("ProfessorId");
+                    b.HasOne("SistemaEscola.Entities.Disciplina", "Disciplina")
+                        .WithMany("TurmaDisciplinas")
+                        .HasForeignKey("DisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaEscola.Entities.Turma", "Turma")
+                        .WithMany("TurmaDisciplinas")
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.TurmaProfessor", b =>
+                {
+                    b.HasOne("SistemaEscola.Entities.Professor", "Professor")
+                        .WithMany("TurmaProfessores")
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaEscola.Entities.Turma", "Turma")
+                        .WithMany("TurmaProfessores")
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

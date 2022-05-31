@@ -29,41 +29,19 @@ namespace SistemaEscola.Controllers
 
         public List<Disciplina> FindAll()
         {
-            return _context.Disciplinas.ToList();
-        }
-
-        public void Delete(int Id)
-        {
-            Disciplina disciplina = FindById(Id);
-
-            if (disciplina != null) 
-            {
-                _context.Disciplinas.Remove(disciplina);
-            }
-            
-        }
-
-        public void Update(FormularioDisciplina form)
-        {
-            Disciplina disciplina = FindById(form.Id);
-
-            if (disciplina != null) {
-
-                _context.Disciplinas.Remove(disciplina);
-                _context.Disciplinas.Add(new Disciplina(form.Nome));
-            }
+            return _context.Disciplinas.OrderBy(d => d.Nome).ToList();
         }
 
         public Disciplina FindById(int id)
         {
-            var disciplina = _context.Disciplinas.Where(d => d.Id == id);
+            var disciplina = _context.Disciplinas.Find(id);
 
-            if (!disciplina.Any())
+            if (disciplina == null)
             {
                 return null;
             }
 
-            return disciplina.First();
+            return disciplina;
         }
 
         public Disciplina FindByName(string name)
@@ -76,6 +54,29 @@ namespace SistemaEscola.Controllers
             }
 
             return disciplina.First();
+        }
+
+        public void Delete(int id)
+        {
+            Disciplina disciplina = FindById(id);
+
+            if (disciplina != null) 
+            {
+                _context.Disciplinas.Remove(disciplina);
+            }
+
+            _context.SaveChanges();
+        }
+
+        public void Update(FormularioDisciplina form)
+        {
+            Disciplina disciplina = FindById(form.Id);
+
+            if (disciplina != null) {
+
+                _context.Disciplinas.Remove(disciplina);
+                _context.Disciplinas.Add(new Disciplina(form.Nome));
+            }
         }
     }
 }
