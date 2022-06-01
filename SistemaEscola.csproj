@@ -403,6 +403,12 @@
     <Compile Include="Boundaries\Turma\RemoverTurma.Designer.cs">
       <DependentUpon>RemoverTurma.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Selections\SelectAluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Selections\SelectAluno.Designer.cs">
+      <DependentUpon>SelectAluno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\TextBoxTools.cs" />
     <Compile Include="Validations\CpfAttribute.cs" />
     <Compile Include="Validations\DateAttribute.cs" />
@@ -490,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Turma\RemoverTurma.resx">
       <DependentUpon>RemoverTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Selections\SelectAluno.resx">
+      <DependentUpon>SelectAluno.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

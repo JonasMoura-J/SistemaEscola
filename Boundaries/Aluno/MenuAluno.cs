@@ -30,7 +30,7 @@ namespace SistemaEscola
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            
+            _mainForm.OpenNewForm(new SelectAluno(_mainForm), sender);
         }
     }
 }

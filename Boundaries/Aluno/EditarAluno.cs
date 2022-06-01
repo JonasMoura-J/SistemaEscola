@@ -2,21 +2,21 @@
 using SistemaEscola.Entities.Formularios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaEscola.Parsers;
 using SistemaEscola.Utils;
+using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola
 {
     public partial class EditarAluno : Form
     {
         Home _mainForm;
+        bool _returnPrevious;
 
         ControladorAluno controladorAluno = new ControladorAluno();
         ControladorTurma controladorTurma = new ControladorTurma();
@@ -35,14 +35,14 @@ namespace SistemaEscola
         List<FormularioTurma> turmas = new List<FormularioTurma>();
         List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
-        public List<FormularioDisciplina> selectedDisciplinas = new List<FormularioDisciplina>();
-        public List<string> nameSelectedDisciplinas = new List<string>();
+        public List<string> selectedDisciplinas = new List<string>();
 
-        public EditarAluno(Home mainForm, FormularioAluno form)
+        public EditarAluno(Home mainForm, FormularioAluno form, bool returnPrevious = false)
         {
             InitializeComponent();
             _mainForm = mainForm;
             aluno = form;
+            _returnPrevious = returnPrevious;
         }
 
         private void EditarAluno_Load(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace SistemaEscola
 
             var alunoDisciplinas = controladorAluno.FindAllAlunoFaltaDisciplinaByAluno(aluno.Id);
 
-            if (alunoDisciplinas.Count > 0)
+            if (alunoDisciplinas.Any())
             {
                 foreach (var disc in disciplinas)
                 {
@@ -101,15 +101,14 @@ namespace SistemaEscola
                     {
                         if (disc.Id == aluDisc.DisciplinaId)
                         {
-                            selectedDisciplinas.Add(disc);
-                            nameSelectedDisciplinas.Add(disc.Nome);
+                            selectedDisciplinas.Add(disc.Nome);
                         }
                     }
                 } 
 
                 foreach (var disc in selectedDisciplinas)
                 {
-                    var panel = new NamePanel(disc.Nome, disciplinasFlwLayPnl);
+                    var panel = new NamePanel(disc, disciplinasFlwLayPnl);
 
                     disciplinasPanels.Add(panel);
                     disciplinasFlwLayPnl.Controls.Add(panel);
@@ -232,13 +231,109 @@ namespace SistemaEscola
 
         private void concluirBtn_Click(object sender, EventArgs e)
         {
+            // Check if any obligatory fields are empty
+            if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+            {
+                if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+                {
+                    // Check if at least 1 optional field is filled
+                    if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black))
+                    {
+                        if (optionalTextBoxes.Any(t => t.ForeColor == Color.Black))
+                        {
+                            // Removes placeholder from optional fields
+                            optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                                ToList().ForEach(t => t.Text = string.Empty);
 
+                            optionalTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                                ToList().ForEach(t => t.Text = string.Empty);
+
+                            // Converts date to correct format (for dealing with errors)
+                            DateTime dateResult;
+                            DateTime dataNascConverted;
+
+                            if (!DateTime.TryParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"),
+                                DateTimeStyles.None, out dateResult))
+                            {
+                                dataNascConverted = DateTime.MinValue;
+                            }
+                            else
+                            {
+                                dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                            }
+
+                            // Creates form to be sent to controller
+                            var form = new FormularioAluno
+                            {
+                                Id = aluno.Id,
+                                Nome = nomeTxtBox.Text.ToUpper(),
+                                Cpf = cpfTxtBox.Text,
+                                Rg = rgTxtBox.Text.ToUpper(),
+                                DataNascimento = dataNascConverted,
+                                TelefoneResidencial = telResTxtBox.Text,
+                                TelefoneCelular = telCelTxtBox.Text,
+                                Email = emailTxtBox.Text.ToUpper(),
+                                NomePai = paiTxtBox.Text.ToUpper(),
+                                NomeMae = maeTxtBox.Text.ToUpper(),
+                                NomeResponsavel = respTxtBox.Text.ToUpper(),
+                                Matricula = matriculaTxtBox.Text.ToUpper(),
+                                TurmaId = turmas.Where(t =>
+                                    t.Nome == turmaComboBox.SelectedItem.ToString()).First().Id,
+                                FormularioDisciplinas = disciplinas.Where(d =>
+                                    selectedDisciplinas.Any(sd => sd == d.Nome)).ToList()
+                            };
+
+                            // Validates form
+                            ValidationContext validContext = new ValidationContext(form, null, null);
+                            List<ValidationResult> errors = new List<ValidationResult>();
+
+                            if (!Validator.TryValidateObject(form, validContext, errors, true))
+                            {
+                                foreach (ValidationResult result in errors)
+                                {
+                                    // Returns placeholders to their text boxes
+                                    ResetPlaceHolders();
+
+                                    MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    // Sends validated form to the controller
+                                    controladorAluno.Update(form);
+
+                                    if (_returnPrevious)
+                                    {
+                                        // Returns to previous form
+                                        _mainForm.OpenPreviousForm(sender);
+                                    } else
+                                    {
+                                        // Returns to MenuAluno
+                                        _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+                                    }
+                                    
+                                }
+                                catch (Exception error)
+                                {
+                                    ResetPlaceHolders();
+                                    MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    //throw error.InnerException;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void addDisciplinaBtn_Click(object sender, EventArgs e)
         {
             ControlFlowLayoutPanel(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
-                disciplinas.Select(d => d.Nome).ToList(), nameSelectedDisciplinas);
+                disciplinas.Select(d => d.Nome).ToList(), selectedDisciplinas);
         }
 
         private void ControlFlowLayoutPanel(FlowLayoutPanel flwLayPnl, List<NamePanel> panels,
@@ -272,6 +367,17 @@ namespace SistemaEscola
                 lengths.Add(panel.Width);
                 panel.AutoSize = false;
                 panels.ForEach(p => p.Width = lengths.Max());
+            }
+        }
+
+        private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            // Reset selectedItems list to match FlowLayout
+            selectedDisciplinas.Clear();
+
+            foreach (NamePanel control in disciplinasFlwLayPnl.Controls)
+            {
+                selectedDisciplinas.Add(control.lb.Text);
             }
         }
 

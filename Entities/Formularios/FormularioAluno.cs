@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Validations;
 
@@ -31,5 +32,6 @@ namespace SistemaEscola.Entities.Formularios
         [Required, Display(Name = "Matrícula")]
         public string Matricula { get; set; }
         public int? TurmaId { get; set; }
+        public List<FormularioDisciplina> FormularioDisciplinas = new List<FormularioDisciplina>();
     }
 }

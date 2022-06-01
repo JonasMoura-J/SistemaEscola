@@ -94,7 +94,7 @@ namespace SistemaEscola
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            // Check is any obligatory fields are empty
+            // Check if any obligatory fields are empty
             if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
                 if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))

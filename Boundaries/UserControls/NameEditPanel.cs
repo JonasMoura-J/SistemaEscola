@@ -59,7 +59,7 @@ namespace SistemaEscola
             
             if (_entity is FormularioAluno)
             {
-                newForm = new EditarAluno(_mainForm, (FormularioAluno)_entity);
+                newForm = new EditarAluno(_mainForm, (FormularioAluno)_entity, true);
             }
             else if (_entity is FormularioProfessor)
             {

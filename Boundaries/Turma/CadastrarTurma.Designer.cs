@@ -118,6 +118,7 @@ namespace SistemaEscola
             this.alunosFlwLayPnl.Name = "alunosFlwLayPnl";
             this.alunosFlwLayPnl.Size = new System.Drawing.Size(273, 183);
             this.alunosFlwLayPnl.TabIndex = 118;
+            this.alunosFlwLayPnl.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.alunosFlwLayPnl_ControlRemoved);
             // 
             // alunosLb
             // 
@@ -156,6 +157,7 @@ namespace SistemaEscola
             this.disciplinasFlwLayPnl.Name = "disciplinasFlwLayPnl";
             this.disciplinasFlwLayPnl.Size = new System.Drawing.Size(273, 183);
             this.disciplinasFlwLayPnl.TabIndex = 124;
+            this.disciplinasFlwLayPnl.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.disciplinasFlwLayPnl_ControlRemoved);
             // 
             // addDisciplinaBtn
             // 

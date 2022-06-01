@@ -397,6 +397,7 @@ namespace SistemaEscola
             this.disciplinasFlwLayPnl.Name = "disciplinasFlwLayPnl";
             this.disciplinasFlwLayPnl.Size = new System.Drawing.Size(273, 323);
             this.disciplinasFlwLayPnl.TabIndex = 141;
+            this.disciplinasFlwLayPnl.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.disciplinasFlwLayPnl_ControlRemoved);
             // 
             // backPanel
             // 

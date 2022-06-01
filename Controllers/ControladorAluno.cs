@@ -23,7 +23,7 @@ namespace SistemaEscola.Controllers
             }
 
             // Adds new Aluno in Db
-            var aluno = new Aluno(form.Nome, CpfParse.ToNumber(form.Cpf), RgParse.ToNumber(form.Rg),
+            var aluno = new Aluno(form.Nome, CpfParse.ToNumber(form.Cpf), form.Rg,
                 form.DataNascimento, PhoneNumberParse.ToNumber(form.TelefoneResidencial),
                 PhoneNumberParse.ToNumber(form.TelefoneCelular),
                 form.Email, form.Matricula, form.NomePai, form.NomeMae, form.NomeResponsavel);
@@ -62,6 +62,49 @@ namespace SistemaEscola.Controllers
             return aluno.First();
         }
 
+        public void Update(FormularioAluno form)
+        {
+            Aluno aluno = FindById(form.Id);
+
+            if (aluno != null)
+            {
+                // Updates Aluno
+                aluno.Nome = form.Nome;
+                aluno.Cpf = CpfParse.ToNumber(form.Cpf);
+                aluno.Rg = form.Rg;
+                aluno.DataNascimento = form.DataNascimento;
+                aluno.TelefoneResidencial = PhoneNumberParse.ToNumber(form.TelefoneResidencial);
+                aluno.TelefoneCelular = PhoneNumberParse.ToNumber(form.TelefoneCelular);
+                aluno.Email = form.Email;
+                aluno.NomePai = form.NomePai;
+                aluno.NomeMae = form.NomeMae;
+                aluno.NomeResponsavel = form.NomeResponsavel;
+                aluno.Matricula = form.Matricula;
+                aluno.TurmaId = form.TurmaId;
+
+                // Updates disciplinas
+                var alunoFaltaDisciplinas = FindAllAlunoFaltaDisciplinaByAluno(aluno.Id);
+
+                foreach (var fd in form.FormularioDisciplinas)
+                {
+                    if (!alunoFaltaDisciplinas.Any(afd => afd.DisciplinaId == fd.Id))
+                    {
+                        AddFaltaDisciplina(aluno.Id, fd.Id, true);
+                    }
+                }
+
+                foreach (var afd in alunoFaltaDisciplinas)
+                {
+                    if (!form.FormularioDisciplinas.Any(fd => fd.Id == afd.DisciplinaId))
+                    {
+                        RemoveFaltaDisciplina(afd.AlunoId, afd.DisciplinaId, true);
+                    }
+                }
+
+                _context.SaveChanges();
+            }
+        }
+
         public void Delete(int id)
         {
             Aluno aluno = FindById(id);
@@ -71,32 +114,6 @@ namespace SistemaEscola.Controllers
             }
 
             _context.SaveChanges();
-        }
-
-        public void Update(FormularioAluno form)
-        {
-            /*
-            Aluno aluno = FindById(form.Id);
-
-            if (aluno != null) {
-
-                aluno.UpdateTurma(form.t)
-
-                _context.Alunos.Update(aluno);
-                _context.SaveChanges();
-            }
-            */
-        }
-
-        public void Update(Aluno aluno)
-        {
-            if (aluno != null)
-            {
-                var a = FindById(aluno.Id);
-                
-                _context.Alunos.Update(a);
-                _context.SaveChanges();
-            }
         }
 
         public void AddFaltaDisciplina(int alunoId, int disciplinaId, bool isBugged = false)
@@ -109,6 +126,21 @@ namespace SistemaEscola.Controllers
                     AlunoId = alunoId,
                     DisciplinaId = disciplinaId,
                 });
+
+                if (!isBugged)
+                {
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        public void RemoveFaltaDisciplina(int alunoId, int disciplinaId, bool isBugged = false)
+        {
+            var afd = _context.AlunoFaltaDisciplinas.Find(alunoId, disciplinaId);
+
+            if (afd != null)
+            {
+                _context.AlunoFaltaDisciplinas.Remove(afd);
 
                 if (!isBugged)
                 {

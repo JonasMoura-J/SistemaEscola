@@ -195,5 +195,27 @@ namespace SistemaEscola
                 panels.ForEach(p => p.Width = lengths.Max());
             }
         }
+
+        private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            // Reset selectedItems list to match FlowLayout
+            selectedDisciplinas.Clear();
+
+            foreach (NamePanel control in disciplinasFlwLayPnl.Controls)
+            {
+                selectedDisciplinas.Add(control.lb.Text);
+            }
+        }
+
+        private void alunosFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            // Reset selectedItems list to match FlowLayout
+            selectedAlunos.Clear();
+
+            foreach (NamePanel control in alunosFlwLayPnl.Controls)
+            {
+                selectedAlunos.Add(control.lb.Text);
+            }
+        }
     }
 }
