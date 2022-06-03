@@ -56,10 +56,12 @@ namespace SistemaEscola
             this.turmaComboBox = new System.Windows.Forms.ComboBox();
             this.turmaLb = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.addDisciplinaBtn = new FontAwesome.Sharp.IconButton();
             this.disciplinasLb = new System.Windows.Forms.Label();
             this.disciplinasFlwLayPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.backPanel = new System.Windows.Forms.Panel();
+            this.addDisciplinaBtn = new FontAwesome.Sharp.IconButton();
+            this.removeBtn = new System.Windows.Forms.Button();
+            this.backPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // telCelTxtBox
@@ -362,24 +364,6 @@ namespace SistemaEscola
             this.panel12.Size = new System.Drawing.Size(277, 34);
             this.panel12.TabIndex = 140;
             // 
-            // addDisciplinaBtn
-            // 
-            this.addDisciplinaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
-            this.addDisciplinaBtn.FlatAppearance.BorderSize = 0;
-            this.addDisciplinaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addDisciplinaBtn.ForeColor = System.Drawing.Color.White;
-            this.addDisciplinaBtn.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.addDisciplinaBtn.IconColor = System.Drawing.Color.White;
-            this.addDisciplinaBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.addDisciplinaBtn.IconSize = 40;
-            this.addDisciplinaBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.addDisciplinaBtn.Location = new System.Drawing.Point(1061, 30);
-            this.addDisciplinaBtn.Name = "addDisciplinaBtn";
-            this.addDisciplinaBtn.Size = new System.Drawing.Size(48, 44);
-            this.addDisciplinaBtn.TabIndex = 142;
-            this.addDisciplinaBtn.UseVisualStyleBackColor = false;
-            this.addDisciplinaBtn.Click += new System.EventHandler(this.addDisciplinaBtn_Click);
-            // 
             // disciplinasLb
             // 
             this.disciplinasLb.AutoSize = true;
@@ -402,11 +386,45 @@ namespace SistemaEscola
             // backPanel
             // 
             this.backPanel.BackColor = System.Drawing.Color.White;
+            this.backPanel.Controls.Add(this.removeBtn);
             this.backPanel.Location = new System.Drawing.Point(0, 0);
             this.backPanel.Name = "backPanel";
             this.backPanel.Size = new System.Drawing.Size(1201, 670);
             this.backPanel.TabIndex = 144;
             this.backPanel.Click += new System.EventHandler(this.backPanel_Click);
+            // 
+            // addDisciplinaBtn
+            // 
+            this.addDisciplinaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
+            this.addDisciplinaBtn.FlatAppearance.BorderSize = 0;
+            this.addDisciplinaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addDisciplinaBtn.ForeColor = System.Drawing.Color.White;
+            this.addDisciplinaBtn.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.addDisciplinaBtn.IconColor = System.Drawing.Color.White;
+            this.addDisciplinaBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.addDisciplinaBtn.IconSize = 40;
+            this.addDisciplinaBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.addDisciplinaBtn.Location = new System.Drawing.Point(1061, 30);
+            this.addDisciplinaBtn.Name = "addDisciplinaBtn";
+            this.addDisciplinaBtn.Size = new System.Drawing.Size(48, 44);
+            this.addDisciplinaBtn.TabIndex = 142;
+            this.addDisciplinaBtn.UseVisualStyleBackColor = false;
+            this.addDisciplinaBtn.Click += new System.EventHandler(this.addDisciplinaBtn_Click);
+            // 
+            // removeBtn
+            // 
+            this.removeBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.removeBtn.FlatAppearance.BorderSize = 0;
+            this.removeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeBtn.ForeColor = System.Drawing.Color.White;
+            this.removeBtn.Location = new System.Drawing.Point(962, 512);
+            this.removeBtn.Name = "removeBtn";
+            this.removeBtn.Size = new System.Drawing.Size(142, 54);
+            this.removeBtn.TabIndex = 120;
+            this.removeBtn.Text = "Remover";
+            this.removeBtn.UseVisualStyleBackColor = false;
+            this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
             // EditarAluno
             // 
@@ -448,6 +466,7 @@ namespace SistemaEscola
             this.Name = "EditarAluno";
             this.Text = "EditarAluno";
             this.Load += new System.EventHandler(this.EditarAluno_Load);
+            this.backPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,5 +505,6 @@ namespace SistemaEscola
         private System.Windows.Forms.Label disciplinasLb;
         private System.Windows.Forms.FlowLayoutPanel disciplinasFlwLayPnl;
         private System.Windows.Forms.Panel backPanel;
+        private System.Windows.Forms.Button removeBtn;
     }
 }

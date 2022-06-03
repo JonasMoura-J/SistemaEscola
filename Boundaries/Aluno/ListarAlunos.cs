@@ -1,8 +1,9 @@
 ﻿using SistemaEscola.Controllers;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SistemaEscola
@@ -15,7 +16,7 @@ namespace SistemaEscola
 
         List<FormularioAluno> alunos = new List<FormularioAluno>();
 
-        List<NameEditPanel> alunosPanels = new List<NameEditPanel>();
+        List<NameEditListPanel> alunosPanels = new List<NameEditListPanel>();
         List<int> alunosPanelLengths = new List<int>();
 
         public ListarAlunos(Home mainForm)
@@ -40,20 +41,33 @@ namespace SistemaEscola
 
             foreach (var aluno in alunos)
             {
-                var panel = new NameEditPanel(_mainForm, aluno, alunosFlwLayPnl);
-
-                alunosPanels.Add(panel);
-                alunosFlwLayPnl.Controls.Add(panel);
-
-                alunosPanelLengths.Add(panel.Width);
-                panel.AutoSize = false;
-                alunosPanels.ForEach(p => p.Width = alunosPanelLengths.Max());
+                FlowLayoutPanelTools.LoadNameEditListPanel(_mainForm, aluno, alunosFlwLayPnl,
+                    alunosPanels, alunosPanelLengths);
             }
         }
 
         private void concluirBtn_Click(object sender, EventArgs e)
         {
             _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+        }
+
+        private void searchTxtBox_Enter(object sender, EventArgs e)
+        {
+            TextBoxTools.Clear(searchTxtBox, "Buscar");
+        }
+
+        private void searchTxtBox_Leave(object sender, EventArgs e)
+        {
+            TextBoxTools.Fill(searchTxtBox, "Buscar");
+        }
+
+        private void searchTxtBox_TextChanged(object sender, EventArgs e)
+        {
+            if (searchTxtBox.Text != "Buscar")
+            {
+                TextBoxTools.FilterPanelList(searchTxtBox, alunosFlwLayPnl, _mainForm,
+                alunos, alunosPanels, alunosPanelLengths);
+            }
         }
     }
 }

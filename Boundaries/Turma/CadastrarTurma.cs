@@ -117,14 +117,24 @@ namespace SistemaEscola
 
         private void addAlunoBtn_Click(object sender, EventArgs e)
         {
-            ControlFlowLayoutPanel(alunosFlwLayPnl, alunosPanels, alunosPanelLengths,
+            FlowLayoutPanelTools.InsertItems(alunosFlwLayPnl, alunosPanels, alunosPanelLengths,
                 nomeAlunos, selectedAlunos);
         }
 
         private void addDisciplinaBtn_Click(object sender, EventArgs e)
         {
-            ControlFlowLayoutPanel(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
+            FlowLayoutPanelTools.InsertItems(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
                 nomeDisciplinas, selectedDisciplinas);
+        }
+
+        private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            FlowLayoutPanelTools.UpdateList(disciplinasFlwLayPnl, selectedDisciplinas);
+        }
+
+        private void alunosFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            FlowLayoutPanelTools.UpdateList(alunosFlwLayPnl, selectedAlunos);
         }
 
         private void nomeTxtBox_Enter(object sender, EventArgs e)
@@ -160,62 +170,6 @@ namespace SistemaEscola
         private void disciplinasLb_Click(object sender, EventArgs e)
         {
             disciplinasLb.Focus();
-        }
-
-        private void ControlFlowLayoutPanel(FlowLayoutPanel flwLayPnl, List<NamePanel> panels,
-            List<int> lengths, List<string> items, List<string> selectedItems)
-        {
-            // Reset selectedItems list to match FlowLayout
-            selectedItems.Clear();
-
-            foreach (NamePanel control in flwLayPnl.Controls)
-            {
-                selectedItems.Add(control.lb.Text);
-            }
-
-            // Open dialog
-            AddFromList form = new AddFromList(items, selectedItems);
-            form.ShowDialog();
-
-            // Receive updated list
-            selectedItems = form.ReturnCheckedItems();
-
-            // Reset FlowLayout based on updated list
-            flwLayPnl.Controls.Clear();
-
-            foreach (string item in selectedItems)
-            {
-                var panel = new NamePanel(item, flwLayPnl);
-
-                panels.Add(panel);
-                flwLayPnl.Controls.Add(panel);
-
-                lengths.Add(panel.Width);
-                panel.AutoSize = false;
-                panels.ForEach(p => p.Width = lengths.Max());
-            }
-        }
-
-        private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            // Reset selectedItems list to match FlowLayout
-            selectedDisciplinas.Clear();
-
-            foreach (NamePanel control in disciplinasFlwLayPnl.Controls)
-            {
-                selectedDisciplinas.Add(control.lb.Text);
-            }
-        }
-
-        private void alunosFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            // Reset selectedItems list to match FlowLayout
-            selectedAlunos.Clear();
-
-            foreach (NamePanel control in alunosFlwLayPnl.Controls)
-            {
-                selectedAlunos.Add(control.lb.Text);
-            }
         }
     }
 }

@@ -32,6 +32,8 @@ namespace SistemaEscola
             this.titleLb = new System.Windows.Forms.Label();
             this.concluirBtn = new System.Windows.Forms.Button();
             this.alunosFlwLayPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.searchTxtBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // titleLb
@@ -67,12 +69,36 @@ namespace SistemaEscola
             this.alunosFlwLayPnl.Size = new System.Drawing.Size(908, 387);
             this.alunosFlwLayPnl.TabIndex = 137;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(194)))));
+            this.panel1.Location = new System.Drawing.Point(666, 67);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(340, 2);
+            this.panel1.TabIndex = 141;
+            // 
+            // searchTxtBox
+            // 
+            this.searchTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
+            this.searchTxtBox.Location = new System.Drawing.Point(666, 39);
+            this.searchTxtBox.Name = "searchTxtBox";
+            this.searchTxtBox.Size = new System.Drawing.Size(342, 24);
+            this.searchTxtBox.TabIndex = 140;
+            this.searchTxtBox.Text = "Buscar";
+            this.searchTxtBox.TextChanged += new System.EventHandler(this.searchTxtBox_TextChanged);
+            this.searchTxtBox.Enter += new System.EventHandler(this.searchTxtBox_Enter);
+            this.searchTxtBox.Leave += new System.EventHandler(this.searchTxtBox_Leave);
+            // 
             // ListarAlunos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1116, 590);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.searchTxtBox);
             this.Controls.Add(this.titleLb);
             this.Controls.Add(this.concluirBtn);
             this.Controls.Add(this.alunosFlwLayPnl);
@@ -89,5 +115,7 @@ namespace SistemaEscola
         private System.Windows.Forms.Label titleLb;
         private System.Windows.Forms.Button concluirBtn;
         private System.Windows.Forms.FlowLayoutPanel alunosFlwLayPnl;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox searchTxtBox;
     }
 }

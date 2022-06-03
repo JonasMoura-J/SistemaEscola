@@ -5,15 +5,14 @@ using System.Windows.Forms;
 
 namespace SistemaEscola
 {
-    public partial class NameEditPanel : UserControl
+    public partial class NameEditListPanel : UserControl
     {
         Home _mainForm;
-        FlowLayoutPanel _panel;
         IFormulario _entity;
 
         public Label lb;
 
-        public NameEditPanel(Home mainForm, IFormulario entity, FlowLayoutPanel panel)
+        public NameEditListPanel(Home mainForm, IFormulario entity)
         {
             InitializeComponent();
             _mainForm = mainForm;
@@ -23,12 +22,12 @@ namespace SistemaEscola
             nameLb.MouseLeave += NameEditPanel_MouseLeave;
             editBtn.MouseEnter += NameEditPanel_MouseEnter;
             editBtn.MouseLeave += NameEditPanel_MouseLeave;
+            detailsBtn.MouseEnter += NameEditPanel_MouseEnter;
+            detailsBtn.MouseLeave += NameEditPanel_MouseLeave;
 
             _entity = entity;
 
             lb.Text = _entity.Nome;
-            
-            _panel = panel;
         }
 
         private void HighlightPanel()
@@ -76,6 +75,34 @@ namespace SistemaEscola
             else if (_entity is FormularioUsuario)
             {
                 //newForm = new EditarUsuario(_mainForm, (FormularioUsuario)_entity);
+            }
+
+            _mainForm.OpenNewForm(newForm, sender);
+        }
+
+        private void detailsBtn_Click(object sender, EventArgs e)
+        {
+            Form newForm = null;
+
+            if (_entity is FormularioAluno)
+            {
+                newForm = new MostrarAluno(_mainForm, (FormularioAluno)_entity, true);
+            }
+            else if (_entity is FormularioProfessor)
+            {
+                //newForm = new MostrarProfessor(_mainForm, (FormularioProfessor)_entity);
+            }
+            else if (_entity is FormularioDisciplina)
+            {
+                //newForm = new MostrarDisciplina(_mainForm, (FormularioDisciplina)_entity);
+            }
+            else if (_entity is FormularioTurma)
+            {
+                //newForm = new MostrarTurma(_mainForm, (FormularioTurma)_entity);
+            }
+            else if (_entity is FormularioUsuario)
+            {
+                //newForm = new MostrarUsuario(_mainForm, (FormularioUsuario)_entity);
             }
 
             _mainForm.OpenNewForm(newForm, sender);

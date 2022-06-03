@@ -10,7 +10,7 @@ namespace SistemaEscola
 
         public Label lb;
 
-        public NamePanel(string text, FlowLayoutPanel panel)
+        public NamePanel(string text, FlowLayoutPanel panel, bool readOnly = false)
         {
             InitializeComponent();
             lb = nameLb;
@@ -19,7 +19,12 @@ namespace SistemaEscola
             deleteBtn.MouseEnter += NamePanel_MouseEnter;
             deleteBtn.MouseLeave += NamePanel_MouseLeave;
             lb.Text = text;
-            _panel = panel; 
+            _panel = panel;
+            
+            if (readOnly)
+            {
+                deleteBtn.Visible = false;
+            }
         }
 
         private void HighlightPanel()

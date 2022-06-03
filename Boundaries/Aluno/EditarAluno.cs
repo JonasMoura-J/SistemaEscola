@@ -332,52 +332,35 @@ namespace SistemaEscola
 
         private void addDisciplinaBtn_Click(object sender, EventArgs e)
         {
-            ControlFlowLayoutPanel(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
+            FlowLayoutPanelTools.InsertItems(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
                 disciplinas.Select(d => d.Nome).ToList(), selectedDisciplinas);
-        }
-
-        private void ControlFlowLayoutPanel(FlowLayoutPanel flwLayPnl, List<NamePanel> panels,
-            List<int> lengths, List<string> items, List<string> selectedItems)
-        {
-            // Reset selectedItems list to match FlowLayout
-            selectedItems.Clear();
-
-            foreach (NamePanel control in flwLayPnl.Controls)
-            {
-                selectedItems.Add(control.lb.Text);
-            }
-
-            // Open dialog
-            AddFromList form = new AddFromList(items, selectedItems);
-            form.ShowDialog();
-
-            // Receive updated list
-            selectedItems = form.ReturnCheckedItems();
-
-            // Reset FlowLayout based on updated list
-            flwLayPnl.Controls.Clear();
-
-            foreach (string item in selectedItems)
-            {
-                var panel = new NamePanel(item, flwLayPnl);
-
-                panels.Add(panel);
-                flwLayPnl.Controls.Add(panel);
-
-                lengths.Add(panel.Width);
-                panel.AutoSize = false;
-                panels.ForEach(p => p.Width = lengths.Max());
-            }
         }
 
         private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
         {
-            // Reset selectedItems list to match FlowLayout
-            selectedDisciplinas.Clear();
+            FlowLayoutPanelTools.UpdateList(disciplinasFlwLayPnl, selectedDisciplinas);
+        }
 
-            foreach (NamePanel control in disciplinasFlwLayPnl.Controls)
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            var confirmScreen = new ConfirmDeletion("aluno");
+            confirmScreen.ShowDialog();
+
+            if (confirmScreen.Confirmation)
             {
-                selectedDisciplinas.Add(control.lb.Text);
+                controladorAluno.Delete(aluno.Id);
+
+                if (_returnPrevious)
+                {
+                    // Returns to previous form (always ListarAluno)
+                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+                    _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender, null);
+                }
+                else
+                {
+                    // Returns to MenuAluno
+                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+                }
             }
         }
 

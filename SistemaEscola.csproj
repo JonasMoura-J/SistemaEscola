@@ -356,11 +356,17 @@
       <DependentUpon>20220531061358_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
-    <Compile Include="Boundaries\UserControls\NameEditPanel.cs">
+    <Compile Include="Boundaries\UserControls\NameEditListPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Boundaries\UserControls\NameEditPanel.Designer.cs">
-      <DependentUpon>NameEditPanel.cs</DependentUpon>
+    <Compile Include="Boundaries\UserControls\NameEditListPanel.Designer.cs">
+      <DependentUpon>NameEditListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundaries\Aluno\MostrarAluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Aluno\MostrarAluno.Designer.cs">
+      <DependentUpon>MostrarAluno.cs</DependentUpon>
     </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
@@ -409,6 +415,7 @@
     <Compile Include="Boundaries\Selections\SelectAluno.Designer.cs">
       <DependentUpon>SelectAluno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\FlowLayoutPanelTools.cs" />
     <Compile Include="Utils\TextBoxTools.cs" />
     <Compile Include="Validations\CpfAttribute.cs" />
     <Compile Include="Validations\DateAttribute.cs" />
@@ -436,8 +443,8 @@
     <EmbeddedResource Include="Boundaries\TestForms\AlunoTestForm.resx">
       <DependentUpon>AlunoTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\UserControls\NameEditPanel.resx">
-      <DependentUpon>NameEditPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Boundaries\UserControls\NameEditListPanel.resx">
+      <DependentUpon>NameEditListPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\UserControls\NamePanel.resx">
       <DependentUpon>NamePanel.cs</DependentUpon>
@@ -477,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Dialog\ConfirmDeletion.resx">
       <DependentUpon>ConfirmDeletion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Aluno\MostrarAluno.resx">
+      <DependentUpon>MostrarAluno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -540,6 +550,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\edit icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\details icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
