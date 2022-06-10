@@ -12,7 +12,7 @@ namespace SistemaEscola
     {
         private readonly Home _mainForm;
 
-        private readonly ControladorAluno controladorAluno = new ControladorAluno();
+        private readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
 
         List<FormularioAluno> alunos = new List<FormularioAluno>();
 

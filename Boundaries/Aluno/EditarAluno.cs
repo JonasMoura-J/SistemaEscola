@@ -1,39 +1,39 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 using SistemaEscola.Parsers;
 using SistemaEscola.Utils;
-using System.Globalization;
-using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola
 {
     public partial class EditarAluno : Form
     {
-        Home _mainForm;
-        bool _returnPrevious;
-
-        ControladorAluno controladorAluno = new ControladorAluno();
-        ControladorTurma controladorTurma = new ControladorTurma();
-        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
-
-        List<NamePanel> disciplinasPanels = new List<NamePanel>();
-        List<int> disciplinasPanelLengths = new List<int>();
-
-        List<TextBox> textBoxes = new List<TextBox>();
-        List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
-        List<TextBox> optionalTextBoxes = new List<TextBox>();
-        List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
-
-        FormularioAluno aluno;
+        readonly Home _mainForm;
+        readonly bool _returnPrevious;
         
-        List<FormularioTurma> turmas = new List<FormularioTurma>();
-        List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
+        readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
+        
+        readonly List<NamePanel> disciplinasPanels = new List<NamePanel>();
+        readonly List<int> disciplinasPanelLengths = new List<int>();
+        
+        readonly List<TextBox> textBoxes = new List<TextBox>();
+        readonly List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
+        readonly List<TextBox> optionalTextBoxes = new List<TextBox>();
+        readonly List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
+
+        readonly FormularioAluno aluno;
+
+        readonly List<FormularioTurma> turmas = new List<FormularioTurma>();
+        readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
         public List<string> selectedDisciplinas = new List<string>();
 
@@ -307,8 +307,9 @@ namespace SistemaEscola
 
                                     if (_returnPrevious)
                                     {
-                                        // Returns to previous form
-                                        _mainForm.OpenPreviousForm(sender);
+                                        // Returns to previous form (always ListarAluno) (since could't fix error)
+                                        _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+                                        _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender, null);
                                     } else
                                     {
                                         // Returns to MenuAluno

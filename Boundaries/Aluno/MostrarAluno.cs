@@ -1,28 +1,28 @@
-﻿using SistemaEscola.Controllers;
+﻿using System;
+using System.Linq;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Collections.Generic;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 using SistemaEscola.Parsers;
 using SistemaEscola.Utils;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace SistemaEscola
 {
     public partial class MostrarAluno : Form
     {
-        private readonly Home _mainForm;
-        bool _returnPrevious;
+        readonly Home _mainForm;
+        readonly bool _returnPrevious;
 
-        ControladorAluno controladorAluno = new ControladorAluno();
-        ControladorTurma controladorTurma = new ControladorTurma();
-        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
+        readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
 
-        List<NamePanel> disciplinasPanels = new List<NamePanel>();
-        List<int> disciplinasPanelLengths = new List<int>();
+        readonly List<NamePanel> disciplinasPanels = new List<NamePanel>();
+        readonly List<int> disciplinasPanelLengths = new List<int>();
 
-        FormularioAluno aluno;
+        readonly FormularioAluno aluno;
 
         public MostrarAluno(Home mainForm, FormularioAluno form, bool returnPrevious = false)
         {
@@ -49,7 +49,8 @@ namespace SistemaEscola
             if (tempAluno.TelefoneResidencial != string.Empty)
             {
                 telResLb.Text = PhoneNumberParse.ToDigit(tempAluno.TelefoneResidencial);
-            } else
+            }
+            else
             {
                 telResLb.ForeColor = Color.LightSteelBlue;
             }
@@ -57,7 +58,8 @@ namespace SistemaEscola
             if (tempAluno.TelefoneCelular != string.Empty)
             {
                 telCelLb.Text = PhoneNumberParse.ToMobileDigit(tempAluno.TelefoneCelular);
-            } else
+            }
+            else
             {
                 telCelLb.ForeColor = Color.LightSteelBlue;
             }
@@ -65,7 +67,8 @@ namespace SistemaEscola
             if (tempAluno.NomePai != string.Empty)
             {
                 paiLb.Text = tempAluno.NomePai;
-            } else
+            }
+            else
             {
                 paiLb.ForeColor = Color.LightSteelBlue;
             }
@@ -73,7 +76,8 @@ namespace SistemaEscola
             if (tempAluno.NomeMae != string.Empty)
             {
                 maeLb.Text = tempAluno.NomeMae;
-            } else
+            }
+            else
             {
                 maeLb.ForeColor = Color.LightSteelBlue;
             }
@@ -81,7 +85,8 @@ namespace SistemaEscola
             if (tempAluno.NomeResponsavel != string.Empty)
             {
                 respLb.Text = tempAluno.NomeResponsavel;
-            } else
+            }
+            else
             {
                 respLb.ForeColor = Color.LightSteelBlue;
             }
@@ -92,7 +97,8 @@ namespace SistemaEscola
                 var turma = controladorTurma.FindById((int)tempAluno.TurmaId);
 
                 turmaLb.Text = turma.Nome;
-            } else
+            }
+            else
             {
                 turmaLb.ForeColor = Color.LightSteelBlue;
             }
@@ -117,10 +123,10 @@ namespace SistemaEscola
                         {
                             FlowLayoutPanelTools.LoadNamePanel(disc.Nome, disciplinasFlwLayPnl,
                                 disciplinasPanels, disciplinasPanelLengths, true);
-                         }
+                        }
                     }
                 }
-            }   
+            }
         }
 
         private void concluirBtn_Click(object sender, EventArgs e)

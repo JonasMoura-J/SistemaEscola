@@ -66,7 +66,7 @@ namespace SistemaEscola
             }
             else if (_entity is FormularioDisciplina)
             {
-                //newForm = new EditarDisciplina(_mainForm, (FormularioDisciplina)_entity);
+                newForm = new EditarDisciplina(_mainForm, (FormularioDisciplina)_entity, true);
             }
             else if (_entity is FormularioTurma)
             {
@@ -94,7 +94,7 @@ namespace SistemaEscola
             }
             else if (_entity is FormularioDisciplina)
             {
-                //newForm = new MostrarDisciplina(_mainForm, (FormularioDisciplina)_entity);
+                newForm = new MostrarDisciplina(_mainForm, (FormularioDisciplina)_entity, true);
             }
             else if (_entity is FormularioTurma)
             {

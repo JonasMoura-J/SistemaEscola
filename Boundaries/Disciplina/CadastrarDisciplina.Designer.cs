@@ -29,23 +29,12 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.nomeTxtBox = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.cadDisBackPanel = new System.Windows.Forms.Panel();
             this.cadDisBackPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(942, 557);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(150, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.Visible = false;
             // 
             // panel1
             // 
@@ -89,7 +78,6 @@ namespace SistemaEscola
             this.cadDisBackPanel.Controls.Add(this.panel1);
             this.cadDisBackPanel.Controls.Add(this.addBtn);
             this.cadDisBackPanel.Controls.Add(this.nomeTxtBox);
-            this.cadDisBackPanel.Controls.Add(this.comboBox1);
             this.cadDisBackPanel.Location = new System.Drawing.Point(0, 0);
             this.cadDisBackPanel.Name = "cadDisBackPanel";
             this.cadDisBackPanel.Size = new System.Drawing.Size(1143, 637);
@@ -106,7 +94,6 @@ namespace SistemaEscola
             this.Name = "CadastrarDisciplina";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CadastrarDisciplina";
-            this.Load += new System.EventHandler(this.CadastrarDisciplina_Load);
             this.cadDisBackPanel.ResumeLayout(false);
             this.cadDisBackPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -114,7 +101,6 @@ namespace SistemaEscola
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox nomeTxtBox;
         private System.Windows.Forms.Button addBtn;

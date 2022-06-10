@@ -1,23 +1,22 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using SistemaEscola.Utils;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
+using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {
     public partial class ListarAlunos : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        private readonly ControladorAluno controladorAluno = new ControladorAluno();
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
 
-        List<FormularioAluno> alunos = new List<FormularioAluno>();
+        readonly List<FormularioAluno> alunos = new List<FormularioAluno>();
 
-        List<NameEditListPanel> alunosPanels = new List<NameEditListPanel>();
-        List<int> alunosPanelLengths = new List<int>();
+        readonly List<NameEditListPanel> alunosPanels = new List<NameEditListPanel>();
+        readonly List<int> alunosPanelLengths = new List<int>();
 
         public ListarAlunos(Home mainForm)
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Controllers
 {
@@ -11,8 +12,10 @@ namespace SistemaEscola.Controllers
     {
         private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
-        private readonly ControladorAluno _controladorAluno = new ControladorAluno();
+        private readonly ControladorAluno _controladorAluno = ControladorAluno.Instance;
         private readonly ControladorDisciplina _controladorDisciplina = new ControladorDisciplina();
+
+        public static readonly ControladorTurma Instance = new ControladorTurma();
 
         public void Add(FormularioTurma form)
         {
@@ -98,6 +101,11 @@ namespace SistemaEscola.Controllers
                 _context.Turmas.Remove(turma);
                 //_context.Turmas.Add(new Turma(form.Id, form.Codigo, form.Nome, form.QuantidadeAlunos, ));
             }
-        }   
+        }
+
+        public List<TurmaDisciplina> FindAllTurmaDisciplinaByDisciplina(int disciplinaId)
+        {
+            return _context.TurmaDisciplinas.Where(td => td.DisciplinaId == disciplinaId).ToList();
+        }
     }
 }

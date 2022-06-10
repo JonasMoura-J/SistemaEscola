@@ -15,7 +15,7 @@ namespace SistemaEscola
         private readonly Home _mainForm;
         
         ControladorTurma controladorTurma = new ControladorTurma();
-        ControladorAluno controladorAluno = new ControladorAluno();
+        ControladorAluno controladorAluno = ControladorAluno.Instance;
         ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
         
         List<NamePanel> alunosPanels = new List<NamePanel>();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola.Entities.Formularios
 {
@@ -8,5 +9,7 @@ namespace SistemaEscola.Entities.Formularios
         [Required]
         [StringLength(100, MinimumLength = 2)]
         public string Nome { get; set; }
+        public List<FormularioProfessor> FormularioProfessores = new List<FormularioProfessor>();
+        public List<FormularioTurma> FormularioTurmas = new List<FormularioTurma>();
     }
 }

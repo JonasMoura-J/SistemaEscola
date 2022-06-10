@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace SistemaEscola
 {
     public partial class AddFromList : Form
     {
-        List<string> _items;
-        List<string> _checkedList = new List<string>();
+        readonly List<string> _items;
+        readonly List<string> _checkedList = new List<string>();
 
         public AddFromList(List<string> items, List<string> checkedList)
         {

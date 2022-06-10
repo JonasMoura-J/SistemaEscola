@@ -5,7 +5,7 @@ using SistemaEscola.Validations;
 
 namespace SistemaEscola.Entities.Formularios
 {
-    class FormularioProfessor : IFormulario
+    public class FormularioProfessor : IFormulario
     {
         public int Id { get; set; }
         [Required]

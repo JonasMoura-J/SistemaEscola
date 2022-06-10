@@ -1,20 +1,20 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 
 namespace SistemaEscola
 {
     public partial class RemoverAluno : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        ControladorAluno controladorAluno = new ControladorAluno();
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
 
-        List<FormularioAluno> alunos = new List<FormularioAluno>();
+        readonly List<FormularioAluno> alunos = new List<FormularioAluno>();
 
         public RemoverAluno(Home mainForm)
         {

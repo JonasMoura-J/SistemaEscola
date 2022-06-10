@@ -4,6 +4,7 @@ using System.Linq;
 using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Entities.JoinClasses;
 using SistemaEscola.Parsers;
 
 namespace SistemaEscola.Controllers
@@ -11,6 +12,8 @@ namespace SistemaEscola.Controllers
     class ControladorProfessor : IController<Professor>
     {
         private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+
+        public static readonly ControladorProfessor Instance = new ControladorProfessor();
 
         private readonly ControladorDisciplina _controladorDisciplina = new ControladorDisciplina();
         private readonly ControladorUsuario _controladorUsuario = new ControladorUsuario();
@@ -101,6 +104,11 @@ namespace SistemaEscola.Controllers
                 //_context.Professores.Add(new Professor(form.Id, form.Nome, form.Cpf,
                 //form.Rg, form.TelefoneResidencial, form.TelefoneCelular, form.Email));
             }
+        }
+
+        public List<ProfessorDisciplina> FindAllProfessorDisciplinaByDisciplina(int disciplinaId)
+        {
+            return _context.ProfessorDisciplinas.Where(pd => pd.DisciplinaId == disciplinaId).ToList();
         }
     }
 }

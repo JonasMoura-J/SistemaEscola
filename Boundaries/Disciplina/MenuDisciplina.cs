@@ -5,7 +5,7 @@ namespace SistemaEscola
 {
     public partial class MenuDisciplina : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
         public MenuDisciplina(Home mainForm)
         {
@@ -16,6 +16,16 @@ namespace SistemaEscola
         private void addBtn_Click(object sender, EventArgs e)
         {
             _mainForm.OpenNewForm(new CadastrarDisciplina(_mainForm), sender);
+        }
+
+        private void listButn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender);
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new SelectDisciplina(_mainForm), sender);
         }
 
         private void removeBtn_Click(object sender, EventArgs e)

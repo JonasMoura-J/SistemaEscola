@@ -29,26 +29,11 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.buscarBtn = new System.Windows.Forms.Button();
             this.listButn = new System.Windows.Forms.Button();
             this.removeBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // buscarBtn
-            // 
-            this.buscarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
-            this.buscarBtn.FlatAppearance.BorderSize = 0;
-            this.buscarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buscarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buscarBtn.ForeColor = System.Drawing.Color.White;
-            this.buscarBtn.Location = new System.Drawing.Point(599, 305);
-            this.buscarBtn.Name = "buscarBtn";
-            this.buscarBtn.Size = new System.Drawing.Size(218, 92);
-            this.buscarBtn.TabIndex = 17;
-            this.buscarBtn.Text = "Buscar";
-            this.buscarBtn.UseVisualStyleBackColor = false;
             // 
             // listButn
             // 
@@ -57,12 +42,13 @@ namespace SistemaEscola
             this.listButn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.listButn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listButn.ForeColor = System.Drawing.Color.White;
-            this.listButn.Location = new System.Drawing.Point(288, 305);
+            this.listButn.Location = new System.Drawing.Point(276, 316);
             this.listButn.Name = "listButn";
             this.listButn.Size = new System.Drawing.Size(218, 92);
             this.listButn.TabIndex = 16;
             this.listButn.Text = "Listar";
             this.listButn.UseVisualStyleBackColor = false;
+            this.listButn.Click += new System.EventHandler(this.listButn_Click);
             // 
             // removeBtn
             // 
@@ -71,7 +57,7 @@ namespace SistemaEscola
             this.removeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeBtn.ForeColor = System.Drawing.Color.White;
-            this.removeBtn.Location = new System.Drawing.Point(753, 157);
+            this.removeBtn.Location = new System.Drawing.Point(587, 316);
             this.removeBtn.Name = "removeBtn";
             this.removeBtn.Size = new System.Drawing.Size(218, 92);
             this.removeBtn.TabIndex = 15;
@@ -86,12 +72,13 @@ namespace SistemaEscola
             this.editBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editBtn.ForeColor = System.Drawing.Color.White;
-            this.editBtn.Location = new System.Drawing.Point(444, 157);
+            this.editBtn.Location = new System.Drawing.Point(587, 161);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(218, 92);
             this.editBtn.TabIndex = 14;
             this.editBtn.Text = "Editar";
             this.editBtn.UseVisualStyleBackColor = false;
+            this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
             // addBtn
             // 
@@ -100,7 +87,7 @@ namespace SistemaEscola
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.White;
-            this.addBtn.Location = new System.Drawing.Point(133, 157);
+            this.addBtn.Location = new System.Drawing.Point(276, 161);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(218, 92);
             this.addBtn.TabIndex = 13;
@@ -114,7 +101,6 @@ namespace SistemaEscola
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1116, 590);
-            this.Controls.Add(this.buscarBtn);
             this.Controls.Add(this.listButn);
             this.Controls.Add(this.removeBtn);
             this.Controls.Add(this.editBtn);
@@ -126,7 +112,6 @@ namespace SistemaEscola
         }
 
         #endregion
-        private System.Windows.Forms.Button buscarBtn;
         private System.Windows.Forms.Button listButn;
         private System.Windows.Forms.Button removeBtn;
         private System.Windows.Forms.Button editBtn;

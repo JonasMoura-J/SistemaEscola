@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
 using SistemaEscola.Utils;
@@ -12,20 +12,14 @@ namespace SistemaEscola
 {
     public partial class CadastrarDisciplina : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
 
         public CadastrarDisciplina(Home mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
-        }
-
-        // Provisoriamente
-        private void CadastrarDisciplina_Load(object sender, EventArgs e)
-        {
-            controladorDisciplina.FindAll().ForEach(d => comboBox1.Items.Add(d.Nome));
         }
 
         private void addBtn_Click(object sender, EventArgs e)

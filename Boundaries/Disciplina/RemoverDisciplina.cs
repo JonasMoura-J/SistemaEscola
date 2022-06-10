@@ -1,20 +1,20 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 
 namespace SistemaEscola
 {
     public partial class RemoverDisciplina : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
 
-        List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
+        readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
         public RemoverDisciplina(Home mainForm)
         {

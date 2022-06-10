@@ -224,12 +224,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Boundaries\TestForms\AlunoTestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Boundaries\TestForms\AlunoTestForm.Designer.cs">
-      <DependentUpon>AlunoTestForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Boundaries\Dialog\AddFromList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +280,12 @@
     </Compile>
     <Compile Include="Boundaries\Aluno\EditarAluno.Designer.cs">
       <DependentUpon>EditarAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundaries\Disciplina\EditarDisciplina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Disciplina\EditarDisciplina.Designer.cs">
+      <DependentUpon>EditarDisciplina.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Entities\Disciplina.cs" />
@@ -351,6 +351,12 @@
     <Compile Include="Boundaries\Aluno\ListarAlunos.Designer.cs">
       <DependentUpon>ListarAlunos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Disciplina\ListarDisciplinas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Disciplina\ListarDisciplinas.Designer.cs">
+      <DependentUpon>ListarDisciplinas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20220531061358_InitialMigration.cs" />
     <Compile Include="Migrations\20220531061358_InitialMigration.designer.cs">
       <DependentUpon>20220531061358_InitialMigration.cs</DependentUpon>
@@ -367,6 +373,12 @@
     </Compile>
     <Compile Include="Boundaries\Aluno\MostrarAluno.Designer.cs">
       <DependentUpon>MostrarAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boundaries\Disciplina\MostrarDisciplina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Disciplina\MostrarDisciplina.Designer.cs">
+      <DependentUpon>MostrarDisciplina.cs</DependentUpon>
     </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
@@ -415,6 +427,12 @@
     <Compile Include="Boundaries\Selections\SelectAluno.Designer.cs">
       <DependentUpon>SelectAluno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Selections\SelectDisciplina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Selections\SelectDisciplina.Designer.cs">
+      <DependentUpon>SelectDisciplina.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\FlowLayoutPanelTools.cs" />
     <Compile Include="Utils\TextBoxTools.cs" />
     <Compile Include="Validations\CpfAttribute.cs" />
@@ -434,14 +452,20 @@
     <EmbeddedResource Include="Boundaries\Dialog\AddFromList.resx">
       <DependentUpon>AddFromList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Disciplina\EditarDisciplina.resx">
+      <DependentUpon>EditarDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Disciplina\ListarDisciplinas.resx">
+      <DependentUpon>ListarDisciplinas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Disciplina\RemoverDisciplina.resx">
       <DependentUpon>RemoverDisciplina.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Professor\MenuProfessor.resx">
       <DependentUpon>MenuProfessor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boundaries\TestForms\AlunoTestForm.resx">
-      <DependentUpon>AlunoTestForm.cs</DependentUpon>
+    <EmbeddedResource Include="Boundaries\Selections\SelectDisciplina.resx">
+      <DependentUpon>SelectDisciplina.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\UserControls\NameEditListPanel.resx">
       <DependentUpon>NameEditListPanel.cs</DependentUpon>
@@ -487,6 +511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Aluno\MostrarAluno.resx">
       <DependentUpon>MostrarAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Disciplina\MostrarDisciplina.resx">
+      <DependentUpon>MostrarDisciplina.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

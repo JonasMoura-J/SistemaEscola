@@ -5,7 +5,7 @@ namespace SistemaEscola
 {
     public partial class MenuAluno : Form
     {
-        private readonly Home _mainForm;        
+        readonly Home _mainForm;        
 
         public MenuAluno(Home mainForm)
         {
@@ -23,14 +23,14 @@ namespace SistemaEscola
             _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender);
         }
 
-        private void removeBtn_Click(object sender, EventArgs e)
-        {
-            _mainForm.OpenNewForm(new RemoverAluno(_mainForm), sender);
-        }
-
         private void editBtn_Click(object sender, EventArgs e)
         {
             _mainForm.OpenNewForm(new SelectAluno(_mainForm), sender);
+        }
+
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new RemoverAluno(_mainForm), sender);
         }
     }
 }

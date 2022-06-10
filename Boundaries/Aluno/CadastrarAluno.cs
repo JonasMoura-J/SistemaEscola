@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
@@ -14,14 +14,14 @@ namespace SistemaEscola
 {
     public partial class CadastrarAluno : Form
     {
-        private readonly Home _mainForm;
-
-        ControladorAluno controladorAluno = new ControladorAluno();
-
-        List<TextBox> textBoxes = new List<TextBox>();
-        List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
-        List<TextBox> optionalTextBoxes = new List<TextBox>();
-        List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
+        readonly Home _mainForm;
+        
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
+        
+        readonly List<TextBox> textBoxes = new List<TextBox>();
+        readonly List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
+        readonly List<TextBox> optionalTextBoxes = new List<TextBox>();
+        readonly List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
 
         public CadastrarAluno(Home mainForm)
         {

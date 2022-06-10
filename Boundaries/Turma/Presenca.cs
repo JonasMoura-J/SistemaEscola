@@ -11,13 +11,15 @@ using System.Windows.Forms;
 
 namespace SistemaEscola
 {
+    // FIX LATER (WORKS WITH LIST, BUT NOT DB)
+
     public partial class Presenca : Form
     {
         private readonly Home _mainForm;
 
         private readonly ControladorTurma controladorTurma = new ControladorTurma();
         private readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
-        private readonly ControladorAluno controladorAluno = new ControladorAluno();
+        private readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
 
         string _nomeTurma;
         string _nomeDisciplina;

@@ -4,12 +4,15 @@ using System.Linq;
 using SistemaEscola.Data;
 using SistemaEscola.Entities;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Controllers
 {
     class ControladorDisciplina : IController<Disciplina>
     {
         private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+
+        public static readonly ControladorDisciplina Instance = new ControladorDisciplina();
 
         public void Add(FormularioDisciplina form)
         {
@@ -56,6 +59,57 @@ namespace SistemaEscola.Controllers
             return disciplina.First();
         }
 
+        public void Update(FormularioDisciplina form)
+        {
+            Disciplina disciplina = FindById(form.Id);
+
+            if (disciplina != null)
+            {
+                // Updates Disciplina
+                disciplina.Nome = form.Nome;
+
+                // Updates professores
+                var professorDisciplinas = FindAllProfessorDisciplinaByDisciplina(disciplina.Id);
+
+                foreach (var fp in form.FormularioProfessores)
+                {
+                    if (!professorDisciplinas.Any(pd => pd.ProfessorId == fp.Id))
+                    {
+                        AddProfessorDisciplina(fp.Id, disciplina.Id, true);
+                    }
+                }
+
+                foreach (var pd in professorDisciplinas)
+                {
+                    if (!form.FormularioProfessores.Any(fp => fp.Id == pd.ProfessorId))
+                    {
+                        RemoveProfessorDisciplina(pd.ProfessorId, pd.DisciplinaId, true);
+                    }
+                }
+
+                // Updates turmas
+                var turmaDisciplinas = FindAllTurmaDisciplinaByDisciplina(disciplina.Id);
+
+                foreach (var ft in form.FormularioTurmas)
+                {
+                    if (!turmaDisciplinas.Any(td => td.TurmaId == ft.Id))
+                    {
+                        AddTurmaDisciplina(ft.Id, disciplina.Id, true);
+                    }
+                }
+
+                foreach (var td in turmaDisciplinas)
+                {
+                    if (!form.FormularioTurmas.Any(ft => ft.Id == td.TurmaId))
+                    {
+                        RemoveTurmaDisciplina(td.TurmaId, td.DisciplinaId, true);
+                    }
+                }
+
+                _context.SaveChanges();
+            }
+        }
+
         public void Delete(int id)
         {
             Disciplina disciplina = FindById(id);
@@ -68,15 +122,80 @@ namespace SistemaEscola.Controllers
             _context.SaveChanges();
         }
 
-        public void Update(FormularioDisciplina form)
+        public void AddProfessorDisciplina(int professorId, int disciplinaId, bool isBugged = false)
         {
-            Disciplina disciplina = FindById(form.Id);
+            if (!_context.ProfessorDisciplinas.Any(pd => pd.ProfessorId == professorId &&
+            pd.DisciplinaId == disciplinaId))
+            {
+                _context.ProfessorDisciplinas.Add(new ProfessorDisciplina()
+                {
+                    ProfessorId = professorId,
+                    DisciplinaId = disciplinaId,
+                });
 
-            if (disciplina != null) {
-
-                _context.Disciplinas.Remove(disciplina);
-                _context.Disciplinas.Add(new Disciplina(form.Nome));
+                if (!isBugged)
+                {
+                    _context.SaveChanges();
+                }
             }
+        }
+
+        public void RemoveProfessorDisciplina(int professorId, int disciplinaId, bool isBugged = false)
+        {
+            var pd = _context.ProfessorDisciplinas.Find(professorId, disciplinaId);
+
+            if (pd != null)
+            {
+                _context.ProfessorDisciplinas.Remove(pd);
+
+                if (!isBugged)
+                {
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        public List<ProfessorDisciplina> FindAllProfessorDisciplinaByDisciplina(int disciplinaId)
+        {
+            return _context.ProfessorDisciplinas.Where(pd => pd.DisciplinaId == disciplinaId).ToList();
+        }
+
+        public void AddTurmaDisciplina(int turmaId, int disciplinaId, bool isBugged = false)
+        {
+            if (!_context.TurmaDisciplinas.Any(td => td.TurmaId == turmaId &&
+            td.DisciplinaId == disciplinaId))
+            {
+                _context.TurmaDisciplinas.Add(new TurmaDisciplina()
+                {
+                    TurmaId = turmaId,
+                    DisciplinaId = disciplinaId,
+                });
+
+                if (!isBugged)
+                {
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        public void RemoveTurmaDisciplina(int turmaId, int disciplinaId, bool isBugged = false)
+        {
+            var td = _context.TurmaDisciplinas.Find(turmaId, disciplinaId);
+
+            if (td != null)
+            {
+                _context.TurmaDisciplinas.Remove(td);
+
+                if (!isBugged)
+                {
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        public List<TurmaDisciplina> FindAllTurmaDisciplinaByDisciplina(int disciplinaId)
+        {
+            return _context.TurmaDisciplinas.Where(td => td.DisciplinaId == disciplinaId).ToList();
         }
     }
 }

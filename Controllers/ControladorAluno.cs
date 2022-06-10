@@ -13,6 +13,8 @@ namespace SistemaEscola.Controllers
     {
         private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
+        public static readonly ControladorAluno Instance = new ControladorAluno();
+
         public void Add(FormularioAluno form)
         {
             // Checks if Aluno already exists
