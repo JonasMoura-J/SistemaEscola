@@ -11,7 +11,6 @@ namespace SistemaEscola
     public partial class MostrarDisciplina : Form
     {
         readonly Home _mainForm;
-        readonly bool _returnPrevious;
 
         readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
         readonly ControladorProfessor controladorProfessor = ControladorProfessor.Instance;
@@ -22,14 +21,13 @@ namespace SistemaEscola
         readonly List<NamePanel> turmasPanels = new List<NamePanel>();
         readonly List<int> turmasPanelLengths = new List<int>();
 
-        readonly FormularioDisciplina disciplina;
+        readonly FormularioDisciplina disciplina = new FormularioDisciplina();
 
-        public MostrarDisciplina(Home mainForm, FormularioDisciplina form, bool returnPrevious = false)
+        public MostrarDisciplina(Home mainForm, int disciplinaId)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            disciplina = form;
-            _returnPrevious = returnPrevious;
+            disciplina.Id = disciplinaId;
         }
 
         private void MostrarDisciplina_Load(object sender, EventArgs e)
@@ -49,7 +47,7 @@ namespace SistemaEscola
             var professores = controladorProfessor.FindAll();
 
             var professorDisciplinas = controladorDisciplina
-                .FindAllProfessorDisciplinaByDisciplina(disciplina.Id);
+                .FindAllProfessorDisciplinasByDisciplina(disciplina.Id);
 
             if (professorDisciplinas.Any())
             {
@@ -75,7 +73,7 @@ namespace SistemaEscola
             var turmas = controladorTurma.FindAll();
 
             var turmaDisciplinas = controladorDisciplina
-                .FindAllTurmaDisciplinaByDisciplina(disciplina.Id);
+                .FindAllTurmaDisciplinasByDisciplina(disciplina.Id);
 
             if (turmaDisciplinas.Any())
             {
@@ -95,21 +93,13 @@ namespace SistemaEscola
 
         private void concluirBtn_Click(object sender, EventArgs e)
         {
-            if (_returnPrevious)
-            {
-                // Returns to previous form
-                _mainForm.OpenPreviousForm(sender);
-            }
-            else
-            {
-                // Returns to MenuDisciplina
-                _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
-            }
+            // Returns to ListarDisciplinas
+            _mainForm.OpenPreviousForm(sender);
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            _mainForm.OpenNewForm(new EditarDisciplina(_mainForm, disciplina, true), sender);
+            _mainForm.OpenNewForm(new EditarDisciplina(_mainForm, disciplina.Id, true), sender);
         }
     }
 }

@@ -29,7 +29,6 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.telCelTxtBox = new System.Windows.Forms.MaskedTextBox();
             this.telResTxtBox = new System.Windows.Forms.MaskedTextBox();
             this.emailTxtBox = new System.Windows.Forms.TextBox();
@@ -50,16 +49,6 @@ namespace SistemaEscola
             this.panel5 = new System.Windows.Forms.Panel();
             this.addDisciplinaBtn = new FontAwesome.Sharp.IconButton();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(905, 557);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(199, 21);
-            this.comboBox1.TabIndex = 25;
-            this.comboBox1.Visible = false;
             // 
             // telCelTxtBox
             // 
@@ -310,7 +299,6 @@ namespace SistemaEscola
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.nomeTxtBox);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.panel5);
             this.Name = "CadastrarProfessor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -322,7 +310,6 @@ namespace SistemaEscola
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.MaskedTextBox telCelTxtBox;
         private System.Windows.Forms.MaskedTextBox telResTxtBox;
         private System.Windows.Forms.TextBox emailTxtBox;

@@ -25,8 +25,8 @@ namespace SistemaEscola
 
         List<TextBox> textBoxes = new List<TextBox>();
 
-        List<string> nomeAlunos = new List<string>();
-        List<string> nomeDisciplinas = new List<string>();
+        List<FormularioAluno> alunos = new List<FormularioAluno>();
+        List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
         
         public List<string> selectedAlunos = new List<string>();
         public List<string> selectedDisciplinas = new List<string>();
@@ -63,10 +63,18 @@ namespace SistemaEscola
             disciplinasFlwLayPnl.WrapContents = false;
 
             // Busca alunos no DB
-            controladorAluno.FindAll().ForEach(a => nomeAlunos.Add(a.Nome));
+            controladorAluno.FindAll().ForEach(a => alunos.Add(new FormularioAluno()
+            {
+                Id = a.Id,
+                Nome = a.Nome
+            }));
 
             // Busca disciplinas no DB
-            controladorDisciplina.FindAll().ForEach(a => nomeDisciplinas.Add(a.Nome));
+            controladorDisciplina.FindAll().ForEach(d => disciplinas.Add(new FormularioDisciplina()
+            {
+                Id = d.Id,
+                Nome = d.Nome
+            }));
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -75,11 +83,12 @@ namespace SistemaEscola
             {
                 var form = new FormularioTurma
                 {
-                    Id = controladorTurma.FindAll().Count() + 1,
                     Nome = nomeTxtBox.Text.ToUpper(),
                     Codigo = codigoTxtBox.Text.ToUpper(),
-                    Disciplinas = selectedDisciplinas,
-                    Alunos = selectedAlunos,
+                    FormularioDisciplinas = disciplinas.Where(d =>
+                                selectedDisciplinas.Any(sd => sd == d.Nome)).ToList(),
+                    FormularioAlunos = alunos.Where(d =>
+                                selectedAlunos.Any(sd => sd == d.Nome)).ToList(),
                     QuantidadeAlunos = selectedAlunos.Count
                 };
 
@@ -118,13 +127,13 @@ namespace SistemaEscola
         private void addAlunoBtn_Click(object sender, EventArgs e)
         {
             FlowLayoutPanelTools.InsertItems(alunosFlwLayPnl, alunosPanels, alunosPanelLengths,
-                nomeAlunos, selectedAlunos);
+                alunos.Select(a => a.Nome).ToList(), selectedAlunos);
         }
 
         private void addDisciplinaBtn_Click(object sender, EventArgs e)
         {
             FlowLayoutPanelTools.InsertItems(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
-                nomeDisciplinas, selectedDisciplinas);
+                disciplinas.Select(d => d.Nome).ToList(), selectedDisciplinas);
         }
 
         private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)

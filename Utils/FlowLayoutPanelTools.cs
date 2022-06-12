@@ -1,7 +1,7 @@
-﻿using SistemaEscola.Entities.Formularios;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Utils
 {

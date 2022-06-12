@@ -1,14 +1,14 @@
-﻿using SistemaEscola.Entities.Formularios;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola
 {
     public partial class NameEditListPanel : UserControl
     {
-        Home _mainForm;
-        IFormulario _entity;
+        readonly Home _mainForm;
+        readonly IFormulario _entity;
 
         public Label lb;
 
@@ -58,15 +58,15 @@ namespace SistemaEscola
             
             if (_entity is FormularioAluno)
             {
-                newForm = new EditarAluno(_mainForm, (FormularioAluno)_entity, true);
+                newForm = new EditarAluno(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioProfessor)
             {
-                //newForm = new EditarProfessor(_mainForm, (FormularioProfessor)_entity);
+                newForm = new EditarProfessor(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioDisciplina)
             {
-                newForm = new EditarDisciplina(_mainForm, (FormularioDisciplina)_entity, true);
+                newForm = new EditarDisciplina(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioTurma)
             {
@@ -86,15 +86,15 @@ namespace SistemaEscola
 
             if (_entity is FormularioAluno)
             {
-                newForm = new MostrarAluno(_mainForm, (FormularioAluno)_entity, true);
+                newForm = new MostrarAluno(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioProfessor)
             {
-                //newForm = new MostrarProfessor(_mainForm, (FormularioProfessor)_entity);
+                newForm = new MostrarProfessor(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioDisciplina)
             {
-                newForm = new MostrarDisciplina(_mainForm, (FormularioDisciplina)_entity, true);
+                newForm = new MostrarDisciplina(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioTurma)
             {

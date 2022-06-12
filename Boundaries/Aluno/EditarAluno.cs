@@ -30,18 +30,18 @@ namespace SistemaEscola
         readonly List<TextBox> optionalTextBoxes = new List<TextBox>();
         readonly List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
 
-        readonly FormularioAluno aluno;
+        readonly FormularioAluno aluno = new FormularioAluno();
 
         readonly List<FormularioTurma> turmas = new List<FormularioTurma>();
         readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
-        public List<string> selectedDisciplinas = new List<string>();
+        readonly List<string> selectedDisciplinas = new List<string>();
 
-        public EditarAluno(Home mainForm, FormularioAluno form, bool returnPrevious = false)
+        public EditarAluno(Home mainForm, int alunoId, bool returnPrevious = false)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            aluno = form;
+            aluno.Id = alunoId;
             _returnPrevious = returnPrevious;
         }
 
@@ -50,6 +50,7 @@ namespace SistemaEscola
             // Set up Aluno
             var tempAluno = controladorAluno.FindById(aluno.Id);
 
+            aluno.Nome = tempAluno.Nome;
             aluno.Cpf = CpfParse.ToDigit(tempAluno.Cpf);
             aluno.Rg = tempAluno.Rg;
             aluno.DataNascimento = tempAluno.DataNascimento;
@@ -91,7 +92,7 @@ namespace SistemaEscola
                 Nome = d.Nome
             }));
 
-            var alunoDisciplinas = controladorAluno.FindAllAlunoFaltaDisciplinaByAluno(aluno.Id);
+            var alunoDisciplinas = controladorAluno.FindAllAlunoFaltaDisciplinasByAluno(aluno.Id);
 
             if (alunoDisciplinas.Any())
             {
@@ -149,8 +150,6 @@ namespace SistemaEscola
 
             cpfTxtBox.Mask = "000.000.000-00";
             dataNascTxtBox.Mask = "00/00/0000";
-            telResTxtBox.Mask = "(00) 0000-0000";
-            telCelTxtBox.Mask = "(00) 0 0000-0000";
 
             // Required
             nomeTxtBox.Text = aluno.Nome;
@@ -166,12 +165,14 @@ namespace SistemaEscola
             // Optional
             if (aluno.TelefoneResidencial != string.Empty)
             {
+                telResTxtBox.Mask = "(00) 0000-0000";
                 telResTxtBox.Text = aluno.TelefoneResidencial;
                 telResTxtBox.ForeColor = Color.Black;
             }
 
             if (aluno.TelefoneCelular != string.Empty)
             {
+                telCelTxtBox.Mask = "(00) 0 0000-0000";
                 telCelTxtBox.Text = aluno.TelefoneCelular;
                 telCelTxtBox.ForeColor = Color.Black;
             }
@@ -307,15 +308,18 @@ namespace SistemaEscola
 
                                     if (_returnPrevious)
                                     {
-                                        // Returns to previous form (always ListarAluno) (since could't fix error)
+                                        // Returns to MostrarAluno
+                                        _mainForm.OpenPreviousForm(sender);
+                                        _mainForm.OpenPreviousForm(sender);
+                                        _mainForm.OpenNewForm(new MostrarAluno(_mainForm, aluno.Id), sender, null);
+
+                                    }
+                                    else
+                                    {
+                                        // Returns to ListarAlunos
                                         _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
                                         _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender, null);
-                                    } else
-                                    {
-                                        // Returns to MenuAluno
-                                        _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
-                                    }
-                                    
+                                    }                                    
                                 }
                                 catch (Exception error)
                                 {
@@ -323,7 +327,6 @@ namespace SistemaEscola
                                     MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     //throw error.InnerException;
                                 }
-
                             }
                         }
                     }
@@ -351,17 +354,9 @@ namespace SistemaEscola
             {
                 controladorAluno.Delete(aluno.Id);
 
-                if (_returnPrevious)
-                {
-                    // Returns to previous form (always ListarAluno)
-                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
-                    _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender, null);
-                }
-                else
-                {
-                    // Returns to MenuAluno
-                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
-                }
+                // Returns to ListarAlunos
+                _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+                _mainForm.OpenNewForm(new ListarAlunos(_mainForm), sender, null);
             }
         }
 

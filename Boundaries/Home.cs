@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace SistemaEscola
 {
     public partial class Home : Form
     {
         private Form _currentForm;
-        private List<Form> _activeForms = new List<Form>();
-        private Button _currentBtn;
+        
+        readonly List<Form> _activeForms = new List<Form>();
 
         public Home()
         {
             InitializeComponent();
         }
-
 
         public void OpenNewForm(Form newForm, object btnSender, string title = null, bool reset = false)
         {          
@@ -126,17 +120,6 @@ namespace SistemaEscola
         private void returnBtn_Click(object sender, EventArgs e)
         {
             OpenPreviousForm(sender);
-        }
-
-        private void DisableBtn(Button btn)
-        {
-            //btn.Enabled = false;
-            btn.BackColor = ColorTranslator.FromHtml("#047FCC");
-        }
-
-        private void EnableBtn(Button btn)
-        {
-            btn.BackColor = ColorTranslator.FromHtml("#03396C");
         }
     }
 }

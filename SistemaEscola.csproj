@@ -287,6 +287,12 @@
     <Compile Include="Boundaries\Disciplina\EditarDisciplina.Designer.cs">
       <DependentUpon>EditarDisciplina.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Professor\EditarProfessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Professor\EditarProfessor.Designer.cs">
+      <DependentUpon>EditarProfessor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Entities\Disciplina.cs" />
     <Compile Include="Entities\Formularios\Interfaces\IFormulario.cs" />
@@ -357,9 +363,19 @@
     <Compile Include="Boundaries\Disciplina\ListarDisciplinas.Designer.cs">
       <DependentUpon>ListarDisciplinas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Professor\ListarProfessores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Professor\ListarProfessores.Designer.cs">
+      <DependentUpon>ListarProfessores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20220531061358_InitialMigration.cs" />
     <Compile Include="Migrations\20220531061358_InitialMigration.designer.cs">
       <DependentUpon>20220531061358_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220612164834_FixProfessor.cs" />
+    <Compile Include="Migrations\20220612164834_FixProfessor.designer.cs">
+      <DependentUpon>20220612164834_FixProfessor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
     <Compile Include="Boundaries\UserControls\NameEditListPanel.cs">
@@ -380,9 +396,14 @@
     <Compile Include="Boundaries\Disciplina\MostrarDisciplina.Designer.cs">
       <DependentUpon>MostrarDisciplina.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Professor\MostrarProfessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Professor\MostrarProfessor.Designer.cs">
+      <DependentUpon>MostrarProfessor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
-    <Compile Include="Parsers\RgParse.cs" />
     <Compile Include="Boundaries\Turma\Presenca.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -439,7 +460,6 @@
     <Compile Include="Validations\DateAttribute.cs" />
     <Compile Include="Validations\MobilePhoneNumberAttribute.cs" />
     <Compile Include="Validations\PhoneNumberAttribute.cs" />
-    <Compile Include="Validations\RgAttribute.cs" />
     <EmbeddedResource Include="Boundaries\Aluno\EditarAluno.resx">
       <DependentUpon>EditarAluno.cs</DependentUpon>
     </EmbeddedResource>
@@ -460,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Disciplina\RemoverDisciplina.resx">
       <DependentUpon>RemoverDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Professor\EditarProfessor.resx">
+      <DependentUpon>EditarProfessor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Professor\MenuProfessor.resx">
       <DependentUpon>MenuProfessor.cs</DependentUpon>
@@ -514,6 +537,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Disciplina\MostrarDisciplina.resx">
       <DependentUpon>MostrarDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Professor\ListarProfessores.resx">
+      <DependentUpon>ListarProfessores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Professor\MostrarProfessor.resx">
+      <DependentUpon>MostrarProfessor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

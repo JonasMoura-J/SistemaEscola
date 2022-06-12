@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola.Validations
 {

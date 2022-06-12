@@ -1,27 +1,26 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 
 namespace SistemaEscola
 {
     public partial class RemoverProfessor : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        ControladorProfessor controladorProfessor = new ControladorProfessor();
+        readonly ControladorProfessor controladorProfessor = new ControladorProfessor();
 
-        List<FormularioProfessor> professores = new List<FormularioProfessor>();
+        readonly List<FormularioProfessor> professores = new List<FormularioProfessor>();
 
         public RemoverProfessor(Home mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
         }
-
 
         private void RemoverProfessor_Load(object sender, EventArgs e)
         {
@@ -46,7 +45,7 @@ namespace SistemaEscola
                     controladorProfessor.Delete(professores.Where(p => p.Nome == professorComboBox.SelectedItem.ToString())
                         .First().Id);
 
-                    _mainForm.OpenNewForm(new MenuProfessor(_mainForm), sender, null, true);
+                    _mainForm.OpenPreviousForm(sender);
                 }
             }
         }

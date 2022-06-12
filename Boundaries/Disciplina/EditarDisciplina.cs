@@ -25,19 +25,19 @@ namespace SistemaEscola
         readonly List<NamePanel> turmasPanels = new List<NamePanel>();
         readonly List<int> turmasPanelLengths = new List<int>();
 
-        readonly FormularioDisciplina disciplina;
+        readonly FormularioDisciplina disciplina = new FormularioDisciplina();
 
         readonly List<FormularioProfessor> professores = new List<FormularioProfessor>();
         readonly List<FormularioTurma> turmas = new List<FormularioTurma>();
 
-        public readonly List<string> selectedProfessores = new List<string>();
-        public readonly List<string> selectedTurmas = new List<string>();
+        readonly List<string> selectedProfessores = new List<string>();
+        readonly List<string> selectedTurmas = new List<string>();
 
-        public EditarDisciplina(Home mainForm, FormularioDisciplina form, bool returnPrevious = false)
+        public EditarDisciplina(Home mainForm, int disciplinaId, bool returnPrevious = false)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            disciplina = form;
+            disciplina.Id = disciplinaId;
             _returnPrevious = returnPrevious;
         }
 
@@ -47,7 +47,6 @@ namespace SistemaEscola
             var tempDisciplina = controladorDisciplina.FindById(disciplina.Id);
 
             disciplina.Nome = tempDisciplina.Nome;
-
 
             // Set up Professores
             professoresPanelLengths.Add(professoresFlwLayPnl.Width);
@@ -62,7 +61,7 @@ namespace SistemaEscola
             }));
 
             var professorDisciplinas = controladorDisciplina
-                .FindAllProfessorDisciplinaByDisciplina(disciplina.Id);
+                .FindAllProfessorDisciplinasByDisciplina(disciplina.Id);
 
             if (professorDisciplinas.Any())
             {
@@ -103,7 +102,7 @@ namespace SistemaEscola
             }));
 
             var turmaDisciplinas = controladorDisciplina
-                .FindAllTurmaDisciplinaByDisciplina(disciplina.Id);
+                .FindAllTurmaDisciplinasByDisciplina(disciplina.Id);
 
             if (turmaDisciplinas.Any())
             {
@@ -173,14 +172,16 @@ namespace SistemaEscola
 
                         if (_returnPrevious)
                         {
-                            // Returns to previous form (always ListarDisciplina) (since couldn't fix error)
-                            _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
-                            _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender, null);
+                            // Returns to MostrarDisciplina
+                            _mainForm.OpenPreviousForm(sender);
+                            _mainForm.OpenPreviousForm(sender);
+                            _mainForm.OpenNewForm(new MostrarDisciplina(_mainForm, disciplina.Id), sender, null);
                         }
                         else
                         {
-                            // Returns to MenuDisciplina
+                            // Returns to ListarDisciplinas
                             _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
+                            _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender, null);
                         }
 
                     }
@@ -224,17 +225,9 @@ namespace SistemaEscola
             {
                 controladorDisciplina.Delete(disciplina.Id);
 
-                if (_returnPrevious)
-                {
-                    // Returns to previous form (always ListarDisciplina)
-                    _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
-                    _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender, null);
-                }
-                else
-                {
-                    // Returns to MenuDisicplina
-                    _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
-                }
+                // Returns to ListarDisciplinas
+                _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
+                _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender, null);
             }
         }
 

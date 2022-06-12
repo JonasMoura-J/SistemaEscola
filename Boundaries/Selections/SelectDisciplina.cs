@@ -39,7 +39,7 @@ namespace SistemaEscola
             {
                 var selectedDisciplina = disciplinas.Where(d => disciplinaComboBox.SelectedItem.ToString() == d.Nome).First();
 
-                _mainForm.OpenNewForm(new EditarDisciplina(_mainForm, selectedDisciplina), sender);
+                //_mainForm.OpenNewForm(new EditarDisciplina(_mainForm, selectedDisciplina), sender);
             }
         }
     }

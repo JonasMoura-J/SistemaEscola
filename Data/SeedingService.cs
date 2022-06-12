@@ -32,12 +32,12 @@ namespace SistemaEscola.Data
                 DateTime.Parse("12/22/2222"), "22543594",
                 "900339283", "albertftw@gmail.com", "9952432",  "Unknown");
 
-            Professor p1 = new Professor("LEO", "00483923812", "9233813048", "46382917",
-                "928371164", "leoprof@gmail.com");
-            Professor p2 = new Professor("ALE", "93820128553", "1188372048", "09382837",
-                "955774488", "aleprof@gmail.com");
-            Professor p3 = new Professor("THY", "77424678911", "6654356776", "12342231",
-                "922335463", "thygamer@gmail.com");
+            Professor p1 = new Professor("LEO", "00483923812", "9233813048", DateTime.Parse("02-02-1980"),
+                "46382917", "928371164", "leoprof@gmail.com");
+            Professor p2 = new Professor("ALE", "93820128553", "1188372048", DateTime.Parse("02-02-1980"),
+                "09382837", "955774488", "aleprof@gmail.com");
+            Professor p3 = new Professor("THY", "77424678911", "6654356776", DateTime.Parse("02-02-1980"),
+                "12342231", "922335463", "thygamer@gmail.com");
 
             Turma t1 = new Turma("03A3N", "7° ANO", 20);
             Turma t2 = new Turma("01A4N", "8° ANO", 14);
@@ -56,10 +56,10 @@ namespace SistemaEscola.Data
             List<Disciplina> disciplinas = new List<Disciplina>() { d1, d2, d3 };
             List<Usuario> usuarios = new List<Usuario>() { u1, u2 };
 
-            professores.ForEach(p => p.InsertDisciplinas(new List<Disciplina>()));
+            //professores.ForEach(p => p.InsertDisciplinas(new List<Disciplina>()));
 
             //turmas.ForEach(t => alunos.ForEach(a => t.InsertAluno(a)));
-            turmas.ForEach(t => t.InsertDisciplinas(new List<Disciplina>()));
+            //turmas.ForEach(t => t.InsertDisciplinas(new List<Disciplina>()));
 
             //alunos.ForEach(a => a.AddDisciplina(d3));
 

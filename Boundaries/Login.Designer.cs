@@ -29,7 +29,6 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.loginBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.title1Lb = new System.Windows.Forms.Label();
@@ -41,16 +40,6 @@ namespace SistemaEscola
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(441, 519);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(113, 21);
-            this.comboBox1.TabIndex = 61;
-            this.comboBox1.Visible = false;
             // 
             // loginBtn
             // 
@@ -166,7 +155,6 @@ namespace SistemaEscola
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.userTxtBox);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.panel4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -174,7 +162,6 @@ namespace SistemaEscola
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -183,7 +170,6 @@ namespace SistemaEscola
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;

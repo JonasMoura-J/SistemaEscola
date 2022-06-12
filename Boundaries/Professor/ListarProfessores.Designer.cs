@@ -1,7 +1,7 @@
 ﻿
 namespace SistemaEscola
 {
-    partial class ListarAlunos
+    partial class ListarProfessores
     {
         /// <summary>
         /// Required designer variable.
@@ -29,22 +29,44 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.titleLb = new System.Windows.Forms.Label();
-            this.concluirBtn = new System.Windows.Forms.Button();
-            this.alunosFlwLayPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.searchTxtBox = new System.Windows.Forms.TextBox();
+            this.titleLb = new System.Windows.Forms.Label();
+            this.concluirBtn = new System.Windows.Forms.Button();
+            this.professoresFlwLayPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(194)))));
+            this.panel1.Location = new System.Drawing.Point(668, 64);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(340, 2);
+            this.panel1.TabIndex = 146;
+            // 
+            // searchTxtBox
+            // 
+            this.searchTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
+            this.searchTxtBox.Location = new System.Drawing.Point(668, 36);
+            this.searchTxtBox.Name = "searchTxtBox";
+            this.searchTxtBox.Size = new System.Drawing.Size(342, 24);
+            this.searchTxtBox.TabIndex = 145;
+            this.searchTxtBox.Text = "Buscar";
+            this.searchTxtBox.TextChanged += new System.EventHandler(this.searchTxtBox_TextChanged);
+            this.searchTxtBox.Enter += new System.EventHandler(this.searchTxtBox_Enter);
+            this.searchTxtBox.Leave += new System.EventHandler(this.searchTxtBox_Leave);
             // 
             // titleLb
             // 
             this.titleLb.AutoSize = true;
             this.titleLb.Font = new System.Drawing.Font("Comfortaa", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLb.Location = new System.Drawing.Point(93, 26);
+            this.titleLb.Location = new System.Drawing.Point(95, 23);
             this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(333, 38);
-            this.titleLb.TabIndex = 139;
-            this.titleLb.Text = "Listando todos os alunos";
+            this.titleLb.Size = new System.Drawing.Size(398, 38);
+            this.titleLb.TabIndex = 144;
+            this.titleLb.Text = "Listando todos os professores";
             // 
             // concluirBtn
             // 
@@ -53,45 +75,23 @@ namespace SistemaEscola
             this.concluirBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.concluirBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.concluirBtn.ForeColor = System.Drawing.Color.White;
-            this.concluirBtn.Location = new System.Drawing.Point(451, 486);
+            this.concluirBtn.Location = new System.Drawing.Point(453, 483);
             this.concluirBtn.Name = "concluirBtn";
             this.concluirBtn.Size = new System.Drawing.Size(218, 92);
-            this.concluirBtn.TabIndex = 138;
+            this.concluirBtn.TabIndex = 143;
             this.concluirBtn.Text = "Concluir";
             this.concluirBtn.UseVisualStyleBackColor = false;
             this.concluirBtn.Click += new System.EventHandler(this.concluirBtn_Click);
             // 
-            // alunosFlwLayPnl
+            // professoresFlwLayPnl
             // 
-            this.alunosFlwLayPnl.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.alunosFlwLayPnl.Location = new System.Drawing.Point(100, 87);
-            this.alunosFlwLayPnl.Name = "alunosFlwLayPnl";
-            this.alunosFlwLayPnl.Size = new System.Drawing.Size(908, 387);
-            this.alunosFlwLayPnl.TabIndex = 137;
+            this.professoresFlwLayPnl.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.professoresFlwLayPnl.Location = new System.Drawing.Point(102, 84);
+            this.professoresFlwLayPnl.Name = "professoresFlwLayPnl";
+            this.professoresFlwLayPnl.Size = new System.Drawing.Size(908, 387);
+            this.professoresFlwLayPnl.TabIndex = 142;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(194)))));
-            this.panel1.Location = new System.Drawing.Point(666, 67);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(340, 2);
-            this.panel1.TabIndex = 141;
-            // 
-            // searchTxtBox
-            // 
-            this.searchTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchTxtBox.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTxtBox.ForeColor = System.Drawing.Color.LightSteelBlue;
-            this.searchTxtBox.Location = new System.Drawing.Point(666, 39);
-            this.searchTxtBox.Name = "searchTxtBox";
-            this.searchTxtBox.Size = new System.Drawing.Size(342, 24);
-            this.searchTxtBox.TabIndex = 140;
-            this.searchTxtBox.Text = "Buscar";
-            this.searchTxtBox.TextChanged += new System.EventHandler(this.searchTxtBox_TextChanged);
-            this.searchTxtBox.Enter += new System.EventHandler(this.searchTxtBox_Enter);
-            this.searchTxtBox.Leave += new System.EventHandler(this.searchTxtBox_Leave);
-            // 
-            // ListarAlunos
+            // ListarProfessores
             // 
             this.AcceptButton = this.concluirBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,10 +102,10 @@ namespace SistemaEscola
             this.Controls.Add(this.searchTxtBox);
             this.Controls.Add(this.titleLb);
             this.Controls.Add(this.concluirBtn);
-            this.Controls.Add(this.alunosFlwLayPnl);
-            this.Name = "ListarAlunos";
-            this.Text = "ListarAlunos";
-            this.Load += new System.EventHandler(this.ListarAlunos_Load);
+            this.Controls.Add(this.professoresFlwLayPnl);
+            this.Name = "ListarProfessores";
+            this.Text = "ListarProfessores";
+            this.Load += new System.EventHandler(this.ListarProfessores_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,10 +113,10 @@ namespace SistemaEscola
 
         #endregion
 
-        private System.Windows.Forms.Label titleLb;
-        private System.Windows.Forms.Button concluirBtn;
-        private System.Windows.Forms.FlowLayoutPanel alunosFlwLayPnl;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox searchTxtBox;
+        private System.Windows.Forms.Label titleLb;
+        private System.Windows.Forms.Button concluirBtn;
+        private System.Windows.Forms.FlowLayoutPanel professoresFlwLayPnl;
     }
 }

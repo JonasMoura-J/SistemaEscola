@@ -6,7 +6,7 @@ namespace SistemaEscola
 {
     public partial class NamePanel : UserControl
     {
-        FlowLayoutPanel _panel;
+        readonly FlowLayoutPanel _panel;
 
         public Label lb;
 

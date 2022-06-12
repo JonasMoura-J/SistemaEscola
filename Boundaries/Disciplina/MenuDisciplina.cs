@@ -23,11 +23,6 @@ namespace SistemaEscola
             _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender);
         }
 
-        private void editBtn_Click(object sender, EventArgs e)
-        {
-            _mainForm.OpenNewForm(new SelectDisciplina(_mainForm), sender);
-        }
-
         private void removeBtn_Click(object sender, EventArgs e)
         {
             _mainForm.OpenNewForm(new RemoverDisciplina(_mainForm), sender);

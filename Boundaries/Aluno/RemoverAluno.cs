@@ -45,7 +45,7 @@ namespace SistemaEscola
                     controladorAluno.Delete(alunos.Where(a => a.Nome == alunoComboBox.SelectedItem.ToString())
                         .First().Id);
 
-                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+                    _mainForm.OpenPreviousForm(sender);
                 }
             }
         }

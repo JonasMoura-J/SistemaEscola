@@ -1,5 +1,5 @@
-﻿using SistemaEscola.Entities.JoinClasses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Entities
 {
@@ -18,22 +18,6 @@ namespace SistemaEscola.Entities
             Codigo = codigo;
             Nome = nome;
             QuantidadeAlunos = quantidadeAlunos;
-        }
-
-        public void InsertAluno(Aluno aluno)
-        {
-            Alunos.Add(aluno);
-        }
-
-        public void InsertDisciplinas(List<Disciplina> disciplinas)
-        {
-            disciplinas.ForEach(d => TurmaDisciplinas.Add(new TurmaDisciplina
-            {
-                TurmaId = Id,
-                DisciplinaId = d.Id,
-                Turma = this,
-                Disciplina = d
-            }));
         }
     }
 }

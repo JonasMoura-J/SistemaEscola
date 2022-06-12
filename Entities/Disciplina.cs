@@ -1,6 +1,5 @@
-﻿using SistemaEscola.Entities.JoinClasses;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Entities
 {
@@ -15,29 +14,6 @@ namespace SistemaEscola.Entities
         public Disciplina(string nome)
         {
             Nome = nome;
-        }
-
-        public void AddProfessor(Professor professor)
-        {
-            if (!ProfessorDisciplinas.Any(d => d.ProfessorId == professor.Id))
-            {
-                ProfessorDisciplinas.Add(new ProfessorDisciplina {
-                    ProfessorId = professor.Id,
-                    DisciplinaId = Id,
-                    Professor = professor,
-                    Disciplina = this
-                });
-            }
-        }
-
-        public void RemoveProfessor(Professor professor)
-        {
-            if (ProfessorDisciplinas.Any(d => d.ProfessorId == professor.Id))
-            {
-                var profToRemove = ProfessorDisciplinas.Where(d => d.ProfessorId == professor.Id).First();
-
-                ProfessorDisciplinas.Remove(profToRemove);
-            }
         }
     }
 }

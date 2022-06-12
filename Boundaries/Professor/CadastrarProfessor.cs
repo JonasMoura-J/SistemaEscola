@@ -1,37 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Controllers;
 using SistemaEscola.Utils;
-using System.Globalization;
-using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEscola
 {
     public partial class CadastrarProfessor : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        ControladorProfessor controladorProfessor = new ControladorProfessor();
-        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorProfessor controladorProfessor = new ControladorProfessor();
+        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
 
-        List<TextBox> textBoxes = new List<TextBox>();
-        List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
-        List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
+        readonly List<TextBox> textBoxes = new List<TextBox>();
+        readonly List<MaskedTextBox> maskedTextBoxes = new List<MaskedTextBox>();
+        readonly List<MaskedTextBox> optionalMaskedTextBoxes = new List<MaskedTextBox>();
 
-        List<NamePanel> disciplinasPanels = new List<NamePanel>();
-        List<int> disciplinasPanelLengths = new List<int>();
+        readonly List<NamePanel> disciplinasPanels = new List<NamePanel>();
+        readonly List<int> disciplinasPanelLengths = new List<int>();
 
-        List<string> nomeDisciplinas = new List<string>();
+        readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
-        public List<string> selectedDisciplinas = new List<string>();
+        readonly List<string> selectedDisciplinas = new List<string>();
 
         public CadastrarProfessor(Home mainForm)
         {
@@ -39,7 +36,6 @@ namespace SistemaEscola
             _mainForm = mainForm;
         }
 
-        // Provisoriamente
         private void CadastrarProfessor_Load(object sender, EventArgs e)
         {
             foreach (Control c in Controls)
@@ -62,17 +58,17 @@ namespace SistemaEscola
                 }
             }
 
-            // Temporary
-            controladorProfessor.FindAll().ForEach(p => comboBox1.Items.Add(p.Nome));
-
-            // Flow Layout Panel Settings
+            // Set up Disciplinas
             disciplinasPanelLengths.Add(disciplinasFlwLayPnl.Width);
             disciplinasFlwLayPnl.FlowDirection = FlowDirection.TopDown;
             disciplinasFlwLayPnl.AutoScroll = true;
             disciplinasFlwLayPnl.WrapContents = false;
 
-            // Busca disciplinas no DB
-            controladorDisciplina.FindAll().ForEach(a => nomeDisciplinas.Add(a.Nome));
+            controladorDisciplina.FindAll().ForEach(d => disciplinas.Add(new FormularioDisciplina()
+            {
+                Id = d.Id,
+                Nome = d.Nome
+            }));
         }
 
         private void ResetPlaceHolders()
@@ -123,7 +119,6 @@ namespace SistemaEscola
                         // Creates form to be sent to controller
                         var form = new FormularioProfessor
                         {
-                            Id = controladorProfessor.FindAll().Count() + 1,
                             Nome = nomeTxtBox.Text.ToUpper(),
                             Cpf = cpfTxtBox.Text,
                             Rg = rgTxtBox.Text.ToUpper(),
@@ -131,7 +126,8 @@ namespace SistemaEscola
                             TelefoneResidencial = telResTxtBox.Text,
                             TelefoneCelular = telCelTxtBox.Text,
                             Email = emailTxtBox.Text.ToUpper(),
-                            Disciplinas = selectedDisciplinas
+                            FormularioDisciplinas = disciplinas.Where(d =>
+                                selectedDisciplinas.Any(sd => sd == d.Nome)).ToList()
                         };
 
                         // Validates form
@@ -157,13 +153,14 @@ namespace SistemaEscola
                                 controladorProfessor.Add(form);
 
                                 // Returns to MenuAluno
-                                _mainForm.OpenNewForm(new MenuProfessor(_mainForm), sender, null, true);
+                                _mainForm.OpenPreviousForm(sender);
 
                             }
                             catch (Exception error)
                             {
                                 ResetPlaceHolders();
                                 MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                throw error.InnerException;
                             }
                         }
                     }
@@ -174,7 +171,7 @@ namespace SistemaEscola
         private void addDisciplinaBtn_Click(object sender, EventArgs e)
         {
             FlowLayoutPanelTools.InsertItems(disciplinasFlwLayPnl, disciplinasPanels, disciplinasPanelLengths,
-                nomeDisciplinas, selectedDisciplinas);
+                disciplinas.Select(d => d.Nome).ToList(), selectedDisciplinas);
         }
 
         private void disciplinasFlwLayPnl_ControlRemoved(object sender, ControlEventArgs e)
@@ -204,13 +201,11 @@ namespace SistemaEscola
 
         private void rgTxtBox_Enter(object sender, EventArgs e)
         {
-            //TextBoxTools.ClearMask(rgTxtBox, "RG", "00.000.000-0");
             TextBoxTools.Clear(rgTxtBox, "RG");
         }
 
         private void rgTxtBox_Leave(object sender, EventArgs e)
         {
-            //TextBoxTools.FillMask(rgTxtBox, "RG", "  .   .   -");
             TextBoxTools.Fill(rgTxtBox, "RG");
         }
 

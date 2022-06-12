@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Data;
-using SistemaEscola.Entities;
+using System.Collections.Generic;
 using SistemaEscola.Entities.Formularios;
 using SistemaEscola.Entities.JoinClasses;
+using SistemaEscola.Entities;
+using SistemaEscola.Data;
 
 namespace SistemaEscola.Controllers
 {
     class ControladorTurma : IController<Turma>
     {
-        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+        readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
-        private readonly ControladorAluno _controladorAluno = ControladorAluno.Instance;
-        private readonly ControladorDisciplina _controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
 
         public static readonly ControladorTurma Instance = new ControladorTurma();
 
@@ -25,29 +24,22 @@ namespace SistemaEscola.Controllers
                 throw new Exception("Turma já cadastrada");
             }
 
-            // Prepares the lists of Disciplinas and Alunos
-            var alunosToInsert = new List<Aluno>();
-            var disciplinasToInsert = new List<Disciplina>();
-
-            form.Alunos.ForEach(a => alunosToInsert.Add(_controladorAluno.FindByName(a)));
-            _context.Alunos.AttachRange(alunosToInsert);
-
-            form.Disciplinas.ForEach(d => disciplinasToInsert.Add(_controladorDisciplina.FindByName(d)));
-            _context.Disciplinas.AttachRange(disciplinasToInsert);
-
             // Adds new Turma to Db
+            InsertIntoDb(form);
+
+            // Updates Disciplinas
+            UpdateTurmaDisciplinas(form, true);
+
+            // Updates Alunos
+            UpdateAlunos(form, true);
+        }
+        
+        public void InsertIntoDb(FormularioTurma form)
+        {
             var turma = new Turma(form.Codigo, form.Nome,
                 form.QuantidadeAlunos);
 
-            alunosToInsert.ForEach(a => turma.InsertAluno(a));
-            turma.InsertDisciplinas(disciplinasToInsert);
-
             _context.Turmas.Add(turma);
-
-            // Updates Aluno with new data
-            alunosToInsert.ForEach(a => disciplinasToInsert.ForEach(
-                d => _controladorAluno.AddFaltaDisciplina(a.Id, d.Id, true)));
-
             _context.SaveChanges();
         }
 
@@ -103,9 +95,93 @@ namespace SistemaEscola.Controllers
             }
         }
 
-        public List<TurmaDisciplina> FindAllTurmaDisciplinaByDisciplina(int disciplinaId)
+        public List<TurmaDisciplina> FindAllTurmaDisciplinasByDisciplina(int disciplinaId)
         {
             return _context.TurmaDisciplinas.Where(td => td.DisciplinaId == disciplinaId).ToList();
+        }
+
+        public void UpdateAlunos(FormularioTurma form, bool saveChanges = false)
+        {
+            var turmaId = form.Id;
+
+            if (turmaId == 0)
+            {
+                turmaId = FindByName(form.Nome).Id;
+            }
+
+            foreach (var fa in form.FormularioAlunos)
+            {
+                fa.FormularioDisciplinas = form.FormularioDisciplinas;
+
+                controladorAluno.UpdateTurma(fa.Id, turmaId);
+                controladorAluno.UpdateFaltaDisciplinas(fa);
+            }
+
+            if (saveChanges)
+            {
+                _context.SaveChanges();
+            }
+        }
+        
+        public void AddTurmaDisciplina(int turmaId, int disciplinaId)
+        {
+            if (!_context.TurmaDisciplinas.Any(td => td.TurmaId == turmaId &&
+            td.DisciplinaId == disciplinaId))
+            {
+                _context.TurmaDisciplinas.Add(new TurmaDisciplina()
+                {
+                    TurmaId = turmaId,
+                    DisciplinaId = disciplinaId,
+                });
+            }
+        }
+
+        public void RemoveTurmaDisciplina(int turmaId, int disciplinaId)
+        {
+            var td = _context.TurmaDisciplinas.Find(turmaId, disciplinaId);
+
+            if (td != null)
+            {
+                _context.TurmaDisciplinas.Remove(td);
+            }
+        }
+
+        public void UpdateTurmaDisciplinas(FormularioTurma form, bool saveChanges = false)
+        {
+            var turmaId = form.Id;
+
+            if (turmaId == 0)
+            {
+                turmaId = FindByName(form.Nome).Id;
+            }
+
+            var turmaDisciplinas = FindAllTurmaDisciplinasByTurma(turmaId);
+
+            foreach (var fd in form.FormularioDisciplinas)
+            {
+                if (!turmaDisciplinas.Any(td => td.DisciplinaId == fd.Id))
+                {
+                    AddTurmaDisciplina(turmaId, fd.Id);
+                }
+            }
+
+            foreach (var td in turmaDisciplinas)
+            {
+                if (!form.FormularioDisciplinas.Any(fd => fd.Id == td.DisciplinaId))
+                {
+                    RemoveTurmaDisciplina(td.TurmaId, td.DisciplinaId);
+                }
+            }
+
+            if (saveChanges)
+            {
+                _context.SaveChanges();
+            }
+        }
+        
+        public List<TurmaDisciplina> FindAllTurmaDisciplinasByTurma(int turmaId)
+        {
+            return _context.TurmaDisciplinas.Where(td => td.TurmaId == turmaId).ToList();
         }
     }
 }

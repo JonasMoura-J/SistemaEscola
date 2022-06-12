@@ -161,15 +161,14 @@ namespace SistemaEscola
                                     controladorAluno.Add(form);
 
                                     // Returns to MenuAluno
-                                    _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
-                                
+                                    _mainForm.OpenPreviousForm(sender);
+
                                 } catch (Exception error)
                                 {
                                     ResetPlaceHolders();
                                     MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     //throw error.InnerException;
-                                }
-                                
+                                }    
                             }
                         }
                     }
@@ -199,13 +198,11 @@ namespace SistemaEscola
 
         private void rgTxtBox_Enter(object sender, EventArgs e)
         {
-            //TextBoxTools.ClearMask(rgTxtBox, "RG", "00.000.000-0");
             TextBoxTools.Clear(rgTxtBox, "RG");
         }
 
         private void rgTxtBox_Leave(object sender, EventArgs e)
         {
-            //TextBoxTools.FillMask(rgTxtBox, "RG", "  .   .   -");
             TextBoxTools.Fill(rgTxtBox, "RG");
         }
 

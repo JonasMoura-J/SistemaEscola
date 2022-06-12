@@ -47,7 +47,7 @@ namespace SistemaEscola
 
         private void concluirBtn_Click(object sender, EventArgs e)
         {
-            _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
+            _mainForm.OpenPreviousForm(sender);
         }
 
         private void searchTxtBox_Enter(object sender, EventArgs e)

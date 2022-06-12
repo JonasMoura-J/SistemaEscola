@@ -13,7 +13,6 @@ namespace SistemaEscola
     public partial class MostrarAluno : Form
     {
         readonly Home _mainForm;
-        readonly bool _returnPrevious;
 
         readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
         readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
@@ -22,14 +21,13 @@ namespace SistemaEscola
         readonly List<NamePanel> disciplinasPanels = new List<NamePanel>();
         readonly List<int> disciplinasPanelLengths = new List<int>();
 
-        readonly FormularioAluno aluno;
+        readonly FormularioAluno aluno = new FormularioAluno();
 
-        public MostrarAluno(Home mainForm, FormularioAluno form, bool returnPrevious = false)
+        public MostrarAluno(Home mainForm, int alunoId)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            aluno = form;
-            _returnPrevious = returnPrevious;
+            aluno.Id = alunoId;
         }
 
         private void MostrarAluno_Load(object sender, EventArgs e)
@@ -111,7 +109,7 @@ namespace SistemaEscola
 
             var disciplinas = controladorDisciplina.FindAll();
 
-            var alunoDisciplinas = controladorAluno.FindAllAlunoFaltaDisciplinaByAluno(aluno.Id);
+            var alunoDisciplinas = controladorAluno.FindAllAlunoFaltaDisciplinasByAluno(aluno.Id);
 
             if (alunoDisciplinas.Any())
             {
@@ -131,21 +129,13 @@ namespace SistemaEscola
 
         private void concluirBtn_Click(object sender, EventArgs e)
         {
-            if (_returnPrevious)
-            {
-                // Returns to previous form
-                _mainForm.OpenPreviousForm(sender);
-            }
-            else
-            {
-                // Returns to MenuAluno
-                _mainForm.OpenNewForm(new MenuAluno(_mainForm), sender, null, true);
-            }
+            // Returns to ListarAlunos
+            _mainForm.OpenPreviousForm(sender);
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            _mainForm.OpenNewForm(new EditarAluno(_mainForm, aluno, true), sender);
+            _mainForm.OpenNewForm(new EditarAluno(_mainForm, aluno.Id, true), sender);
         }
     }
 }

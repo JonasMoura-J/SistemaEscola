@@ -45,7 +45,7 @@ namespace SistemaEscola
                     controladorDisciplina.Delete(disciplinas.Where(d => d.Nome == disciplinaComboBox.SelectedItem.ToString())
                         .First().Id);
 
-                    _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
+                    _mainForm.OpenPreviousForm(sender);
                 }
             }
         }

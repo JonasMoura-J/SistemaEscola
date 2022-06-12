@@ -9,7 +9,7 @@ namespace SistemaEscola.Controllers
 {
     class ControladorUsuario : IController<Usuario>
     {
-        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+        readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
         public void Add(FormularioUsuario form)
         {

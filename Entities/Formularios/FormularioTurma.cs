@@ -11,8 +11,8 @@ namespace SistemaEscola.Entities.Formularios
         public string Nome { get; set; }
         [Required, Display(Name = "Código")]
         public string Codigo { get; set; }
-        public List<string> Disciplinas { get; set; }
-        public List<string> Alunos { get; set; }
+        public List<FormularioAluno> FormularioAlunos { get; set; }
+        public List<FormularioDisciplina> FormularioDisciplinas { get; set; }
         public int QuantidadeAlunos { get; set; }
     }
 }

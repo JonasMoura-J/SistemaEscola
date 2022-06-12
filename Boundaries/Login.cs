@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
-using SistemaEscola.Controllers;
+using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 using SistemaEscola.Utils;
 
 namespace SistemaEscola
@@ -13,7 +13,8 @@ namespace SistemaEscola
     public partial class Login : Form
     {
         Thread th;
-        ControladorUsuario controladorLogin = new ControladorUsuario();
+        
+        readonly ControladorUsuario controladorLogin = new ControladorUsuario();
 
         public Login()
         {
@@ -98,12 +99,6 @@ namespace SistemaEscola
         private void title2Lb_Click(object sender, EventArgs e)
         {
             title2Lb.Focus();
-        }
-
-        // Provisoriamente
-        private void Login_Load(object sender, EventArgs e)
-        {
-            controladorLogin.FindAll().ForEach(u => comboBox1.Items.Add(u.Nome));
         }
     }
 }

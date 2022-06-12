@@ -23,6 +23,7 @@ namespace SistemaEscola.Entities.Formularios
         public string TelefoneCelular { get; set; }
         [Required, EmailAddress, Display(Name = "E-mail")]
         public string Email { get; set; }
-        public List<string> Disciplinas { get; set; }
+        public List<FormularioDisciplina> FormularioDisciplinas = new List<FormularioDisciplina>();
+        public List<FormularioTurma> FormularioTurmas = new List<FormularioTurma>();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using SistemaEscola.Entities.JoinClasses;
 
 namespace SistemaEscola.Entities
@@ -40,32 +40,12 @@ namespace SistemaEscola.Entities
             NomeMae = nomeMae;
             NomeResponsavel = nomeResponsavel;
         }
-        public void UpdateTurma(Turma turma)
-        {
-            Turma = turma;
-        }
-
-        public void RemoveDisciplina(Disciplina disciplina)
-        {
-            if (AlunoFaltaDisciplinas.Any(d => d.Disciplina.Id == disciplina.Id))
-            {
-                var afd = AlunoFaltaDisciplinas.Where(a => a.DisciplinaId == disciplina.Id).First();
-
-                AlunoFaltaDisciplinas.Remove(afd);
-            }
-        }
 
         public void AddFaltas(Disciplina disciplina, int faltas)
         {
             var aluFaltaDisc = AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplina.Id).First();
 
             aluFaltaDisc.Faltas += faltas;
-        }
-        public void EditFaltas(Disciplina disciplina, int faltas)
-        {
-            var aluFaltaDisc = AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplina.Id).First();
-
-            aluFaltaDisc.Faltas = faltas;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
@@ -28,7 +27,6 @@ namespace SistemaEscola
             {
                 var form = new FormularioDisciplina
                 {
-                    Id = controladorDisciplina.FindAll().Count() + 1,
                     Nome = nomeTxtBox.Text.ToUpper()
                 };
 
@@ -52,7 +50,7 @@ namespace SistemaEscola
                         controladorDisciplina.Add(form);
                         
                         // Returns to MenuDisciplina
-                        _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
+                        _mainForm.OpenPreviousForm(sender);
                     
                     } catch (Exception error)
                     {

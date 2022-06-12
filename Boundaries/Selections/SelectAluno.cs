@@ -39,7 +39,7 @@ namespace SistemaEscola
             {
                 var selectedAluno = alunos.Where(a => alunoComboBox.SelectedItem.ToString() == a.Nome).First();
 
-                _mainForm.OpenNewForm(new EditarAluno(_mainForm, selectedAluno), sender);
+                //_mainForm.OpenNewForm(new EditarAluno(_mainForm, selectedAluno), sender);
             }
         }
     }
