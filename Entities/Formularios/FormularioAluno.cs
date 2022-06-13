@@ -33,5 +33,6 @@ namespace SistemaEscola.Entities.Formularios
         public string Matricula { get; set; }
         public int? TurmaId { get; set; }
         public List<FormularioDisciplina> FormularioDisciplinas = new List<FormularioDisciplina>();
+        public FormularioTurma FormularioTurma = new FormularioTurma();
     }
 }

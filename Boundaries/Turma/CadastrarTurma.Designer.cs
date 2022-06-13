@@ -29,7 +29,6 @@ namespace SistemaEscola
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.codigoTxtBox = new System.Windows.Forms.TextBox();
@@ -43,16 +42,6 @@ namespace SistemaEscola
             this.addDisciplinaBtn = new FontAwesome.Sharp.IconButton();
             this.addAlunoBtn = new FontAwesome.Sharp.IconButton();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(915, 557);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(180, 21);
-            this.comboBox1.TabIndex = 15;
-            this.comboBox1.Visible = false;
             // 
             // addBtn
             // 
@@ -212,7 +201,6 @@ namespace SistemaEscola
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.codigoTxtBox);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel2);
             this.Name = "CadastrarTurma";
@@ -225,8 +213,6 @@ namespace SistemaEscola
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.TextBox codigoTxtBox;

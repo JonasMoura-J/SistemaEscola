@@ -8,6 +8,29 @@ namespace SistemaEscola.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Alunos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: true),
+                    Cpf = table.Column<string>(nullable: true),
+                    Rg = table.Column<string>(nullable: true),
+                    DataNascimento = table.Column<DateTime>(nullable: false),
+                    TelefoneResidencial = table.Column<string>(nullable: true),
+                    TelefoneCelular = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    NomePai = table.Column<string>(nullable: true),
+                    NomeMae = table.Column<string>(nullable: true),
+                    NomeResponsavel = table.Column<string>(nullable: true),
+                    Matricula = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Alunos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Disciplinas",
                 columns: table => new
                 {
@@ -29,6 +52,7 @@ namespace SistemaEscola.Migrations
                     Nome = table.Column<string>(nullable: true),
                     Cpf = table.Column<string>(nullable: true),
                     Rg = table.Column<string>(nullable: true),
+                    DataNascimento = table.Column<DateTime>(nullable: false),
                     TelefoneResidencial = table.Column<string>(nullable: true),
                     TelefoneCelular = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true)
@@ -68,6 +92,31 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AlunoFaltaDisciplinas",
+                columns: table => new
+                {
+                    AlunoId = table.Column<int>(nullable: false),
+                    DisciplinaId = table.Column<int>(nullable: false),
+                    Faltas = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlunoFaltaDisciplinas", x => new { x.AlunoId, x.DisciplinaId });
+                    table.ForeignKey(
+                        name: "FK_AlunoFaltaDisciplinas_Alunos_AlunoId",
+                        column: x => x.AlunoId,
+                        principalTable: "Alunos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AlunoFaltaDisciplinas_Disciplinas_DisciplinaId",
+                        column: x => x.DisciplinaId,
+                        principalTable: "Disciplinas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProfessorDisciplinas",
                 columns: table => new
                 {
@@ -92,33 +141,27 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Alunos",
+                name: "AlunoTurmas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
-                    Cpf = table.Column<string>(nullable: true),
-                    Rg = table.Column<string>(nullable: true),
-                    DataNascimento = table.Column<DateTime>(nullable: false),
-                    TelefoneResidencial = table.Column<string>(nullable: true),
-                    TelefoneCelular = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    NomePai = table.Column<string>(nullable: true),
-                    NomeMae = table.Column<string>(nullable: true),
-                    NomeResponsavel = table.Column<string>(nullable: true),
-                    Matricula = table.Column<string>(nullable: true),
-                    TurmaId = table.Column<int>(nullable: true)
+                    AlunoId = table.Column<int>(nullable: false),
+                    TurmaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Alunos", x => x.Id);
+                    table.PrimaryKey("PK_AlunoTurmas", x => new { x.AlunoId, x.TurmaId });
                     table.ForeignKey(
-                        name: "FK_Alunos_Turmas_TurmaId",
+                        name: "FK_AlunoTurmas_Alunos_AlunoId",
+                        column: x => x.AlunoId,
+                        principalTable: "Alunos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AlunoTurmas_Turmas_TurmaId",
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,39 +212,14 @@ namespace SistemaEscola.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AlunoFaltaDisciplinas",
-                columns: table => new
-                {
-                    AlunoId = table.Column<int>(nullable: false),
-                    DisciplinaId = table.Column<int>(nullable: false),
-                    Faltas = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AlunoFaltaDisciplinas", x => new { x.AlunoId, x.DisciplinaId });
-                    table.ForeignKey(
-                        name: "FK_AlunoFaltaDisciplinas_Alunos_AlunoId",
-                        column: x => x.AlunoId,
-                        principalTable: "Alunos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AlunoFaltaDisciplinas_Disciplinas_DisciplinaId",
-                        column: x => x.DisciplinaId,
-                        principalTable: "Disciplinas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AlunoFaltaDisciplinas_DisciplinaId",
                 table: "AlunoFaltaDisciplinas",
                 column: "DisciplinaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Alunos_TurmaId",
-                table: "Alunos",
+                name: "IX_AlunoTurmas_TurmaId",
+                table: "AlunoTurmas",
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
@@ -224,6 +242,9 @@ namespace SistemaEscola.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AlunoFaltaDisciplinas");
+
+            migrationBuilder.DropTable(
+                name: "AlunoTurmas");
 
             migrationBuilder.DropTable(
                 name: "ProfessorDisciplinas");

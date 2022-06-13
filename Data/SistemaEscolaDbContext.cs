@@ -13,6 +13,7 @@ namespace SistemaEscola.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<ProfessorDisciplina> ProfessorDisciplinas { get; set; }
         public DbSet<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; }
+        public DbSet<AlunoTurma> AlunoTurmas { get; set; }
         public DbSet<TurmaDisciplina> TurmaDisciplinas { get; set; }
         public DbSet<TurmaProfessor> TurmaProfessores { get; set; }
 
@@ -82,13 +83,18 @@ namespace SistemaEscola.Data
                 .WithMany(p => p.TurmaProfessores)
                 .HasForeignKey(tp => tp.ProfessorId);
 
-            // Turma _1______n_ Aluno
-            modelBuilder.Entity<Turma>()
-                .HasMany(t => t.Alunos)
-                .WithOne(a => a.Turma)
-                .HasForeignKey(a => a.TurmaId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+            // Aluno _1______n_ AlunoTurma _n______1_ Turma
+            modelBuilder.Entity<AlunoTurma>().HasKey(x => new { x.AlunoId, x.TurmaId });
+
+            modelBuilder.Entity<AlunoTurma>()
+                .HasOne(at => at.Aluno)
+                .WithMany(a => a.AlunoTurmas)
+                .HasForeignKey(at => at.AlunoId);
+
+            modelBuilder.Entity<AlunoTurma>()
+                .HasOne(at => at.Turma)
+                .WithMany(t => t.AlunoTurmas)
+                .HasForeignKey(at => at.TurmaId);
         }
     }
 }

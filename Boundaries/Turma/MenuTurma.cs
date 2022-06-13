@@ -27,5 +27,10 @@ namespace SistemaEscola
         {
             _mainForm.OpenNewForm(new RemoverTurma(_mainForm), sender);
         }
+
+        private void listButn_Click(object sender, EventArgs e)
+        {
+            _mainForm.OpenNewForm(new ListarTurmas(_mainForm), sender);
+        }
     }
 }

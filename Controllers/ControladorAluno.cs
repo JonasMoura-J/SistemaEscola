@@ -94,10 +94,12 @@ namespace SistemaEscola.Controllers
                 aluno.NomeMae = form.NomeMae;
                 aluno.NomeResponsavel = form.NomeResponsavel;
                 aluno.Matricula = form.Matricula;
-                aluno.TurmaId = form.TurmaId;
 
                 // Updates disciplinas
                 UpdateFaltaDisciplinas(form);
+
+                // Updates turmas
+                UpdateAlunoTurmas(form);
 
                 _context.SaveChanges();
             }
@@ -177,24 +179,62 @@ namespace SistemaEscola.Controllers
             aluno.AddFaltas(disciplina, faltas);
         }
 
+        public List<AlunoFaltaDisciplina> FindAllAlunoFaltaDisciplinas()
+        {
+            return _context.AlunoFaltaDisciplinas.ToList();
+        }
+
         public List<AlunoFaltaDisciplina> FindAllAlunoFaltaDisciplinasByAluno(int alunoId)
         {
             return _context.AlunoFaltaDisciplinas.Where(afd => afd.AlunoId == alunoId).ToList();
         }
-        
-        public void UpdateTurma(int alunoId, int turmaId, bool saveChanges = false)
+
+        public void AddAlunoTurma(int alunoId, int turmaId)
         {
-            var aluno = FindById(alunoId);
-
-            if (aluno != null)
+            if (!_context.AlunoTurmas.Any(at => at.AlunoId == alunoId &&
+            at.TurmaId == turmaId))
             {
-                aluno.TurmaId = turmaId;
-
-                if (saveChanges)
+                _context.AlunoTurmas.Add(new AlunoTurma()
                 {
-                    _context.SaveChanges();
-                }
+                    AlunoId = alunoId,
+                    TurmaId = turmaId
+                });
             }
+        }
+
+        public void RemoveAlunoTurma(int alunoId, int turmaId)
+        {
+            var at = _context.AlunoTurmas.Find(alunoId, turmaId);
+
+            if (at != null)
+            {
+                _context.AlunoTurmas.Remove(at);
+            }
+        }
+
+        public void UpdateAlunoTurmas(FormularioAluno form, bool saveChanges = false)
+        {
+            var alunoId = form.Id;
+
+            if (alunoId == 0)
+            {
+                alunoId = FindByName(form.Nome).Id;
+            }
+
+            var alunoTurmas = FindAllAlunoTurmasByAluno(alunoId);
+
+            alunoTurmas.ForEach(at => RemoveAlunoTurma(alunoId, at.TurmaId));
+            AddAlunoTurma(alunoId, form.FormularioTurma.Id);
+
+            if (saveChanges)
+            {
+                _context.SaveChanges();
+            }
+        }
+
+        public List<AlunoTurma> FindAllAlunoTurmasByAluno(int alunoId)
+        {
+            return _context.AlunoTurmas.Where(at => at.AlunoId == alunoId).ToList();
         }
     }
 }

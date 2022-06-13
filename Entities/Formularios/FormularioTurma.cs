@@ -13,6 +13,7 @@ namespace SistemaEscola.Entities.Formularios
         public string Codigo { get; set; }
         public List<FormularioAluno> FormularioAlunos { get; set; }
         public List<FormularioDisciplina> FormularioDisciplinas { get; set; }
+        public List<FormularioProfessor> FormularioProfessores { get; set; }
         public int QuantidadeAlunos { get; set; }
     }
 }

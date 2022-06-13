@@ -19,8 +19,7 @@ namespace SistemaEscola.Entities
         public string NomeMae { get; set; }
         public string NomeResponsavel { get; set; }
         public string Matricula { get; set; }
-        public int? TurmaId { get; set; }
-        public Turma Turma { get; set; }
+        public List<AlunoTurma> AlunoTurmas { get; set; } = new List<AlunoTurma>();
         public List<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; } = new List<AlunoFaltaDisciplina>();
 
         public Aluno(string nome, string cpf, string rg, DateTime dataNascimento, 

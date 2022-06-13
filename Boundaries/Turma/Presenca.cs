@@ -49,7 +49,7 @@ namespace SistemaEscola
 
             var turma = controladorTurma.FindByName(_nomeTurma);
 
-            turma.Alunos.ForEach(a => alunos.Add(a.Nome));
+            //turma.Alunos.ForEach(a => alunos.Add(a.Nome));
 
             foreach (string aluno in alunos)
             {

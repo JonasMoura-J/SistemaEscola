@@ -70,7 +70,7 @@ namespace SistemaEscola
             }
             else if (_entity is FormularioTurma)
             {
-                //newForm = new EditarTurma(_mainForm, (FormularioTurma)_entity);
+                newForm = new EditarTurma(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioUsuario)
             {
@@ -98,7 +98,7 @@ namespace SistemaEscola
             }
             else if (_entity is FormularioTurma)
             {
-                //newForm = new MostrarTurma(_mainForm, (FormularioTurma)_entity);
+                newForm = new MostrarTurma(_mainForm, _entity.Id);
             }
             else if (_entity is FormularioUsuario)
             {

@@ -293,6 +293,12 @@
     <Compile Include="Boundaries\Professor\EditarProfessor.Designer.cs">
       <DependentUpon>EditarProfessor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Turma\EditarTurma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Turma\EditarTurma.Designer.cs">
+      <DependentUpon>EditarTurma.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Entities\Disciplina.cs" />
     <Compile Include="Entities\Formularios\Interfaces\IFormulario.cs" />
@@ -303,6 +309,7 @@
     <Compile Include="Entities\Formularios\FormularioTurma.cs" />
     <Compile Include="Entities\Interfaces\IEntity.cs" />
     <Compile Include="Entities\JoinClasses\AlunoFaltaDisciplina.cs" />
+    <Compile Include="Entities\JoinClasses\AlunoTurma.cs" />
     <Compile Include="Entities\JoinClasses\ProfessorDisciplina.cs" />
     <Compile Include="Entities\JoinClasses\TurmaDisciplina.cs" />
     <Compile Include="Entities\JoinClasses\TurmaProfessor.cs" />
@@ -369,15 +376,12 @@
     <Compile Include="Boundaries\Professor\ListarProfessores.Designer.cs">
       <DependentUpon>ListarProfessores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220531061358_InitialMigration.cs" />
-    <Compile Include="Migrations\20220531061358_InitialMigration.designer.cs">
-      <DependentUpon>20220531061358_InitialMigration.cs</DependentUpon>
+    <Compile Include="Boundaries\Turma\ListarTurmas.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Migrations\20220612164834_FixProfessor.cs" />
-    <Compile Include="Migrations\20220612164834_FixProfessor.designer.cs">
-      <DependentUpon>20220612164834_FixProfessor.cs</DependentUpon>
+    <Compile Include="Boundaries\Turma\ListarTurmas.Designer.cs">
+      <DependentUpon>ListarTurmas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
     <Compile Include="Boundaries\UserControls\NameEditListPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -402,6 +406,17 @@
     <Compile Include="Boundaries\Professor\MostrarProfessor.Designer.cs">
       <DependentUpon>MostrarProfessor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Boundaries\Turma\MostrarTurma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boundaries\Turma\MostrarTurma.Designer.cs">
+      <DependentUpon>MostrarTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220613033606_InitialMigration.cs" />
+    <Compile Include="Migrations\20220613033606_InitialMigration.designer.cs">
+      <DependentUpon>20220613033606_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
     <Compile Include="Parsers\CpfParse.cs" />
     <Compile Include="Parsers\PhoneNumberParse.cs" />
     <Compile Include="Boundaries\Turma\Presenca.cs">
@@ -490,6 +505,9 @@
     <EmbeddedResource Include="Boundaries\Selections\SelectDisciplina.resx">
       <DependentUpon>SelectDisciplina.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Turma\ListarTurmas.resx">
+      <DependentUpon>ListarTurmas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\UserControls\NameEditListPanel.resx">
       <DependentUpon>NameEditListPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -543,6 +561,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Boundaries\Professor\MostrarProfessor.resx">
       <DependentUpon>MostrarProfessor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Turma\EditarTurma.resx">
+      <DependentUpon>EditarTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boundaries\Turma\MostrarTurma.resx">
+      <DependentUpon>MostrarTurma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

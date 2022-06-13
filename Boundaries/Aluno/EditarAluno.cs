@@ -61,7 +61,6 @@ namespace SistemaEscola
             aluno.NomeMae = tempAluno.NomeMae;
             aluno.NomeResponsavel = tempAluno.NomeResponsavel;
             aluno.Matricula = tempAluno.Matricula;
-            aluno.TurmaId = tempAluno.TurmaId;
 
             // Set up Turmas
             controladorTurma.FindAll().ForEach(t => turmas.Add(new FormularioTurma() 
@@ -72,12 +71,13 @@ namespace SistemaEscola
 
             turmas.ForEach(t => turmaComboBox.Items.Add(t.Nome));
 
-            if (aluno.TurmaId != null)
+            var alunoTurmas = controladorAluno.FindAllAlunoTurmasByAluno(aluno.Id);
+
+            if (alunoTurmas.Any())
             {
                 turmaComboBox.SelectedIndex = turmaComboBox.FindStringExact(turmas
-                    .Where(t => t.Id == aluno.TurmaId)
-                    .First()
-                    .Nome);
+                    .Where(t => t.Id == alunoTurmas.First().TurmaId)
+                    .First().Nome);
             }
 
             // Set up Disciplinas
@@ -278,8 +278,8 @@ namespace SistemaEscola
                                 NomeMae = maeTxtBox.Text.ToUpper(),
                                 NomeResponsavel = respTxtBox.Text.ToUpper(),
                                 Matricula = matriculaTxtBox.Text.ToUpper(),
-                                TurmaId = turmas.Where(t =>
-                                    t.Nome == turmaComboBox.SelectedItem.ToString()).First().Id,
+                                FormularioTurma = turmas.Where(t =>
+                                        t.Nome == turmaComboBox.SelectedItem.ToString()).First(),
                                 FormularioDisciplinas = disciplinas.Where(d =>
                                     selectedDisciplinas.Any(sd => sd == d.Nome)).ToList()
                             };

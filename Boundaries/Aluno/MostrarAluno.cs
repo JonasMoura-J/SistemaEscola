@@ -90,9 +90,10 @@ namespace SistemaEscola
             }
 
             // Set up Turma
-            if (tempAluno.TurmaId != null)
+            if (controladorAluno.FindAllAlunoTurmasByAluno(tempAluno.Id).Any())
             {
-                var turma = controladorTurma.FindById((int)tempAluno.TurmaId);
+                var turma = controladorTurma.FindById(controladorAluno.
+                    FindAllAlunoTurmasByAluno(tempAluno.Id).First().TurmaId);
 
                 turmaLb.Text = turma.Nome;
             }

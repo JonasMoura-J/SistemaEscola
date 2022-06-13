@@ -39,9 +39,6 @@ namespace SistemaEscola
 
         private void CadastrarTurma_Load(object sender, EventArgs e)
         {
-            // Temporario
-            controladorTurma.FindAll().ForEach(t => comboBox1.Items.Add(t.Nome));
-
             // Set up textboxes            
             foreach (var c in Controls)
             {

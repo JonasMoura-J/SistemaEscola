@@ -10,7 +10,7 @@ using SistemaEscola.Data;
 namespace SistemaEscola.Migrations
 {
     [DbContext(typeof(SistemaEscolaDbContext))]
-    [Migration("20220531061358_InitialMigration")]
+    [Migration("20220613033606_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,12 +61,7 @@ namespace SistemaEscola.Migrations
                     b.Property<string>("TelefoneResidencial")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TurmaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TurmaId");
 
                     b.ToTable("Alunos");
                 });
@@ -102,6 +97,21 @@ namespace SistemaEscola.Migrations
                     b.HasIndex("DisciplinaId");
 
                     b.ToTable("AlunoFaltaDisciplinas");
+                });
+
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.AlunoTurma", b =>
+                {
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TurmaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlunoId", "TurmaId");
+
+                    b.HasIndex("TurmaId");
+
+                    b.ToTable("AlunoTurmas");
                 });
 
             modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.ProfessorDisciplina", b =>
@@ -158,6 +168,9 @@ namespace SistemaEscola.Migrations
 
                     b.Property<string>("Cpf")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -218,14 +231,6 @@ namespace SistemaEscola.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("SistemaEscola.Entities.Aluno", b =>
-                {
-                    b.HasOne("SistemaEscola.Entities.Turma", "Turma")
-                        .WithMany("Alunos")
-                        .HasForeignKey("TurmaId")
-                        .OnDelete(DeleteBehavior.SetNull);
-                });
-
             modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.AlunoFaltaDisciplina", b =>
                 {
                     b.HasOne("SistemaEscola.Entities.Aluno", "Aluno")
@@ -237,6 +242,21 @@ namespace SistemaEscola.Migrations
                     b.HasOne("SistemaEscola.Entities.Disciplina", "Disciplina")
                         .WithMany("AlunoFaltaDisciplinas")
                         .HasForeignKey("DisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SistemaEscola.Entities.JoinClasses.AlunoTurma", b =>
+                {
+                    b.HasOne("SistemaEscola.Entities.Aluno", "Aluno")
+                        .WithMany("AlunoTurmas")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaEscola.Entities.Turma", "Turma")
+                        .WithMany("AlunoTurmas")
+                        .HasForeignKey("TurmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
