@@ -89,14 +89,8 @@ namespace SistemaEscola
 
                 foreach (var disc in selectedDisciplinas)
                 {
-                    var panel = new NamePanel(disc, disciplinasFlwLayPnl);
-
-                    disciplinasPanels.Add(panel);
-                    disciplinasFlwLayPnl.Controls.Add(panel);
-
-                    disciplinasPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    disciplinasPanels.ForEach(p => p.Width = disciplinasPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(disc, disciplinasFlwLayPnl,
+                        disciplinasPanels, disciplinasPanelLengths);
                 }
             }
 
@@ -129,16 +123,9 @@ namespace SistemaEscola
 
                 foreach (var turma in selectedTurmas)
                 {
-                    var panel = new NamePanel(turma, turmasFlwLayPnl);
-
-                    turmasPanels.Add(panel);
-                    turmasFlwLayPnl.Controls.Add(panel);
-
-                    turmasPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    turmasPanels.ForEach(p => p.Width = turmasPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(turma, turmasFlwLayPnl,
+                        turmasPanels, turmasPanelLengths);
                 }
-
             }
 
             // Set up TextBoxes

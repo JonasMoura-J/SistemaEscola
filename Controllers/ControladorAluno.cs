@@ -223,8 +223,15 @@ namespace SistemaEscola.Controllers
 
             var alunoTurmas = FindAllAlunoTurmasByAluno(alunoId);
 
-            alunoTurmas.ForEach(at => RemoveAlunoTurma(alunoId, at.TurmaId));
-            AddAlunoTurma(alunoId, form.FormularioTurma.Id);
+            if (alunoTurmas.Any())
+            {
+                alunoTurmas.ForEach(at => RemoveAlunoTurma(alunoId, at.TurmaId));
+            }
+
+            if (form.FormularioTurma != null)
+            {
+                AddAlunoTurma(alunoId, form.FormularioTurma.Id);
+            }
 
             if (saveChanges)
             {

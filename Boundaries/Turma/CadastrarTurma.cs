@@ -1,35 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 using System.Linq;
+using System.Drawing;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using SistemaEscola.Controllers;
+using System.ComponentModel.DataAnnotations;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {
     public partial class CadastrarTurma : Form
     {
-        private readonly Home _mainForm;
-        
-        ControladorTurma controladorTurma = new ControladorTurma();
-        ControladorAluno controladorAluno = ControladorAluno.Instance;
-        ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
-        
-        List<NamePanel> alunosPanels = new List<NamePanel>();
-        List<int> alunosPanelLengths = new List<int>();
-        List<NamePanel> disciplinasPanels = new List<NamePanel>();
-        List<int> disciplinasPanelLengths = new List<int>();
+        readonly Home _mainForm;
 
-        List<TextBox> textBoxes = new List<TextBox>();
+        readonly ControladorTurma controladorTurma = new ControladorTurma();
+        readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
+        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
 
-        List<FormularioAluno> alunos = new List<FormularioAluno>();
-        List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
-        
-        public List<string> selectedAlunos = new List<string>();
-        public List<string> selectedDisciplinas = new List<string>();
+        readonly List<NamePanel> alunosPanels = new List<NamePanel>();
+        readonly List<int> alunosPanelLengths = new List<int>();
+        readonly List<NamePanel> disciplinasPanels = new List<NamePanel>();
+        readonly List<int> disciplinasPanelLengths = new List<int>();
+
+        readonly List<TextBox> textBoxes = new List<TextBox>();
+
+        readonly List<FormularioAluno> alunos = new List<FormularioAluno>();
+        readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
+
+        readonly List<string> selectedAlunos = new List<string>();
+        readonly List<string> selectedDisciplinas = new List<string>();
 
         public CadastrarTurma(Home mainForm)
         {

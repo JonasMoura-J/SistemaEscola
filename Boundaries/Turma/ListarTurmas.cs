@@ -1,9 +1,9 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using SistemaEscola.Utils;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
+using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {

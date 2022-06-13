@@ -91,7 +91,6 @@ namespace SistemaEscola.Controllers
                 // Updates alunos
                 UpdateAlunoTurmas(form);
                 UpdateAlunoFaltaDisciplina(form);
-
                 _context.SaveChanges();
             }
         }
@@ -110,9 +109,17 @@ namespace SistemaEscola.Controllers
         // AlunoTurma
         public void AddAlunoTurma(int alunoId, int turmaId)
         {
+            // Only one Turma per Aluno
             if (!_context.AlunoTurmas.Any(at => at.AlunoId == alunoId &&
-            at.TurmaId == turmaId))
+                at.TurmaId == turmaId))
             {
+                var previousTurma = _context.AlunoTurmas.Where(at => at.AlunoId == alunoId).FirstOrDefault();
+
+                if (previousTurma != null)
+                {
+                    _context.AlunoTurmas.Remove(previousTurma);
+                }
+
                 _context.AlunoTurmas.Add(new AlunoTurma()
                 {
                     AlunoId = alunoId,
@@ -296,6 +303,8 @@ namespace SistemaEscola.Controllers
         // AlunoFaltaDisciplina
         public void UpdateAlunoFaltaDisciplina(FormularioTurma form, bool saveChanges = false)
         {
+            // Works... for some reason... (but there is a logical error going on)
+
             var turmaId = form.Id;
 
             if (turmaId == 0)
@@ -313,7 +322,7 @@ namespace SistemaEscola.Controllers
                     FormularioDisciplinas = form.FormularioDisciplinas
                 };
 
-                controladorAluno.UpdateFaltaDisciplinas(tempAluno);
+                controladorAluno.UpdateFaltaDisciplinas(tempAluno, true);
             }
 
             if (saveChanges)

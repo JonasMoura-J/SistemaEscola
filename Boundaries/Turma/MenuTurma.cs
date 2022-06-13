@@ -5,7 +5,7 @@ namespace SistemaEscola
 {
     public partial class MenuTurma : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
         public MenuTurma(Home mainForm)
         {

@@ -109,14 +109,8 @@ namespace SistemaEscola
 
                 foreach (var disc in selectedDisciplinas)
                 {
-                    var panel = new NamePanel(disc, disciplinasFlwLayPnl);
-
-                    disciplinasPanels.Add(panel);
-                    disciplinasFlwLayPnl.Controls.Add(panel);
-
-                    disciplinasPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    disciplinasPanels.ForEach(p => p.Width = disciplinasPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(disc, disciplinasFlwLayPnl,
+                        disciplinasPanels, disciplinasPanelLengths);
                 }
             }
 
@@ -263,6 +257,15 @@ namespace SistemaEscola
                                 dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
                             }
 
+                            // Prepares Turma for selection
+                            var selectedTurma = turmaComboBox.SelectedItem;
+
+                            if (selectedTurma != null)
+                            {
+                                selectedTurma = turmas.Where(t =>
+                                        t.Nome == selectedTurma.ToString()).FirstOrDefault();
+                            }
+
                             // Creates form to be sent to controller
                             var form = new FormularioAluno
                             {
@@ -278,8 +281,7 @@ namespace SistemaEscola
                                 NomeMae = maeTxtBox.Text.ToUpper(),
                                 NomeResponsavel = respTxtBox.Text.ToUpper(),
                                 Matricula = matriculaTxtBox.Text.ToUpper(),
-                                FormularioTurma = turmas.Where(t =>
-                                        t.Nome == turmaComboBox.SelectedItem.ToString()).First(),
+                                FormularioTurma = (FormularioTurma)selectedTurma,
                                 FormularioDisciplinas = disciplinas.Where(d =>
                                     selectedDisciplinas.Any(sd => sd == d.Nome)).ToList()
                             };

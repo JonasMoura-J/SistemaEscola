@@ -1,16 +1,13 @@
-﻿using SistemaEscola.Controllers;
-using SistemaEscola.Entities.Formularios;
-using SistemaEscola.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
+using SistemaEscola.Utils;
 
 namespace SistemaEscola
 {
@@ -86,14 +83,8 @@ namespace SistemaEscola
 
                 foreach (var aluno in selectedAlunos)
                 {
-                    var panel = new NamePanel(aluno, alunosFlwLayPnl);
-
-                    alunosPanels.Add(panel);
-                    alunosFlwLayPnl.Controls.Add(panel);
-
-                    alunosPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    alunosPanels.ForEach(p => p.Width = alunosPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(aluno, alunosFlwLayPnl,
+                        alunosPanels, alunosPanelLengths);
                 }
             }
 
@@ -126,14 +117,8 @@ namespace SistemaEscola
 
                 foreach (var disc in selectedDisciplinas)
                 {
-                    var panel = new NamePanel(disc, disciplinasFlwLayPnl);
-
-                    disciplinasPanels.Add(panel);
-                    disciplinasFlwLayPnl.Controls.Add(panel);
-
-                    disciplinasPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    disciplinasPanels.ForEach(p => p.Width = disciplinasPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(disc, disciplinasFlwLayPnl,
+                        disciplinasPanels, disciplinasPanelLengths);
                 }
             }
 
@@ -166,14 +151,8 @@ namespace SistemaEscola
 
                 foreach (var prof in selectedProfessores)
                 {
-                    var panel = new NamePanel(prof, professoresFlwLayPnl);
-
-                    professoresPanels.Add(panel);
-                    professoresFlwLayPnl.Controls.Add(panel);
-
-                    professoresPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    professoresPanels.ForEach(p => p.Width = professoresPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(prof, professoresFlwLayPnl,
+                        professoresPanels, professoresPanelLengths);
                 }
             }
 

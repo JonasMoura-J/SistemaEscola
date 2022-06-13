@@ -78,14 +78,8 @@ namespace SistemaEscola
 
                 foreach (var prof in selectedProfessores)
                 {
-                    var panel = new NamePanel(prof, professoresFlwLayPnl);
-
-                    professoresPanels.Add(panel);
-                    professoresFlwLayPnl.Controls.Add(panel);
-
-                    professoresPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    professoresPanels.ForEach(p => p.Width = professoresPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(prof, professoresFlwLayPnl,
+                        professoresPanels, professoresPanelLengths);
                 }
             }
 
@@ -119,14 +113,8 @@ namespace SistemaEscola
 
                 foreach (var turma in selectedTurmas)
                 {
-                    var panel = new NamePanel(turma, turmasFlwLayPnl);
-
-                    turmasPanels.Add(panel);
-                    turmasFlwLayPnl.Controls.Add(panel);
-
-                    turmasPanelLengths.Add(panel.Width);
-                    panel.AutoSize = false;
-                    turmasPanels.ForEach(p => p.Width = turmasPanelLengths.Max());
+                    FlowLayoutPanelTools.LoadNamePanel(turma, turmasFlwLayPnl,
+                        turmasPanels, turmasPanelLengths);
                 }
             }
 
