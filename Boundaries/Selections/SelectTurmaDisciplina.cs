@@ -1,16 +1,21 @@
-﻿using SistemaEscola.Controllers;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Controllers;
 
 namespace SistemaEscola
 {
     public partial class SelectTurmaDisciplina : Form
     {
-        private readonly Home _mainForm;
+        readonly Home _mainForm;
 
-        private readonly ControladorTurma controladorTurma = new ControladorTurma();
-        private readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorTurma controladorTurma = new ControladorTurma();
+        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+
+        readonly List<FormularioTurma> turmas = new List<FormularioTurma>();
+        readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
         public SelectTurmaDisciplina(Home mainForm)
         {
@@ -20,25 +25,29 @@ namespace SistemaEscola
 
         private void SelectTurmaDisciplina_Load(object sender, EventArgs e)
         {
-            List<string> turmas = new List<string>();
-            List<string> disciplinas = new List<string>();
+            controladorTurma.FindAll().ForEach(t => turmas.Add(new FormularioTurma() 
+            {
+                Id = t.Id,
+                Nome = t.Nome
+            }));
 
-            controladorTurma.FindAll().ForEach(t => turmas.Add(t.Nome));
-            controladorDisciplina.FindAll().ForEach(d => disciplinas.Add(d.Nome));
+            controladorDisciplina.FindAll().ForEach(d => disciplinas.Add(new FormularioDisciplina() 
+            {
+                Id = d.Id,
+                Nome = d.Nome
+            }));
 
-            turmas.Sort();
-            disciplinas.Sort();
-
-            turmas.ForEach(t => turmaComboBox.Items.Add(t));
-            disciplinas.ForEach(d => disciplinaComboBox.Items.Add(d));
+            turmas.ForEach(t => turmaComboBox.Items.Add(t.Nome));
+            disciplinas.ForEach(d => disciplinaComboBox.Items.Add(d.Nome));
         }
 
         private void advanceBtn_Click(object sender, EventArgs e)
         {
             if (turmaComboBox.SelectedItem != null && disciplinaComboBox.SelectedItem != null)
             {
-                _mainForm.OpenNewForm(new Presenca(_mainForm, turmaComboBox.SelectedItem.ToString(),
-                    disciplinaComboBox.SelectedItem.ToString()), sender);
+                _mainForm.OpenNewForm(new Presenca(_mainForm, 
+                    turmas.Where(t => t.Nome == turmaComboBox.SelectedItem.ToString()).First().Id,
+                    disciplinas.Where(d => d.Nome == disciplinaComboBox.SelectedItem.ToString()).First().Id), sender);
             }
         }
     }

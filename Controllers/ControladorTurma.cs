@@ -322,7 +322,7 @@ namespace SistemaEscola.Controllers
                     FormularioDisciplinas = form.FormularioDisciplinas
                 };
 
-                controladorAluno.UpdateFaltaDisciplinas(tempAluno, true);
+                controladorAluno.UpdateAlunoFaltaDisciplinas(tempAluno, true);
             }
 
             if (saveChanges)

@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Controllers;
+using System.Collections.Generic;
 using SistemaEscola.Entities;
 
 namespace SistemaEscola.Data
 {
     class SeedingService
     {
-        private readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
-        private readonly ControladorTurma _controladorTurma = new ControladorTurma();
+        readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
 
         public void Seed()
         {
@@ -55,13 +53,6 @@ namespace SistemaEscola.Data
             List<Turma> turmas = new List<Turma>() { t1, t2, t3 };
             List<Disciplina> disciplinas = new List<Disciplina>() { d1, d2, d3 };
             List<Usuario> usuarios = new List<Usuario>() { u1, u2 };
-
-            //professores.ForEach(p => p.InsertDisciplinas(new List<Disciplina>()));
-
-            //turmas.ForEach(t => alunos.ForEach(a => t.InsertAluno(a)));
-            //turmas.ForEach(t => t.InsertDisciplinas(new List<Disciplina>()));
-
-            //alunos.ForEach(a => a.AddDisciplina(d3));
 
             // Insert in Db
             alunos.ForEach(a => _context.Alunos.Add(a));

@@ -1,6 +1,6 @@
-﻿using SistemaEscola.Data;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using SistemaEscola.Data;
 
 namespace SistemaEscola
 {

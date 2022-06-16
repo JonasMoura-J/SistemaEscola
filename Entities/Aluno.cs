@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using SistemaEscola.Entities.JoinClasses;
 
@@ -38,13 +37,6 @@ namespace SistemaEscola.Entities
             NomePai = nomePai;
             NomeMae = nomeMae;
             NomeResponsavel = nomeResponsavel;
-        }
-
-        public void AddFaltas(Disciplina disciplina, int faltas)
-        {
-            var aluFaltaDisc = AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplina.Id).First();
-
-            aluFaltaDisc.Faltas += faltas;
         }
     }
 }

@@ -1,29 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaEscola
 {
     public partial class NamePresencaPanel : UserControl
     {
-        FlowLayoutPanel _panel;
-
         public Label lb;
 
-        public NamePresencaPanel(string text, FlowLayoutPanel panel)
+        public NamePresencaPanel(string text)
         {
             InitializeComponent();
             lb = nameLb;
             nameLb.MouseEnter += NamePresencaPanel_MouseEnter;
             nameLb.MouseLeave += NamePresencaPanel_MouseLeave;
             lb.Text = text;
-            _panel = panel;
         }
 
         private void HighlightPanel()
@@ -44,6 +35,13 @@ namespace SistemaEscola
         private void NamePresencaPanel_MouseLeave(object sender, EventArgs e)
         {
             ResetPanel();
+        }
+
+        public void ClearSelection()
+        {
+            presenteRBtn.Checked = false;
+            ausenteRBtn.Checked = false;
+            justificadoRBtn.Checked = false;
         }
     }
 }

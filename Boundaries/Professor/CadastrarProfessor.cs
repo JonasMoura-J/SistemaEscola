@@ -160,7 +160,7 @@ namespace SistemaEscola
                             {
                                 ResetPlaceHolders();
                                 MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                throw error.InnerException;
+                                //throw error.InnerException;
                             }
                         }
                     }

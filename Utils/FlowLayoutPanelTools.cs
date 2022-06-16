@@ -56,6 +56,19 @@ namespace SistemaEscola.Utils
             }
         }
 
+        public static void LoadNamePanel(string name, FlowLayoutPanel flwLayPnl,
+            List<NamePanel> panels, List<int> lengths, bool readOnly = false)
+        {
+            var newPanel = new NamePanel(name, flwLayPnl, readOnly);
+
+            panels.Add(newPanel);
+            flwLayPnl.Controls.Add(newPanel);
+
+            lengths.Add(newPanel.Width);
+            newPanel.AutoSize = false;
+            panels.ForEach(p => p.Width = lengths.Max());
+        }
+
         public static void LoadNameEditListPanel(Home mainForm, IFormulario form, FlowLayoutPanel flwLayPnl,
             List<NameEditListPanel> panels, List<int> lengths)
         {
@@ -68,10 +81,11 @@ namespace SistemaEscola.Utils
             newPanel.AutoSize = false;
             panels.ForEach(p => p.Width = lengths.Max());
         }
-        public static void LoadNamePanel(string name, FlowLayoutPanel flwLayPnl,
-            List<NamePanel> panels, List<int> lengths, bool readOnly = false)
+        
+        public static void LoadNamePresencaPanel(string name, FlowLayoutPanel flwLayPnl,
+            List<NamePresencaPanel> panels, List<int> lengths)
         {
-            var newPanel = new NamePanel(name, flwLayPnl, readOnly);
+            var newPanel = new NamePresencaPanel(name);
 
             panels.Add(newPanel);
             flwLayPnl.Controls.Add(newPanel);
@@ -88,6 +102,14 @@ namespace SistemaEscola.Utils
             panels.Clear();
             lengths.Clear();
             lengths.Add(flwLayPnl.Width);
+        }
+
+        public static void ClearRadioBtnSelection(FlowLayoutPanel flwLayPnl)
+        {
+            foreach (NamePresencaPanel panel in flwLayPnl.Controls)
+            {
+                panel.ClearSelection();
+            }
         }
     }
 }

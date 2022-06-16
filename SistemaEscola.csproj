@@ -274,7 +274,6 @@
     <Compile Include="Controllers\Interfaces\IController.cs" />
     <Compile Include="Data\SeedingService.cs" />
     <Compile Include="Data\SistemaEscolaDbContext.cs" />
-    <Compile Include="Data\TempDb.cs" />
     <Compile Include="Boundaries\Aluno\EditarAluno.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -115,7 +115,7 @@ namespace SistemaEscola
                     catch (Exception error)
                     {
                         MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        throw error.InnerException;
+                        //throw error.InnerException;
                     }
                 }
             }

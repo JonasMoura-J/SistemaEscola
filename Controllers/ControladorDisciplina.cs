@@ -90,6 +90,7 @@ namespace SistemaEscola.Controllers
             _context.SaveChanges();
         }
 
+        // ProfessorDisciplina
         public void AddProfessorDisciplina(int professorId, int disciplinaId)
         {
             if (!_context.ProfessorDisciplinas.Any(pd => pd.ProfessorId == professorId &&
@@ -151,6 +152,7 @@ namespace SistemaEscola.Controllers
             return _context.ProfessorDisciplinas.Where(pd => pd.DisciplinaId == disciplinaId).ToList();
         }
 
+        // TurmaDisciplina
         public void AddTurmaDisciplina(int turmaId, int disciplinaId)
         {
             if (!_context.TurmaDisciplinas.Any(td => td.TurmaId == turmaId &&
@@ -210,6 +212,70 @@ namespace SistemaEscola.Controllers
         public List<TurmaDisciplina> FindAllTurmaDisciplinasByDisciplina(int disciplinaId)
         {
             return _context.TurmaDisciplinas.Where(td => td.DisciplinaId == disciplinaId).ToList();
+        }
+
+        // AlunoFaltaDisciplina
+        public void AddAlunoFaltaDisciplina(int alunoId, int disciplinaId)
+        {
+            if (!_context.AlunoFaltaDisciplinas.Any(afd => afd.AlunoId == alunoId &&
+            afd.DisciplinaId == disciplinaId))
+            {
+                _context.AlunoFaltaDisciplinas.Add(new AlunoFaltaDisciplina()
+                {
+                    AlunoId = alunoId,
+                    DisciplinaId = disciplinaId
+                });
+            }
+        }
+
+        public void RemoveAlunoFaltaDisciplina(int alunoId, int disciplinaId)
+        {
+            var afd = _context.AlunoFaltaDisciplinas.Find(alunoId, disciplinaId);
+
+            if (afd != null)
+            {
+                _context.AlunoFaltaDisciplinas.Remove(afd);
+            }
+        }
+
+        // Not Working
+        public void UpdateAlunoFaltaDisciplinas(FormularioDisciplina form, bool saveChanges = false)
+        {
+            /*
+            var disciplinaId = form.Id;
+
+            if (disciplinaId == 0)
+            {
+                disciplinaId = FindByName(form.Nome).Id;
+            }
+
+            var alunoFaltaDisciplinas = FindAllAlunoFaltaDisciplinasByDisciplina(disciplinaId);
+
+            foreach (var ft in form.FormularioAlunoFaltaDisciplinas)
+            {
+                if (!alunoFaltaDisciplinas.Any(afd => afd.AlunoId == ft.Id))
+                {
+                    AddAlunoFaltaDisciplina(ft.Id, disciplinaId);
+                }
+            }
+
+            foreach (var td in turmaDisciplinas)
+            {
+                if (!form.FormularioTurmas.Any(ft => ft.Id == td.TurmaId))
+                {
+                    RemoveTurmaDisciplina(td.TurmaId, td.DisciplinaId);
+                }
+            }
+
+            if (saveChanges)
+            {
+                _context.SaveChanges();
+            }*/
+        }
+
+        public List<AlunoFaltaDisciplina> FindAllAlunoFaltaDisciplinasByDisciplina(int disciplinaId)
+        {
+            return _context.AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplinaId).ToList();
         }
     }
 }

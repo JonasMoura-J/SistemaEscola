@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SistemaEscola.Entities;
 using SistemaEscola.Entities.JoinClasses;
+using SistemaEscola.Entities;
 
 namespace SistemaEscola.Data
 {

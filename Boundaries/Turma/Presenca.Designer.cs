@@ -33,6 +33,7 @@ namespace SistemaEscola
             this.concluirBtn = new System.Windows.Forms.Button();
             this.titleLb = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.clearBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // alunosFlwLayPnl
@@ -76,6 +77,22 @@ namespace SistemaEscola
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(150, 28);
             this.dateTimePicker1.TabIndex = 136;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // clearBtn
+            // 
+            this.clearBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(91)))), ((int)(((byte)(150)))));
+            this.clearBtn.FlatAppearance.BorderSize = 0;
+            this.clearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearBtn.ForeColor = System.Drawing.Color.White;
+            this.clearBtn.Location = new System.Drawing.Point(899, 508);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(106, 45);
+            this.clearBtn.TabIndex = 137;
+            this.clearBtn.Text = "Limpar";
+            this.clearBtn.UseVisualStyleBackColor = false;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // Presenca
             // 
@@ -83,6 +100,7 @@ namespace SistemaEscola
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1116, 590);
+            this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.titleLb);
             this.Controls.Add(this.concluirBtn);
@@ -101,5 +119,6 @@ namespace SistemaEscola
         private System.Windows.Forms.Button concluirBtn;
         private System.Windows.Forms.Label titleLb;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button clearBtn;
     }
 }

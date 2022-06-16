@@ -131,6 +131,7 @@ namespace SistemaEscola.Controllers
             _context.SaveChanges();
         }
 
+        // ProfessorDisciplina
         public void AddProfessorDisciplina(int professorId, int disciplinaId)
         {
             if (!_context.ProfessorDisciplinas.Any(pd => pd.ProfessorId == professorId &&
@@ -193,6 +194,7 @@ namespace SistemaEscola.Controllers
             return _context.ProfessorDisciplinas.Where(pd => pd.ProfessorId == professorId).ToList();
         }
 
+        // TurmaProfessor
         public void AddTurmaProfessor(int turmaId, int professorId)
         {
             if (!_context.TurmaProfessores.Any(tp => tp.TurmaId == turmaId &&

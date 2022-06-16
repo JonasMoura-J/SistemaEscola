@@ -7,6 +7,8 @@ using SistemaEscola.Entities.Formularios;
 
 namespace SistemaEscola.Controllers
 {
+    // FIX LATER
+
     class ControladorUsuario : IController<Usuario>
     {
         readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
