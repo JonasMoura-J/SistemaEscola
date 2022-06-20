@@ -14,7 +14,7 @@ namespace SistemaEscola.Entities
         public List<TurmaProfessor> TurmaProfessores { get; set; } = new List<TurmaProfessor>();
         public List<TurmaAvaliacao> TurmaAvaliacoes { get; set; } = new List<TurmaAvaliacao>();
 
-        public Turma(string codigo, string nome, int quantidadeAlunos)
+        public Turma(string codigo, string nome, int quantidadeAlunos = 0)
         {
             Codigo = codigo;
             Nome = nome;

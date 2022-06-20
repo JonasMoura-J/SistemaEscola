@@ -167,7 +167,8 @@ namespace SistemaEscola
         private void concluirBtn_Click(object sender, EventArgs e)
         {
             // Check if any obligatory fields are empty
-            if (nomeTxtBox.ForeColor != Color.LightSteelBlue && codigoTxtBox.ForeColor != Color.LightSteelBlue)
+            if (nomeTxtBox.ForeColor != Color.LightSteelBlue
+                && codigoTxtBox.ForeColor != Color.LightSteelBlue)
             {
                 // Creates form to be sent to controller
                 var form = new FormularioTurma
@@ -180,7 +181,8 @@ namespace SistemaEscola
                     FormularioDisciplinas = disciplinas.Where(d =>
                         selectedDisciplinas.Any(sd => sd == d.Nome)).ToList(),
                     FormularioProfessores = professores.Where(p =>
-                        selectedProfessores.Any(sp => sp == p.Nome)).ToList()
+                        selectedProfessores.Any(sp => sp == p.Nome)).ToList(),
+                    QuantidadeAlunos = selectedAlunos.Count
                 };
 
                 // Validates form
@@ -191,7 +193,7 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -207,21 +209,25 @@ namespace SistemaEscola
                             // Returns to MostrarTurma
                             _mainForm.OpenPreviousForm(sender);
                             _mainForm.OpenPreviousForm(sender);
-                            _mainForm.OpenNewForm(new MostrarTurma(_mainForm, turma.Id), sender, null);
+                            _mainForm.OpenNewForm(new MostrarTurma(_mainForm, turma.Id), sender);
                         }
                         else
                         {
                             // Returns to ListarTurmas
                             _mainForm.OpenNewForm(new MenuTurma(_mainForm), sender, null, true);
-                            _mainForm.OpenNewForm(new ListarTurmas(_mainForm), sender, null);
+                            _mainForm.OpenNewForm(new ListarTurmas(_mainForm), sender);
                         }
                     }
                     catch (Exception error)
                     {
-                        MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //throw error.InnerException;
+                        MessageBox.Show(error.Message, "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Nome e Código obrigatórios.",
+                    "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

@@ -216,7 +216,7 @@ namespace SistemaEscola
             this.cpfLb.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.cpfLb.Location = new System.Drawing.Point(15, 84);
             this.cpfLb.Name = "cpfLb";
-            this.cpfLb.Size = new System.Drawing.Size(142, 23);
+            this.cpfLb.Size = new System.Drawing.Size(147, 23);
             this.cpfLb.TabIndex = 175;
             this.cpfLb.Text = "CPF";
             // 

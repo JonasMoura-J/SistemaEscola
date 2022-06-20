@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using SistemaEscola.Entities;
+using System.Globalization;
 
 namespace SistemaEscola.Data
 {
@@ -17,29 +18,32 @@ namespace SistemaEscola.Data
                 return;
             }
 
-            Aluno a1 = new Aluno("JOAO AUGUSTO", "12345678910", "4312312345",
-                DateTime.Parse("12/22/2222"), "23451123",
-                "912341234", "joao@gmail.com", "0321323", string.Empty, "Maria");
-            Aluno a2 = new Aluno("MARIA DA SILVA", "64734664743", "7665092996",
-                DateTime.Parse("12/22/2222"), "66543213",
-                "923672345", "mari@gmail.com", "2839102", "Miguel");
-            Aluno a3 = new Aluno("MIGUEL WAWRZASZEK", "00594837251", "2283011830",
-                DateTime.Parse("12/22/2222"), "22550594",
-                "900339283", "migueleocara@gmail.com", "9932432", "Unknown");
-            Aluno a4 = new Aluno("ALBERTO WAWRZASZEK", "00394857151", "2283011830",
-                DateTime.Parse("12/22/2222"), "22543594",
-                "900339283", "albertftw@gmail.com", "9952432",  "Unknown");
+            Aluno a1 = new Aluno("JOAO AUGUSTO", "09358135000", "30.045.243-3",
+                DateTime.ParseExact("26/02/2005", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2137834482", "21981907312", "joao@gmail.com", "0321323", string.Empty, "AYLA LUIZA");
+            Aluno a2 = new Aluno("MARIA DA SILVA", "68640652007", "33.064.644-8",
+                DateTime.ParseExact("16/04/2005", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2437249048", "24984972029", "mary@gmail.com", "2839102", "CAUÊ MIGUEL");
+            Aluno a3 = new Aluno("MIGUEL WAWRZASZEK", "80091488060", "39.585.454-4",
+                DateTime.ParseExact("24/01/2008", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2129392424", "21998497525", "migueleocara@gmail.com", "9932432", "MARCELO KAIQUE", "SARA SOPHIA");
+            Aluno a4 = new Aluno("ALBERTO WAWRZASZEK", "23646078090", "10.832.435-7",
+                DateTime.ParseExact("24/01/2010", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2136229365", "21991467842", "albertftw@gmail.com", "9952432", "MARCELO KAIQUE", "SARA SOPHIA");
 
-            Professor p1 = new Professor("LEO", "00483923812", "9233813048", DateTime.Parse("02-02-1980"),
-                "46382917", "928371164", "leoprof@gmail.com");
-            Professor p2 = new Professor("ALE", "93820128553", "1188372048", DateTime.Parse("02-02-1980"),
-                "09382837", "955774488", "aleprof@gmail.com");
-            Professor p3 = new Professor("THY", "77424678911", "6654356776", DateTime.Parse("02-02-1980"),
-                "12342231", "922335463", "thygamer@gmail.com");
+            Professor p1 = new Professor("GABRIEL ENZO", "07273739782", "43.975.996-1",
+                DateTime.ParseExact("09/04/1989", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2237095317", "22989187620", "gabrielprof@gmail.com");
+            Professor p2 = new Professor("MATHEUS DA ROCHA", "96517311769", "42.464.823-4",
+                DateTime.ParseExact("09/06/1978", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2437286239", "24984621420", "mathprof@gmail.com");
+            Professor p3 = new Professor("MURILO ANTONIO", "92599362768", "22.315.780-6",
+                DateTime.ParseExact("02/04/1965", "dd/MM/yyyy", new CultureInfo("pt-BR")),
+                "2125945504", "21983584802", "murillgamer@gmail.com");
 
-            Turma t1 = new Turma("03A3N", "7° ANO", 20);
-            Turma t2 = new Turma("01A4N", "8° ANO", 14);
-            Turma t3 = new Turma("08A1N", "9° ANO", 3);
+            Turma t1 = new Turma("03A3N", "7° ANO");
+            Turma t2 = new Turma("01A4N", "8° ANO");
+            Turma t3 = new Turma("08A1N", "9° ANO");
 
             Disciplina d1 = new Disciplina("MATEMATICA");
             Disciplina d2 = new Disciplina("PORTUGUES");

@@ -11,7 +11,7 @@ namespace SistemaEscola
     {
         readonly Home _mainForm;
 
-        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
 
         readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
 
@@ -65,7 +65,7 @@ namespace SistemaEscola
             if (searchTxtBox.Text != "Buscar")
             {
                 TextBoxTools.FilterPanelList(searchTxtBox, disciplinasFlwLayPnl, _mainForm,
-                disciplinas, disciplinasPanels, disciplinasPanelLengths);
+                    disciplinas, disciplinasPanels, disciplinasPanelLengths);
             }
         }
     }

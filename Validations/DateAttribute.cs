@@ -46,7 +46,7 @@ namespace SistemaEscola.Validations
             }
         }          
 
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var date = (DateTime)value;
 
@@ -54,11 +54,11 @@ namespace SistemaEscola.Validations
             {
                 if (date >= _minDate && date <= _maxDate)
                 {
-                    return true;
+                    return ValidationResult.Success;
                 }
             }
 
-            return false;
+            return new ValidationResult(ErrorMessage = "Data de nascimento inválida.");
         }
     }
 }

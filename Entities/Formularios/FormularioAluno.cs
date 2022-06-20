@@ -9,19 +9,19 @@ namespace SistemaEscola.Entities.Formularios
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "Nome deve conter de 2 a 100 caracteres.")]
         public string Nome { get; set; }
-        [Required, Cpf, Display(Name = "CPF")]
+        [Required, Cpf]
         public string Cpf { get; set; }
-        [Required, Display(Name = "RG")]
+        [Required]
         public string Rg { get; set; }
-        [Required, Date("01/01/2000"), Display(Name = "Data de Nascimento")] // set proper date later
+        [Required, Date("01/01/1950", "01/01/2018")]
         public DateTime DataNascimento { get; set; }
-        [PhoneNumber, Display(Name = "Telefone Residencial")]
+        [PhoneNumber]
         public string TelefoneResidencial { get; set; }
-        [MobilePhoneNumber, Display(Name = "Telefone Celular")]
+        [MobilePhoneNumber]
         public string TelefoneCelular { get; set; }
-        [Required, EmailAddress, Display(Name = "E-mail")]
+        [Required, EmailAddress(ErrorMessage = "Endereço de e-mail inválido.")]
         public string Email { get; set; }
         [StringLength(100), Display(Name = "Nome do Pai")]
         public string NomePai { get; set; }
@@ -31,7 +31,6 @@ namespace SistemaEscola.Entities.Formularios
         public string NomeResponsavel { get; set; }
         [Required, Display(Name = "Matrícula")]
         public string Matricula { get; set; }
-        public int? TurmaId { get; set; }
         public List<FormularioDisciplina> FormularioDisciplinas = new List<FormularioDisciplina>();
         public FormularioTurma FormularioTurma = new FormularioTurma();
     }

@@ -42,7 +42,7 @@ namespace SistemaEscola
             cpfLb.Text = CpfParse.ToDigit(tempProfessor.Cpf);
             rgLb.Text = tempProfessor.Rg;
             dataNascLb.Text = tempProfessor.DataNascimento.ToString("dd/MM/yyyy");
-            emailLb.Text = tempProfessor.Email.ToLower();
+            emailLb.Text = tempProfessor.Email;
 
             // Optional
             if (tempProfessor.TelefoneResidencial != string.Empty)

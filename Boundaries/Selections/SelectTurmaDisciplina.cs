@@ -11,8 +11,8 @@ namespace SistemaEscola
     {
         readonly Home _mainForm;
 
-        readonly ControladorTurma controladorTurma = new ControladorTurma();
-        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
 
         readonly List<FormularioTurma> turmas = new List<FormularioTurma>();
         readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();

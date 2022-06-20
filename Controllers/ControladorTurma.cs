@@ -21,7 +21,7 @@ namespace SistemaEscola.Controllers
             // Check if already exists
             if (FindAll().Any(d => d.Nome == form.Nome || d.Codigo == form.Codigo))
             {
-                throw new Exception("Turma já cadastrada");
+                throw new Exception("Turma já cadastrada.");
             }
 
             // Adds new Turma to Db
@@ -84,6 +84,7 @@ namespace SistemaEscola.Controllers
                 // Updates Turma
                 turma.Nome = form.Nome;
                 turma.Codigo = form.Codigo;
+                turma.QuantidadeAlunos = form.QuantidadeAlunos;
 
                 // Updates disciplinas
                 UpdateTurmaDisciplinas(form);
@@ -94,6 +95,7 @@ namespace SistemaEscola.Controllers
                 // Updates alunos
                 UpdateAlunoTurmas(form);
                 UpdateAlunoFaltaDisciplina(form);
+                
                 _context.SaveChanges();
             }
         }

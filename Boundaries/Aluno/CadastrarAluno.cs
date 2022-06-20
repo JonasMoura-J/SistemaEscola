@@ -95,84 +95,94 @@ namespace SistemaEscola
         private void addBtn_Click(object sender, EventArgs e)
         {
             // Check if any obligatory fields are empty
-            if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+            if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue)
+                && !textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
-                if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+                // Check if at least 1 optional field is filled
+                if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black)
+                    && optionalTextBoxes.Any(t => t.ForeColor == Color.Black))
                 {
-                    // Check if at least 1 optional field is filled
-                    if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black))
+                    // Removes placeholder from optional fields
+                    optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                        ToList().ForEach(t => t.Text = string.Empty);
+
+                    optionalTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                        ToList().ForEach(t => t.Text = string.Empty);
+
+                    // Converts date to correct format (for dealing with errors)
+                    DateTime dateResult;
+                    DateTime dataNascConverted;
+
+                    if (!DateTime.TryParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"),
+                        DateTimeStyles.None, out dateResult))
                     {
-                        if (optionalTextBoxes.Any(t => t.ForeColor == Color.Black))
+                        dataNascConverted = DateTime.MinValue;
+                    }
+                    else
+                    {
+                        dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                    }
+
+                    // Creates form to be sent to controller
+                    var form = new FormularioAluno
+                    {
+                        Nome = nomeTxtBox.Text.ToUpper(),
+                        Cpf = cpfTxtBox.Text,
+                        Rg = rgTxtBox.Text.ToUpper(),
+                        DataNascimento = dataNascConverted,
+                        TelefoneResidencial = telResTxtBox.Text,
+                        TelefoneCelular = telCelTxtBox.Text,
+                        Email = emailTxtBox.Text.ToLower(),
+                        NomePai = paiTxtBox.Text.ToUpper(),
+                        NomeMae = maeTxtBox.Text.ToUpper(),
+                        NomeResponsavel = respTxtBox.Text.ToUpper(),
+                        Matricula = matriculaTxtBox.Text.ToUpper()
+                    };
+
+                    // Validates form
+                    ValidationContext validContext = new ValidationContext(form, null, null);
+                    List<ValidationResult> errors = new List<ValidationResult>();
+
+                    if (!Validator.TryValidateObject(form, validContext, errors, true))
+                    {
+                        foreach (ValidationResult result in errors)
                         {
-                            // Removes placeholder from optional fields
-                            optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
-                                ToList().ForEach(t => t.Text = string.Empty);
+                            // Returns placeholders to their text boxes
+                            ResetPlaceHolders();
 
-                            optionalTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
-                                ToList().ForEach(t => t.Text = string.Empty);
+                            MessageBox.Show(result.ErrorMessage, "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            // Sends validated form to the controller
+                            controladorAluno.Add(form);
 
-                            // Converts date to correct format (for dealing with errors)
-                            DateTime dateResult;
-                            DateTime dataNascConverted;
+                            // Returns to MenuAluno
+                            _mainForm.OpenPreviousForm(sender);
 
-                            if (!DateTime.TryParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"),
-                                DateTimeStyles.None, out dateResult))
-                            {
-                                dataNascConverted = DateTime.MinValue;
-                            } else
-                            {
-                                dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
-                            }
-
-                            // Creates form to be sent to controller
-                            var form = new FormularioAluno
-                            {
-                                Nome = nomeTxtBox.Text.ToUpper(),
-                                Cpf = cpfTxtBox.Text,
-                                Rg = rgTxtBox.Text.ToUpper(),
-                                DataNascimento = dataNascConverted,
-                                TelefoneResidencial = telResTxtBox.Text,
-                                TelefoneCelular = telCelTxtBox.Text,
-                                Email = emailTxtBox.Text.ToUpper(),
-                                NomePai = paiTxtBox.Text.ToUpper(),
-                                NomeMae = maeTxtBox.Text.ToUpper(),
-                                NomeResponsavel = respTxtBox.Text.ToUpper(),
-                                Matricula = matriculaTxtBox.Text.ToUpper()
-                            };
-
-                            // Validates form
-                            ValidationContext validContext = new ValidationContext(form, null, null);
-                            List<ValidationResult> errors = new List<ValidationResult>();
-
-                            if (!Validator.TryValidateObject(form, validContext, errors, true))
-                            {
-                                foreach (ValidationResult result in errors)
-                                {
-                                    // Returns placeholders to their text boxes
-                                    ResetPlaceHolders();
-
-                                    MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return;
-                                }
-                            } else {
-                                try
-                                {
-                                    // Sends validated form to the controller
-                                    controladorAluno.Add(form);
-
-                                    // Returns to MenuAluno
-                                    _mainForm.OpenPreviousForm(sender);
-
-                                } catch (Exception error)
-                                {
-                                    ResetPlaceHolders();
-                                    MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    //throw error.InnerException;
-                                }    
-                            }
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBox.Show(error.Message, "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            ResetPlaceHolders();              
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Pelo menos um número de telefone obrigatório.\n" +
+                        "Pelo menos o nome de um dos pais ou o nome do responsável obrigatório.",
+                        "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nome, CPF, RG, Data de Nascimento, E-mail e Matrícula obrigatórios.",
+                    "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

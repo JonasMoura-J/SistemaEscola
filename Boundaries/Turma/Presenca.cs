@@ -13,8 +13,8 @@ namespace SistemaEscola
     {
         readonly Home _mainForm;
 
-        readonly ControladorTurma controladorTurma = new ControladorTurma();
-        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
         readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
 
         readonly int _turmaId;
@@ -71,7 +71,7 @@ namespace SistemaEscola
                     alunosPanels, alunosPanelLengths);
             }
 
-            //Datetimepicker Settings (currently not doing anything)
+            // Datetimepicker Settings (currently not doing anything)
             dateTimePicker1.CustomFormat = "dd/MM/yyyy";
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
         }

@@ -9,7 +9,7 @@ namespace SistemaEscola.Validations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     sealed public class CpfAttribute : ValidationAttribute
     {
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var cpfDigit = (string)value;
 
@@ -17,11 +17,11 @@ namespace SistemaEscola.Validations
             {
                 if (IsValidCpfDigit(cpfDigit))
                 {
-                    return true;
+                    return ValidationResult.Success;
                 }
             }
 
-            return false;
+            return new ValidationResult(ErrorMessage = "CPF inválido.");
         }
 
         internal bool MatchesFormat(string cpfDigit)

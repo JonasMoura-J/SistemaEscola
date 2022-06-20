@@ -14,7 +14,7 @@ namespace SistemaEscola
     {
         Thread th;
         
-        readonly ControladorUsuario controladorLogin = new ControladorUsuario();
+        readonly ControladorUsuario controladorLogin = ControladorUsuario.Instance;
 
         public Login()
         {
@@ -44,20 +44,33 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Erro de log in", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
                 else
                 {
-                    if (controladorLogin.ConfirmLogin(form))
+                    try
                     {
-                        Close();
-                        th = new Thread(OpenHomeForm);
-                        th.SetApartmentState(ApartmentState.STA);
-                        th.Start();
+                        var confirmLogin = controladorLogin.ConfirmLogin(form);
+
+                        if (confirmLogin)
+                        {
+                            Close();
+                            th = new Thread(OpenHomeForm);
+                            th.SetApartmentState(ApartmentState.STA);
+                            th.Start();
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message, "Erro de log in", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Usuário e Senha obrigatórios.", "Erro de log in", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

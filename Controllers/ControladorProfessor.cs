@@ -15,7 +15,7 @@ namespace SistemaEscola.Controllers
 
         public static readonly ControladorProfessor Instance = new ControladorProfessor();
         
-        readonly ControladorUsuario _controladorUsuario = new ControladorUsuario();
+        readonly ControladorUsuario controladorUsuario = ControladorUsuario.Instance;
 
         public void Add(FormularioProfessor form)
         {
@@ -31,16 +31,12 @@ namespace SistemaEscola.Controllers
             // Updates disciplinas
             UpdateProfessorDisciplinas(form, true);
 
-            /*
             // Creates a new user profile
-            var usuario = new FormularioUsuario
+            controladorUsuario.Add(new FormularioUsuario
             {
-                Nome = professor.Cpf,
-                Senha = professor.Cpf
-            };
-
-            _controladorUsuario.Add(usuario);
-            */
+                Nome = CpfParse.ToNumber(form.Cpf),
+                Senha = CpfParse.ToNumber(form.Cpf)
+            });
         }
 
         public void InsertIntoDb(FormularioProfessor form)

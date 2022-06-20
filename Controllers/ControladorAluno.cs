@@ -21,7 +21,7 @@ namespace SistemaEscola.Controllers
             if (FindAll().Any(a => CpfParse.ToDigit(a.Cpf) == form.Cpf || a.Matricula == form.Matricula ||
                 a.Email == form.Email))
             {
-                throw new Exception("Aluno já cadastrado");
+                throw new Exception("Aluno já cadastrado.");
             }
 
             // Adds new Aluno in Db

@@ -19,7 +19,7 @@ namespace SistemaEscola.Controllers
             // Checks if Disciplina already exists
             if (FindAll().Any(d => d.Nome == form.Nome))
             {
-                throw new Exception("Disciplina já cadastrada");
+                throw new Exception("Disciplina já cadastrada.");
             }
 
             // Adds new Disciplina do Db

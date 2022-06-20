@@ -9,12 +9,12 @@ namespace SistemaEscola.Validations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     sealed public class MobilePhoneNumberAttribute : ValidationAttribute
     {
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (string.IsNullOrEmpty((string)value))
             {
                 // Phone numbers are optional
-                return true;
+                return ValidationResult.Success;
             }
 
             var phoneNumber = (string)value;
@@ -23,11 +23,11 @@ namespace SistemaEscola.Validations
             {
                 if (IsValidPhoneNumber(phoneNumber))
                 {
-                    return true;
+                    return ValidationResult.Success;
                 }
             }
 
-            return false;
+            return new ValidationResult(ErrorMessage = "Número de telefone celular inválido.");
         }
 
         internal bool MatchesFormat(string phoneNumber)

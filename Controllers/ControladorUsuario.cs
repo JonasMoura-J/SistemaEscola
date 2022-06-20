@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using SistemaEscola.Data;
-using SistemaEscola.Entities;
+using System.Collections.Generic;
 using SistemaEscola.Entities.Formularios;
+using SistemaEscola.Entities;
+using SistemaEscola.Data;
 
 namespace SistemaEscola.Controllers
 {
-    // FIX LATER
-
     class ControladorUsuario : IController<Usuario>
     {
         readonly SistemaEscolaDbContext _context = new SistemaEscolaDbContext();
+
+        public static readonly ControladorUsuario Instance = new ControladorUsuario();
 
         public void Add(FormularioUsuario form)
         {
@@ -31,7 +31,7 @@ namespace SistemaEscola.Controllers
 
         public List<Usuario> FindAll()
         {
-            return _context.Usuarios.ToList();
+            return _context.Usuarios.OrderBy(u => u.Nome).ToList();
         }
 
         public Usuario FindByName(string name)
@@ -50,15 +50,17 @@ namespace SistemaEscola.Controllers
         {
             var user = FindByName(form.Nome);
 
-            if (user != null)
+            if (user == null)
             {
-                if (form.Senha == user.Senha)
-                {
-                    return true;
-                }
+                throw new Exception("Usuário não cadastrado.");
             }
 
-            return false;
+            if (form.Senha != user.Senha)
+            {
+                throw new Exception("Senha incorreta.");
+            }
+
+            return true;
         }
     }
 }

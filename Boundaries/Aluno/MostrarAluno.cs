@@ -40,7 +40,7 @@ namespace SistemaEscola
             cpfLb.Text = CpfParse.ToDigit(tempAluno.Cpf);
             rgLb.Text = tempAluno.Rg;
             dataNascLb.Text = tempAluno.DataNascimento.ToString("dd/MM/yyyy");
-            emailLb.Text = tempAluno.Email.ToLower();
+            emailLb.Text = tempAluno.Email;
             matriculaLb.Text = tempAluno.Matricula;
 
             // Optional

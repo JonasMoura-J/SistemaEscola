@@ -13,7 +13,7 @@ namespace SistemaEscola
     {
         readonly Home _mainForm;
 
-        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
 
         public CadastrarDisciplina(Home mainForm)
         {
@@ -38,7 +38,7 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -54,10 +54,14 @@ namespace SistemaEscola
                     
                     } catch (Exception error)
                     {
-                        MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(error.Message, "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }  
                 }
-            }                    
+            }
+            else
+            {
+                MessageBox.Show("Nome obrigatório.", "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void nomeTxtBox_Enter(object sender, EventArgs e)

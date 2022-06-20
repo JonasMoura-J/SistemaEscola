@@ -12,7 +12,7 @@ namespace SistemaEscola
     {
         readonly Home _mainForm;
 
-        readonly ControladorTurma controladorTurma = new ControladorTurma();
+        readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
 
         readonly List<FormularioTurma> turmas = new List<FormularioTurma>();
 

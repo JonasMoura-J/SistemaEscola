@@ -147,7 +147,7 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -163,22 +163,24 @@ namespace SistemaEscola
                             // Returns to MostrarDisciplina
                             _mainForm.OpenPreviousForm(sender);
                             _mainForm.OpenPreviousForm(sender);
-                            _mainForm.OpenNewForm(new MostrarDisciplina(_mainForm, disciplina.Id), sender, null);
+                            _mainForm.OpenNewForm(new MostrarDisciplina(_mainForm, disciplina.Id), sender);
                         }
                         else
                         {
                             // Returns to ListarDisciplinas
                             _mainForm.OpenNewForm(new MenuDisciplina(_mainForm), sender, null, true);
-                            _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender, null);
+                            _mainForm.OpenNewForm(new ListarDisciplinas(_mainForm), sender);
                         }
 
                     }
                     catch (Exception error)
                     {
-                        MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //throw error.InnerException;
+                        MessageBox.Show(error.Message, "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            } else
+            {
+                MessageBox.Show("Nome obrigatório.", "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

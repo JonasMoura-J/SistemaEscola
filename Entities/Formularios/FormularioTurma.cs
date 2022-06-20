@@ -7,9 +7,9 @@ namespace SistemaEscola.Entities.Formularios
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "Nome deve conter de 2 a 100 caracteres.")]
         public string Nome { get; set; }
-        [Required, Display(Name = "Código")]
+        [Required]
         public string Codigo { get; set; }
         public List<FormularioAluno> FormularioAlunos { get; set; }
         public List<FormularioDisciplina> FormularioDisciplinas { get; set; }

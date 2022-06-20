@@ -65,7 +65,7 @@ namespace SistemaEscola
             if (searchTxtBox.Text != "Buscar")
             {
                 TextBoxTools.FilterPanelList(searchTxtBox, alunosFlwLayPnl, _mainForm,
-                alunos, alunosPanels, alunosPanelLengths);
+                    alunos, alunosPanels, alunosPanelLengths);
             }
         }
     }

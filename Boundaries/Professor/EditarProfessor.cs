@@ -157,7 +157,7 @@ namespace SistemaEscola
             cpfTxtBox.Text = professor.Cpf;
             rgTxtBox.Text = professor.Rg;
             dataNascTxtBox.Text = professor.DataNascimento.ToString("dd/MM/yyyy");
-            emailTxtBox.Text = professor.Email.ToLower();
+            emailTxtBox.Text = professor.Email;
 
             textBoxes.ForEach(tb => tb.ForeColor = Color.Black);
             maskedTextBoxes.ForEach(mtb => mtb.ForeColor = Color.Black);
@@ -198,92 +198,100 @@ namespace SistemaEscola
         private void concluirBtn_Click(object sender, EventArgs e)
         {
             // Check if any obligatory fields are empty
-            if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+            if (!maskedTextBoxes.Any(t => t.ForeColor == Color.LightSteelBlue)
+                && !textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
             {
-                if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+                // Check if at least 1 optional field is filled
+                if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black))
                 {
-                    // Check if at least 1 optional field is filled
-                    if (optionalMaskedTextBoxes.Any(t => t.ForeColor == Color.Black))
+                    // Removes placeholder from optional fields
+                    optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
+                        ToList().ForEach(t => t.Text = string.Empty);
+
+                    // Converts date to correct format (for dealing with errors)
+                    DateTime dateResult;
+                    DateTime dataNascConverted;
+
+                    if (!DateTime.TryParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"),
+                        DateTimeStyles.None, out dateResult))
                     {
-                        // Removes placeholder from optional fields
-                        optionalMaskedTextBoxes.Where(t => t.ForeColor == Color.LightSteelBlue).
-                            ToList().ForEach(t => t.Text = string.Empty);
+                        dataNascConverted = DateTime.MinValue;
+                    }
+                    else
+                    {
+                        dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                    }
 
-                        // Converts date to correct format (for dealing with errors)
-                        DateTime dateResult;
-                        DateTime dataNascConverted;
+                    // Creates form to be sent to controller
+                    var form = new FormularioProfessor
+                    {
+                        Id = professor.Id,
+                        Nome = nomeTxtBox.Text.ToUpper(),
+                        Cpf = cpfTxtBox.Text,
+                        Rg = rgTxtBox.Text.ToUpper(),
+                        DataNascimento = dataNascConverted,
+                        TelefoneResidencial = telResTxtBox.Text,
+                        TelefoneCelular = telCelTxtBox.Text,
+                        Email = emailTxtBox.Text.ToLower(),
+                        FormularioDisciplinas = disciplinas.Where(d =>
+                            selectedDisciplinas.Any(sd => sd == d.Nome)).ToList(),
+                        FormularioTurmas = turmas.Where(t =>
+                            selectedTurmas.Any(st => st == t.Nome)).ToList()
+                    };
 
-                        if (!DateTime.TryParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"),
-                            DateTimeStyles.None, out dateResult))
+                    // Validates form
+                    ValidationContext validContext = new ValidationContext(form, null, null);
+                    List<ValidationResult> errors = new List<ValidationResult>();
+
+                    if (!Validator.TryValidateObject(form, validContext, errors, true))
+                    {
+                        foreach (ValidationResult result in errors)
                         {
-                            dataNascConverted = DateTime.MinValue;
+                            // Returns placeholders to their text boxes
+                            ResetPlaceHolders();
+
+                            MessageBox.Show(result.ErrorMessage, "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
                         }
-                        else
+                    }
+                    else
+                    {
+                        try
                         {
-                            dataNascConverted = DateTime.ParseExact(dataNascTxtBox.Text, "dd/MM/yyyy", new CultureInfo("pt-BR"));
-                        }
+                            // Sends validated form to the controller
+                            controladorProfessor.Update(form);
 
-                        // Creates form to be sent to controller
-                        var form = new FormularioProfessor
-                        {
-                            Id = professor.Id,
-                            Nome = nomeTxtBox.Text.ToUpper(),
-                            Cpf = cpfTxtBox.Text,
-                            Rg = rgTxtBox.Text.ToUpper(),
-                            DataNascimento = dataNascConverted,
-                            TelefoneResidencial = telResTxtBox.Text,
-                            TelefoneCelular = telCelTxtBox.Text,
-                            Email = emailTxtBox.Text.ToUpper(),
-                            FormularioDisciplinas = disciplinas.Where(d =>
-                                selectedDisciplinas.Any(sd => sd == d.Nome)).ToList(),
-                            FormularioTurmas = turmas.Where(t =>
-                                selectedTurmas.Any(st => st == t.Nome)).ToList()
-                        };
-
-                        // Validates form
-                        ValidationContext validContext = new ValidationContext(form, null, null);
-                        List<ValidationResult> errors = new List<ValidationResult>();
-
-                        if (!Validator.TryValidateObject(form, validContext, errors, true))
-                        {
-                            foreach (ValidationResult result in errors)
+                            if (_returnPrevious)
                             {
-                                // Returns placeholders to their text boxes
-                                ResetPlaceHolders();
-
-                                MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
+                                // Returns to MostrarProfessor
+                                _mainForm.OpenPreviousForm(sender);
+                                _mainForm.OpenPreviousForm(sender);
+                                _mainForm.OpenNewForm(new MostrarProfessor(_mainForm, professor.Id), sender);
+                            }
+                            else
+                            {
+                                // Returns to ListarProfessores
+                                _mainForm.OpenNewForm(new MenuProfessor(_mainForm), sender, null, true);
+                                _mainForm.OpenNewForm(new ListarProfessores(_mainForm), sender);
                             }
                         }
-                        else
+                        catch (Exception error)
                         {
-                            try
-                            {
-                                // Sends validated form to the controller
-                                controladorProfessor.Update(form);
-
-                                if (_returnPrevious)
-                                {
-                                    // Returns to MostrarProfessor
-                                    _mainForm.OpenPreviousForm(sender);
-                                    _mainForm.OpenPreviousForm(sender);
-                                    _mainForm.OpenNewForm(new MostrarProfessor(_mainForm, professor.Id), sender, null);
-                                } else
-                                {
-                                    // Returns to ListarProfessores
-                                    _mainForm.OpenNewForm(new MenuProfessor(_mainForm), sender, null, true);
-                                    _mainForm.OpenNewForm(new ListarProfessores(_mainForm), sender, null);
-                                }
-                            }
-                            catch (Exception error)
-                            {
-                                ResetPlaceHolders();
-                                MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                //throw error.InnerException;
-                            }
+                            ResetPlaceHolders();
+                            MessageBox.Show(error.Message, "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Pelo menos um número de telefone obrigatório.",
+                        "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nome, CPF, RG, Data de Nascimento e E-mail obrigatórios.",
+                    "Erro de edição", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -320,7 +328,7 @@ namespace SistemaEscola
 
                 // Returns to ListarProfessores
                 _mainForm.OpenNewForm(new MenuProfessor(_mainForm), sender, null, true);
-                _mainForm.OpenNewForm(new ListarProfessores(_mainForm), sender, null);
+                _mainForm.OpenNewForm(new ListarProfessores(_mainForm), sender);
             }
         }
 

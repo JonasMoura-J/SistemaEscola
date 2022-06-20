@@ -49,7 +49,7 @@
             parsedNumber = parsedNumber.Insert(3, ")");
             parsedNumber = parsedNumber.Insert(4, " ");
             parsedNumber = parsedNumber.Insert(6, " ");
-            parsedNumber = parsedNumber.Insert(10, "-");
+            parsedNumber = parsedNumber.Insert(11, "-");
 
             return parsedNumber;
         }

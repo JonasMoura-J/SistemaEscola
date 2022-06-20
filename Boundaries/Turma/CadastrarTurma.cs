@@ -14,16 +14,14 @@ namespace SistemaEscola
     {
         readonly Home _mainForm;
 
-        readonly ControladorTurma controladorTurma = new ControladorTurma();
+        readonly ControladorTurma controladorTurma = ControladorTurma.Instance;
         readonly ControladorAluno controladorAluno = ControladorAluno.Instance;
-        readonly ControladorDisciplina controladorDisciplina = new ControladorDisciplina();
+        readonly ControladorDisciplina controladorDisciplina = ControladorDisciplina.Instance;
 
         readonly List<NamePanel> alunosPanels = new List<NamePanel>();
         readonly List<int> alunosPanelLengths = new List<int>();
         readonly List<NamePanel> disciplinasPanels = new List<NamePanel>();
         readonly List<int> disciplinasPanelLengths = new List<int>();
-
-        readonly List<TextBox> textBoxes = new List<TextBox>();
 
         readonly List<FormularioAluno> alunos = new List<FormularioAluno>();
         readonly List<FormularioDisciplina> disciplinas = new List<FormularioDisciplina>();
@@ -39,15 +37,6 @@ namespace SistemaEscola
 
         private void CadastrarTurma_Load(object sender, EventArgs e)
         {
-            // Set up textboxes            
-            foreach (var c in Controls)
-            {
-                if (c is TextBox)
-                {
-                    textBoxes.Add((TextBox)c);
-                }               
-            }
-
             // Flow Layout Panel Settings
             alunosPanelLengths.Add(alunosFlwLayPnl.Width);
             alunosFlwLayPnl.FlowDirection = FlowDirection.TopDown;
@@ -76,7 +65,8 @@ namespace SistemaEscola
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (!textBoxes.Any(t => t.ForeColor == Color.LightSteelBlue))
+            if (nomeTxtBox.ForeColor != Color.LightSteelBlue
+                && codigoTxtBox.ForeColor != Color.LightSteelBlue)
             {
                 var form = new FormularioTurma
                 {
@@ -97,7 +87,7 @@ namespace SistemaEscola
                 {
                     foreach (ValidationResult result in errors)
                     {
-                        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(result.ErrorMessage, "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -109,15 +99,19 @@ namespace SistemaEscola
                         controladorTurma.Add(form);
 
                         // Returns to MenuDisciplina
-                        _mainForm.OpenNewForm(new MenuTurma(_mainForm), sender, null, true);
+                        _mainForm.OpenPreviousForm(sender);
 
                     }
                     catch (Exception error)
                     {
-                        MessageBox.Show(error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //throw error.InnerException;
+                        MessageBox.Show(error.Message, "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Nome e Código obrigatórios.",
+                    "Erro de cadastro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
