@@ -11,11 +11,15 @@ namespace SistemaEscola.Data
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<ProfessorDisciplina> ProfessorDisciplinas { get; set; }
         public DbSet<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; }
         public DbSet<AlunoTurma> AlunoTurmas { get; set; }
         public DbSet<TurmaDisciplina> TurmaDisciplinas { get; set; }
         public DbSet<TurmaProfessor> TurmaProfessores { get; set; }
+        public DbSet<TurmaAvaliacao> TurmaAvaliacoes { get; set; }
+        public DbSet<DisciplinaAvaliacao> DisciplinaAvaliacoes { get; set; }
+        public DbSet<DisciplinaAvaliacao> AvaliacaoAtividades { get; set; }
 
         public string DbPath { get; }
 
@@ -95,6 +99,45 @@ namespace SistemaEscola.Data
                 .HasOne(at => at.Turma)
                 .WithMany(t => t.AlunoTurmas)
                 .HasForeignKey(at => at.TurmaId);
+
+            // Turma _1______n_ TurmaAvaliacao _n______1_ Avaliacao
+            modelBuilder.Entity<TurmaAvaliacao>().HasKey(x => new { x.TurmaId, x.AvaliacaoId });
+
+            modelBuilder.Entity<TurmaAvaliacao>()
+                .HasOne(ta => ta.Turma)
+                .WithMany(t => t.TurmaAvaliacoes)
+                .HasForeignKey(ta => ta.TurmaId);
+
+            modelBuilder.Entity<TurmaAvaliacao>()
+                .HasOne(ta => ta.Avaliacao)
+                .WithMany(a => a.TurmaAvaliacoes)
+                .HasForeignKey(ta => ta.AvaliacaoId);
+
+            // Disciplina _1______n_ DisciplinaAvaliacao _n______1_ Avaliacao
+            modelBuilder.Entity<DisciplinaAvaliacao>().HasKey(x => new { x.DisciplinaId, x.AvaliacaoId });
+
+            modelBuilder.Entity<DisciplinaAvaliacao>()
+                .HasOne(da => da.Disciplina)
+                .WithMany(d => d.DisciplinaAvaliacoes)
+                .HasForeignKey(da => da.DisciplinaId);
+
+            modelBuilder.Entity<DisciplinaAvaliacao>()
+                .HasOne(da => da.Avaliacao)
+                .WithMany(a => a.DisciplinaAvaliacoes)
+                .HasForeignKey(da => da.AvaliacaoId);
+
+            // Avaliacao _1______n_ AvaliacaoAtividade _n______1_ Atividade
+            modelBuilder.Entity<AvaliacaoAtividade>().HasKey(x => new { x.AvaliacaoId, x.AtividadeId });
+
+            modelBuilder.Entity<AvaliacaoAtividade>()
+                .HasOne(aa => aa.Avaliacao)
+                .WithMany(a => a.AvaliacaoAtividades)
+                .HasForeignKey(aa => aa.AvaliacaoId);
+
+            modelBuilder.Entity<AvaliacaoAtividade>()
+                .HasOne(aa => aa.Atividade)
+                .WithMany(a => a.AvaliacaoAtividades)
+                .HasForeignKey(da => da.AvaliacaoId);
         }
     }
 }

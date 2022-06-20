@@ -30,6 +30,9 @@ namespace SistemaEscola.Controllers
             // Updates Disciplinas
             UpdateTurmaDisciplinas(form, true);
 
+            // Updates Avaliacoes
+            UpdateTurmaAvaliacoes(form, true);
+
             // Updates Alunos
             UpdateAlunoTurmas(form, true);
         }
@@ -329,6 +332,43 @@ namespace SistemaEscola.Controllers
             {
                 _context.SaveChanges();
             }
+        }
+
+        //TurmaAvaliacao
+        public void AddTurmaAvaliacao(int turmaId, int avaliacaoId)
+        {
+            if (!_context.TurmaAvaliacoes.Any(ta => ta.TurmaId == turmaId &&
+                ta.AvaliacaoId == avaliacaoId))
+            {
+                _context.TurmaAvaliacoes.Add(new TurmaAvaliacao()
+                {
+                    TurmaId = turmaId,
+                    AvaliacaoId = avaliacaoId
+                });
+            }
+        }
+
+        public void UpdateTurmaAvaliacoes(FormularioTurma form, bool saveChanges = false)
+        {
+            var turmaId = form.Id;
+
+            if (turmaId == 0)
+            {
+                turmaId = FindByName(form.Nome).Id;
+            }
+
+            AddTurmaAvaliacao(turmaId, 1);
+            AddTurmaAvaliacao(turmaId, 2);
+
+            if (saveChanges)
+            {
+                _context.SaveChanges();
+            }
+        }
+
+        public List<TurmaAvaliacao> FindAllTurmaAvaliacoesByTurma(int turmaId)
+        {
+            return _context.TurmaAvaliacoes.Where(ta => ta.TurmaId == turmaId).ToList();
         }
     }
 }

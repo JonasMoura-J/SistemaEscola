@@ -48,11 +48,15 @@ namespace SistemaEscola.Data
             Usuario u1 = new Usuario("COORDENACAO", "123456");
             Usuario u2 = new Usuario("PROFESSOR", "123456789");
 
+            Avaliacao av1 = new Avaliacao() { Nome = "AV1" };
+            Avaliacao av2 = new Avaliacao() { Nome = "AV2" };
+
             List<Aluno> alunos = new List<Aluno>() { a1, a2, a3, a4 };
             List<Professor> professores = new List<Professor>() { p1, p2, p3 };
             List<Turma> turmas = new List<Turma>() { t1, t2, t3 };
             List<Disciplina> disciplinas = new List<Disciplina>() { d1, d2, d3 };
             List<Usuario> usuarios = new List<Usuario>() { u1, u2 };
+            List<Avaliacao> avaliacoes = new List<Avaliacao>() { av1, av2 };
 
             // Insert in Db
             alunos.ForEach(a => _context.Alunos.Add(a));
@@ -60,6 +64,7 @@ namespace SistemaEscola.Data
             turmas.ForEach(t => _context.Turmas.Add(t));
             disciplinas.ForEach(d => _context.Disciplinas.Add(d));
             usuarios.ForEach(u => _context.Usuarios.Add(u));
+            avaliacoes.ForEach(av => _context.Avaliacoes.Add(av));
 
             _context.SaveChanges();
         }

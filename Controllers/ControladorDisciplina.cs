@@ -23,10 +23,17 @@ namespace SistemaEscola.Controllers
             }
 
             // Adds new Disciplina do Db
+            InsertIntoDb(form);
+
+            // Updates Avaliacoes
+            UpdateDisciplinaAvaliacoes(form, true);
+        }
+
+        public void InsertIntoDb(FormularioDisciplina form)
+        {
             var disciplina = new Disciplina(form.Nome);
 
             _context.Disciplinas.Add(disciplina);
-
             _context.SaveChanges();
         }
 
@@ -276,6 +283,43 @@ namespace SistemaEscola.Controllers
         public List<AlunoFaltaDisciplina> FindAllAlunoFaltaDisciplinasByDisciplina(int disciplinaId)
         {
             return _context.AlunoFaltaDisciplinas.Where(afd => afd.DisciplinaId == disciplinaId).ToList();
+        }
+
+        //DisciplinaAvaliacao
+        public void AddDisciplinaAvaliacao(int disciplinaId, int avaliacaoId)
+        {
+            if (!_context.DisciplinaAvaliacoes.Any(da => da.DisciplinaId == disciplinaId &&
+                da.AvaliacaoId == avaliacaoId))
+            {
+                _context.DisciplinaAvaliacoes.Add(new DisciplinaAvaliacao()
+                {
+                    DisciplinaId = disciplinaId,
+                    AvaliacaoId = avaliacaoId
+                });
+            }
+        }
+
+        public void UpdateDisciplinaAvaliacoes(FormularioDisciplina form, bool saveChanges = false)
+        {
+            var disciplinaId = form.Id;
+
+            if (disciplinaId == 0)
+            {
+                disciplinaId = FindByName(form.Nome).Id;
+            }
+
+            AddDisciplinaAvaliacao(disciplinaId, 1);
+            AddDisciplinaAvaliacao(disciplinaId, 2);
+
+            if (saveChanges)
+            {
+                _context.SaveChanges();
+            }
+        }
+
+        public List<DisciplinaAvaliacao> FindAllDisciplinaAvaliacoesByDisciplina(int disciplinaId)
+        {
+            return _context.DisciplinaAvaliacoes.Where(da => da.DisciplinaId == disciplinaId).ToList();
         }
     }
 }

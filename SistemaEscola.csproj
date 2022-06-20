@@ -299,6 +299,8 @@
       <DependentUpon>EditarTurma.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Aluno.cs" />
+    <Compile Include="Entities\Atividade.cs" />
+    <Compile Include="Entities\Avaliacao.cs" />
     <Compile Include="Entities\Disciplina.cs" />
     <Compile Include="Entities\Formularios\Interfaces\IFormulario.cs" />
     <Compile Include="Entities\Formularios\FormularioAluno.cs" />
@@ -306,13 +308,19 @@
     <Compile Include="Entities\Formularios\FormularioUsuario.cs" />
     <Compile Include="Entities\Formularios\FormularioProfessor.cs" />
     <Compile Include="Entities\Formularios\FormularioTurma.cs" />
+    <Compile Include="Entities\Interfaces\IAtividade.cs" />
     <Compile Include="Entities\Interfaces\IEntity.cs" />
     <Compile Include="Entities\JoinClasses\AlunoFaltaDisciplina.cs" />
     <Compile Include="Entities\JoinClasses\AlunoTurma.cs" />
+    <Compile Include="Entities\JoinClasses\AvaliacaoAtividade.cs" />
+    <Compile Include="Entities\JoinClasses\DisciplinaAvaliacao.cs" />
     <Compile Include="Entities\JoinClasses\ProfessorDisciplina.cs" />
+    <Compile Include="Entities\JoinClasses\TurmaAvaliacao.cs" />
     <Compile Include="Entities\JoinClasses\TurmaDisciplina.cs" />
     <Compile Include="Entities\JoinClasses\TurmaProfessor.cs" />
     <Compile Include="Entities\Professor.cs" />
+    <Compile Include="Entities\Prova.cs" />
+    <Compile Include="Entities\Trabalho.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Boundaries\Home.cs">
@@ -411,9 +419,9 @@
     <Compile Include="Boundaries\Turma\MostrarTurma.Designer.cs">
       <DependentUpon>MostrarTurma.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220613033606_InitialMigration.cs" />
-    <Compile Include="Migrations\20220613033606_InitialMigration.designer.cs">
-      <DependentUpon>20220613033606_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20220618174835_InitialMigration.cs" />
+    <Compile Include="Migrations\20220618174835_InitialMigration.designer.cs">
+      <DependentUpon>20220618174835_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SistemaEscolaDbContextModelSnapshot.cs" />
     <Compile Include="Parsers\CpfParse.cs" />

@@ -31,6 +31,35 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Atividade",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: true),
+                    Nota = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Atividade", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Avaliacoes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: true),
+                    Nota = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Avaliacoes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Disciplinas",
                 columns: table => new
                 {
@@ -92,6 +121,30 @@ namespace SistemaEscola.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AvaliacaoAtividade",
+                columns: table => new
+                {
+                    AvaliacaoId = table.Column<int>(nullable: false),
+                    AtividadeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AvaliacaoAtividade", x => new { x.AvaliacaoId, x.AtividadeId });
+                    table.ForeignKey(
+                        name: "FK_AvaliacaoAtividade_Atividade_AvaliacaoId",
+                        column: x => x.AvaliacaoId,
+                        principalTable: "Atividade",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AvaliacaoAtividade_Avaliacoes_AvaliacaoId",
+                        column: x => x.AvaliacaoId,
+                        principalTable: "Avaliacoes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AlunoFaltaDisciplinas",
                 columns: table => new
                 {
@@ -110,6 +163,30 @@ namespace SistemaEscola.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AlunoFaltaDisciplinas_Disciplinas_DisciplinaId",
+                        column: x => x.DisciplinaId,
+                        principalTable: "Disciplinas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DisciplinaAvaliacao",
+                columns: table => new
+                {
+                    DisciplinaId = table.Column<int>(nullable: false),
+                    AvaliacaoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DisciplinaAvaliacao", x => new { x.DisciplinaId, x.AvaliacaoId });
+                    table.ForeignKey(
+                        name: "FK_DisciplinaAvaliacao_Avaliacoes_AvaliacaoId",
+                        column: x => x.AvaliacaoId,
+                        principalTable: "Avaliacoes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DisciplinaAvaliacao_Disciplinas_DisciplinaId",
                         column: x => x.DisciplinaId,
                         principalTable: "Disciplinas",
                         principalColumn: "Id",
@@ -158,6 +235,30 @@ namespace SistemaEscola.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AlunoTurmas_Turmas_TurmaId",
+                        column: x => x.TurmaId,
+                        principalTable: "Turmas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TurmaAvaliacoes",
+                columns: table => new
+                {
+                    TurmaId = table.Column<int>(nullable: false),
+                    AvaliacaoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TurmaAvaliacoes", x => new { x.TurmaId, x.AvaliacaoId });
+                    table.ForeignKey(
+                        name: "FK_TurmaAvaliacoes_Avaliacoes_AvaliacaoId",
+                        column: x => x.AvaliacaoId,
+                        principalTable: "Avaliacoes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TurmaAvaliacoes_Turmas_TurmaId",
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
@@ -223,9 +324,19 @@ namespace SistemaEscola.Migrations
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DisciplinaAvaliacao_AvaliacaoId",
+                table: "DisciplinaAvaliacao",
+                column: "AvaliacaoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProfessorDisciplinas_DisciplinaId",
                 table: "ProfessorDisciplinas",
                 column: "DisciplinaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TurmaAvaliacoes_AvaliacaoId",
+                table: "TurmaAvaliacoes",
+                column: "AvaliacaoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TurmaDisciplinas_DisciplinaId",
@@ -247,7 +358,16 @@ namespace SistemaEscola.Migrations
                 name: "AlunoTurmas");
 
             migrationBuilder.DropTable(
+                name: "AvaliacaoAtividade");
+
+            migrationBuilder.DropTable(
+                name: "DisciplinaAvaliacao");
+
+            migrationBuilder.DropTable(
                 name: "ProfessorDisciplinas");
+
+            migrationBuilder.DropTable(
+                name: "TurmaAvaliacoes");
 
             migrationBuilder.DropTable(
                 name: "TurmaDisciplinas");
@@ -260,6 +380,12 @@ namespace SistemaEscola.Migrations
 
             migrationBuilder.DropTable(
                 name: "Alunos");
+
+            migrationBuilder.DropTable(
+                name: "Atividade");
+
+            migrationBuilder.DropTable(
+                name: "Avaliacoes");
 
             migrationBuilder.DropTable(
                 name: "Disciplinas");

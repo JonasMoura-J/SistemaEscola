@@ -10,6 +10,7 @@ namespace SistemaEscola.Entities
         public List<ProfessorDisciplina> ProfessorDisciplinas { get; set; } = new List<ProfessorDisciplina>();
         public List<TurmaDisciplina> TurmaDisciplinas { get; set; } = new List<TurmaDisciplina>();
         public List<AlunoFaltaDisciplina> AlunoFaltaDisciplinas { get; set; } = new List<AlunoFaltaDisciplina>();
+        public List<DisciplinaAvaliacao> DisciplinaAvaliacoes { get; set; } = new List<DisciplinaAvaliacao>();
 
         public Disciplina(string nome)
         {
